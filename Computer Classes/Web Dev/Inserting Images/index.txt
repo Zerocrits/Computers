@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title>
+			Images Test
+		</title>
+	</head>
+
+	<body>
+		<center>
+		<b>hello world</b>
+		<b>Harambe</b>
+		<image src="images/harambe.jpg">
+		<table border=3>
+		<tr> row </tr>
+		<td> col </td>
+		</table border>
+		</center>
+	</body>
+</html>
