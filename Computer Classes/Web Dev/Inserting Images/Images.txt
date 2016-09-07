@@ -1,0 +1,11 @@
+<html>
+	<head>
+		<title>
+			Images Test
+		</title>
+	</head>
+
+	<body>
+		hello world
+	</body>
+</html>
