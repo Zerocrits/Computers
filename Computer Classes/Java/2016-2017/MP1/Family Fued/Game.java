@@ -26,13 +26,11 @@ public class Game
 		this.width = width;
 		this.height = height;
 		this.title = title;
-		//player = new Player(this);
 	}
 
 	private void reset()
 	{
 		display.getFrame().dispose();
-		//player = new Player(this);
 		score1=score2=0;
 		init();
 	}
@@ -75,10 +73,11 @@ public class Game
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Serif", Font.BOLD, 50));
 
-		//g.drawString("Score: " + getScore(), 100, 100);
-
-		//displays image(buffered image)
 		bs.show();
 		g.dispose();
+	}
+	public void start()
+	{
+		render();
 	}
 }
