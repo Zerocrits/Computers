@@ -1,83 +1,75 @@
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
+import javax.swing.JFrame;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 import java.awt.Graphics;
 import java.io.File;
-import javax.imageio.ImageIO;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Font;
 
-public class Game
+public class Game extends JFrame
 {
-	private Display display;
 	public int width, height;
 	public String title;
-	private boolean running;
-	private Thread thread;
+	private JFrame frame;
+	private JLabel lblTitle;
 	private Player player1, player2;
 	private int score1, score2;
-	private BufferStrategy bs;
 	private Graphics g;
-	private BufferedImage imgBackground;
+	private ButtonListener listener;
+
+	public static void main(String[] args)
+	{
+		Game game = new Game("Family Feud", 600, 600);
+	}
 
 	public Game(String title, int width, int height)
 	{
+		// Get window and set layout
+		Container cp = getContentPane();
+		cp.setLayout(new FlowLayout());
+		cp.setBackground(Color.gray);
+
 		this.width = width;
 		this.height = height;
 		this.title = title;
+
+		lblTitle = new JLabel("test");
+
+		cp.add(lblTitle);
+
+		listener = new ButtonListener();
+
+		setSize(550,560);
+		setVisible(true);
+		setResizable(false);
 	}
 
-	private void reset()
+	// private inner class for handling button events
+	// action listener requires actionPerformed method
+	private class ButtonListener implements ActionListener
 	{
-		display.getFrame().dispose();
-		score1=score2=0;
-		init();
-	}
-	private void init()
-	{
-		display = new Display(title, width, height);
-
-		display.getFrame();
-	}
-
-	public Display getDisplay()
-	{
-		return display;
-	}
-
-	public void render()
-	{
-		//canvas
-		bs = display.getCanvas().getBufferStrategy();
-		if(bs == null)
+		String strNum = "";
+		public void actionPerformed(ActionEvent event)
 		{
-			display.getCanvas().createBufferStrategy(3);
-			return;
+			Object source = new Object();
+			source = event.getSource();
+
+			/*if(source == btnSoda)
+			{
+				restaurant.addSoda();
+			}
+			else if (source == btnCompleteorder)
+			{
+				restaurant.getTotal();
+				JOptionPane.showMessageDialog(null,"Total Comes to: $" + numberFormat.format(restaurant.getTotal()) + "!");
+				restaurant.clearOrder();
+			}
+			lblTotal.setText(restaurant.toString());
+			lblTotalfood.setText(restaurant.getFood());
+			// Add code to randomly play sounds based on a button click*/
 		}
-		g = bs.getDrawGraphics();
-
-		//reset screen
-		g.clearRect(0,0,width,height);
-
-		//draws background, player, wall
-		try {
-			 imgBackground = ImageIO.read(new File("Background.PNG"));
-		}catch (IOException e) {
-
-			e.printStackTrace();
-			System.exit(1);
-		}
-
-		g.drawImage(imgBackground,0,0,null);
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Serif", Font.BOLD, 50));
-
-		bs.show();
-		g.dispose();
-	}
-	public void start()
-	{
-		render();
 	}
 }

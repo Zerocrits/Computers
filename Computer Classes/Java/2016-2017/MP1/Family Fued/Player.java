@@ -8,10 +8,8 @@ import java.io.IOException;
 import java.awt.event.KeyListener;
 import java.awt.Rectangle;
 
-public class Player //implements KeyListener
+public class Player
 {
-	//private BufferedImage imgPlayer;
-	//private boolean upPressed, jumping, falling;
 	private int score;
 
     public Player(Game game)
@@ -23,25 +21,4 @@ public class Player //implements KeyListener
     {
         return score;
     }
-
-  /*  public void keyPressed(KeyEvent e)
-    {
-        if (e.getKeyCode() == KeyEvent.VK_UP)
-        {
-			upPressed=true;
-        }
-    }
-
-    public void keyReleased(KeyEvent e)
-    {
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-        {
-			upPressed=false;
-        }
-    }
-
-    public void keyTyped(KeyEvent e)
-	{
-
-	}*/ //make it enter
 }
