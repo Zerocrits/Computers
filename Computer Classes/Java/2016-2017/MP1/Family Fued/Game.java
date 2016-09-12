@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JPanel;
 
 public class Game extends JFrame
 {
@@ -28,23 +29,22 @@ public class Game extends JFrame
 	public Game(String title, int width, int height)
 	{
 		// Get window and set layout
-		Container cp = getContentPane();
-		cp.setLayout(new FlowLayout());
-		cp.setBackground(Color.gray);
+		setLayout(new BorderLayout());
+		add(new JLabel("Family1: " + score1 + " Family2: " + score2), BorderLayout.NORTH);
+		add(new Button("Type Answers Here"), BorderLayout.SOUTH);
+		add(new Button("Player2"), BorderLayout.EAST);
+		add(new Button("Player1"), BorderLayout.WEST);
+		add(new Button("harvey/game"), BorderLayout.CENTER);
 
 		this.width = width;
 		this.height = height;
 		this.title = title;
 
-		lblTitle = new JLabel("test");
-
-		cp.add(lblTitle);
-
 		listener = new ButtonListener();
 
-		setSize(550,560);
+		setSize(1200,800);
 		setVisible(true);
-		setResizable(false);
+
 	}
 
 	// private inner class for handling button events
