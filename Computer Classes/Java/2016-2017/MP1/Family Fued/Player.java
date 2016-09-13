@@ -11,9 +11,17 @@ import java.awt.Rectangle;
 public class Player
 {
 	private int score;
+	private BufferedImage imgPlayer;
 
     public Player(Game game)
     {
+		try {
+			 imgPlayer = ImageIO.read(new File("Character.JPG"));
+		}catch (IOException e) {
+
+			e.printStackTrace();
+			System.exit(1);
+		}
 		score = 0;
     }
 
@@ -21,4 +29,8 @@ public class Player
     {
         return score;
     }
+	public void render(Graphics g) //draws player
+	{
+		g.drawImage(imgPlayer,0,0,null);
+	}
 }

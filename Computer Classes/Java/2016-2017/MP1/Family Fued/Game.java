@@ -15,26 +15,51 @@ public class Game extends JFrame
 	public int width, height;
 	public String title;
 	private JFrame frame;
+	private JPanel panel1, panel2, panel3, panel4;
 	private JLabel lblTitle;
 	private Player player1, player2;
+	private BufferStrategy bs;
 	private int score1, score2;
 	private Graphics g;
 	private ButtonListener listener;
 
 	public static void main(String[] args)
 	{
-		Game game = new Game("Family Feud", 600, 600);
+		Game game = new Game("Family Feud", 1200, 800);
 	}
 
 	public Game(String title, int width, int height)
 	{
 		// Get window and set layout
 		setLayout(new BorderLayout());
+
+		// Init
+		player1 = new Player();
+
+		// West Player 1
+		panel1 = new JPanel();
+		panel1.setBackground(Color.gray);
+		panel1.add(player1.render(g));
+		add(panel1, BorderLayout.WEST);
+
+		// East Player 2
+		panel2 = new JPanel();
+		panel2.setBackground(Color.gray);
+		add(panel2, BorderLayout.EAST);
+
+		// Center Harvey/Screen
+		panel3 = new JPanel();
+		panel3.setBackground(Color.red);
+		add(panel3, BorderLayout.CENTER);
+
+		// Type Answer
+		panel4 = new JPanel();
+		panel4.setBackground(Color.gray);
+		add(panel4, BorderLayout.SOUTH);
+
+
+
 		add(new JLabel("Family1: " + score1 + " Family2: " + score2), BorderLayout.NORTH);
-		add(new Button("Type Answers Here"), BorderLayout.SOUTH);
-		add(new Button("Player2"), BorderLayout.EAST);
-		add(new Button("Player1"), BorderLayout.WEST);
-		add(new Button("harvey/game"), BorderLayout.CENTER);
 
 		this.width = width;
 		this.height = height;
@@ -42,11 +67,25 @@ public class Game extends JFrame
 
 		listener = new ButtonListener();
 
-		setSize(1200,800);
+		setSize(width,height);
 		setVisible(true);
 
 	}
 
+	private void render()
+	{
+		bs = getBufferStrategy();
+		try {
+			 imgBackground = ImageIO.read(new File("Character.JPG"));
+		}catch (IOException e) {
+
+			e.printStackTrace();
+			System.exit(1);
+		}
+
+		g.drawImage(Character,0,0,null);
+
+	}
 	// private inner class for handling button events
 	// action listener requires actionPerformed method
 	private class ButtonListener implements ActionListener
