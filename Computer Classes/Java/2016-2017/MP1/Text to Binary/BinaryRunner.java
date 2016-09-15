@@ -2,22 +2,32 @@ import java.util.Scanner;
 
 public class BinaryRunner
 {
+	private BinaryConverter core = new BinaryConverter();
+
 	public static void main(String args[])
 	{
-		private BinaryCoverter core = new BinaryConverter();
+		BinaryRunner runner = new BinaryRunner();
+	}
+
+	public BinaryRunner()
+	{
 		String phrase = "";
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("***Text To Binary***");
 		System.out.print("Please Type What You Want To Convert: ");
 		phrase = sc.nextLine();
+		getPhrase(phrase);
 
 	}
-	public void getPhrase()
+	public void getPhrase(String phrase)
 	{
-		phrase = core.sendBinary(binary);
+		core.getValue(phrase);
+		core = new BinaryConverter();
+
 	}
 }
 //
 
 //http://www.unit-conversion.info/texttools/convert-text-to-binary/
+//fix ascii

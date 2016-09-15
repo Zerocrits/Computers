@@ -1,41 +1,58 @@
+import java.io.*;
+import java.awt.*;
+
 public class BinaryConverter
 {
 	public BinaryConverter()
 	{
 		String value = "";
-		int binary = 0;
+		toBinary(value);
 	}
 
 	public void getValue(String value)
 	{
+		System.out.println(value + "test");
 		value = value;
+		toBinary(value);
 	}
 
-	public void getBinary(int binary)
+	public void toBinary(String value)
 	{
-		binary = binary;
-	}
-
-	public void toBinary(String value, String binary)
-	{
+		String binary = "";
+		int val = 0;
 		for(int i = 0; i < value.length(); i++)
 		{
-			int val = value.charAt(i);
-			binary += convertBinary(val);
+			val = value.charAt(i);
+			if(val == 32)
+				binary += " ";
+			else
+			System.out.println(val + "testss");
+				binary += convertBinary(val);
 		}
+		System.out.println(binary + "testbb");
 	}
 
 	public int convertBinary(int val)
 	{
 		switch(val)
 		{
-			case 48: return 000001;
+			case 0: return 0000;
+			case 1: return 0001;
+			case 2: return 0010;
+			case 3: return 0011;
+			case 4: return 0100;
+			case 5: return 0101;
+			case 6: return 0110;
+			case 7: return 0111;
+			case 8: return 1000;
+			case 9: return 1001;
 		}
-		return 789;
+		return 2;
 	}
 
-	public int sendBinary(int binary)
+	public String sendBinary(String binary)
 	{
+		System.out.println(binary + "test");
 		return binary;
 	}
 }
