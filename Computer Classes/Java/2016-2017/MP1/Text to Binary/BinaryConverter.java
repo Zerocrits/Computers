@@ -1,5 +1,5 @@
 import java.io.*;
-import java.awt.*;
+import java.lang.*;
 
 public class BinaryConverter
 {
@@ -11,7 +11,6 @@ public class BinaryConverter
 
 	public void getValue(String value)
 	{
-		System.out.println(value + "test");
 		value = value;
 		toBinary(value);
 	}
@@ -26,28 +25,35 @@ public class BinaryConverter
 			if(val == 32)
 				binary += " ";
 			else
-			System.out.println(val + "testss");
 				binary += convertBinary(val);
 		}
-		System.out.println(binary + "testbb");
 	}
 
-	public int convertBinary(int val)
+	public String convertBinary(int val)
 	{
-		switch(val)
+		String binary = "";
+		String value = String.valueOf(val);
+		int digit = 0;
+		for(int i = 0; i < value.length(); i++)
 		{
-			case 0: return 0000;
-			case 1: return 0001;
-			case 2: return 0010;
-			case 3: return 0011;
-			case 4: return 0100;
-			case 5: return 0101;
-			case 6: return 0110;
-			case 7: return 0111;
-			case 8: return 1000;
-			case 9: return 1001;
+			digit = Character.digit(value.charAt(i), 10);
+			System.out.println(digit+"nooo");
+			switch(digit)
+			{
+				case 0: binary += "0000"; break;
+				case 1: binary += "0001"; break;
+				case 2: binary += "0010"; break;
+				case 3: binary += "0011"; break;
+				case 4: binary += "0100"; break;
+				case 5: binary += "0101"; break;
+				case 6: binary += "0110"; break;
+				case 7: binary += "0111"; break;
+				case 8: binary += "1000"; break;
+				case 9: binary += "1001"; break;
+				default: binary += "null"; break;
+			}
 		}
-		return 2;
+		return binary;
 	}
 
 	public String sendBinary(String binary)
