@@ -6,18 +6,20 @@ public class BinaryConverter
 	public BinaryConverter()
 	{
 		String value = "";
-		toBinary(value);
+		String binary = "";
 	}
 
-	public void getValue(String value)
+	public String getValue(String value)
 	{
 		value = value;
-		toBinary(value);
+		String binary = "";
+		binary = toBinary(value, binary);
+
+		return binary;
 	}
 
-	public void toBinary(String value)
+	public String toBinary(String value, String binary)
 	{
-		String binary = "";
 		int val = 0;
 		for(int i = 0; i < value.length(); i++)
 		{
@@ -25,19 +27,18 @@ public class BinaryConverter
 			if(val == 32)
 				binary += " ";
 			else
-				binary += convertBinary(val);
+				binary += convertBinary(val, binary);
 		}
+		return binary;
 	}
 
-	public String convertBinary(int val)
+	public String convertBinary(int val, String binary)
 	{
-		String binary = "";
 		String value = String.valueOf(val);
 		int digit = 0;
 		for(int i = 0; i < value.length(); i++)
 		{
 			digit = Character.digit(value.charAt(i), 10);
-			System.out.println(digit+"nooo");
 			switch(digit)
 			{
 				case 0: binary += "0000"; break;
@@ -53,12 +54,6 @@ public class BinaryConverter
 				default: binary += "null"; break;
 			}
 		}
-		return binary;
-	}
-
-	public String sendBinary(String binary)
-	{
-		System.out.println(binary + "test");
 		return binary;
 	}
 }

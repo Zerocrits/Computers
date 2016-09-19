@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class BinaryRunner
 {
-	private BinaryConverter core = new BinaryConverter();
+	private BinaryConverter core;
 
 	public static void main(String args[])
 	{
@@ -22,8 +22,8 @@ public class BinaryRunner
 	}
 	public void getPhrase(String phrase)
 	{
-		core.getValue(phrase);
 		core = new BinaryConverter();
+		System.out.println(core.getValue(phrase));
 
 	}
 }
