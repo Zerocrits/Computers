@@ -27,7 +27,3 @@ public class BinaryRunner
 
 	}
 }
-//
-
-//http://www.unit-conversion.info/texttools/convert-text-to-binary/
-//fix ascii

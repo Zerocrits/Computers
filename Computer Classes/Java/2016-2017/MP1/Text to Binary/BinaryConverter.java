@@ -19,17 +19,28 @@ public class BinaryConverter
 
 	public String toBinary(String value)
 	{
+		String phrase = "";
 		byte[] bytes = value.getBytes();
+		byte space = 32;
 		StringBuilder binary = new StringBuilder();
 		for(byte b : bytes)
 		{
 			int val = b;
 			for (int i = 0; i < 8; i++)
 			{
-				binary.append((val & 128) == 0 ? 0 : 1);
-				val <<= 1;
+				if(b == space && i == 0)
+					phrase += " ";
+				else if(b != space)
+				{
+					binary.append((val & 128) == 0 ? 0 : 1);
+					val <<= 1;
+					phrase += binary;
+					if(i == 7)
+						phrase += " ";
+					binary.setLength(0);
+				}
 			}
 		}
-		return ""+binary;
+		return phrase;
 	}
 }
