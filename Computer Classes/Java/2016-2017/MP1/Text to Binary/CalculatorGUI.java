@@ -8,9 +8,9 @@ public class CalculatorGUI extends JFrame
 	private JLabel lblBinary, lblOctal, lblDecimal, lblHex, lblTitle, lblBox1;
 	private JButton btnEnter;
 	private JTextField txtInsert, txtBinary, txtOctal, txtDecimal, txtHex;
-	private JRadioButton rdoBinary1, rdoBinary2;
+	private JRadioButton rdoBinary1, rdoBinary2, rdoChoice1, rdoChoice2, rdoChoice3, rdoChoice4;
 	private BinaryConverter binary;
-	private ButtonGroup grpButtons1;
+	private ButtonGroup grpButtons1, grpButtons2;
 	private ButtonListener listener;
 
 	public CalculatorGUI()
@@ -51,10 +51,32 @@ public class CalculatorGUI extends JFrame
 		rdoBinary1 = new JRadioButton("Numerical");
 		rdoBinary2 = new JRadioButton("ASCII");
 
-		/*Box box2 = Box.createVerticalBox();
+		rdoBinary1.setEnabled(false);
+		rdoBinary2.setEnabled(false);
+
+		box1.add(lblBox1);
+		box1.add(rdoBinary1);
+		box1.add(rdoBinary2);
+
+		grpButtons1.add(rdoBinary1);
+		grpButtons1.add(rdoBinary2);
+
+		Box box2 = Box.createVerticalBox();
 		grpButtons2 = new ButtonGroup();
-		rdoEdit = new JRadioButton("Numerical");
-		rdoEdit = new JRadioButton("ASCII");*/
+		rdoChoice1 = new JRadioButton("Binary");
+		rdoChoice2 = new JRadioButton("Octal");
+		rdoChoice3 = new JRadioButton("Decimal");
+		rdoChoice4 = new JRadioButton("Hex");
+
+		box2.add(rdoChoice1);
+		box2.add(rdoChoice2);
+		box2.add(rdoChoice3);
+		box2.add(rdoChoice4);
+
+		grpButtons2.add(rdoChoice1);
+		grpButtons2.add(rdoChoice2);
+		grpButtons2.add(rdoChoice3);
+		grpButtons2.add(rdoChoice4);
 
 		cp.add(lblTitle);
 		cp.add(lblBinary);
@@ -66,14 +88,12 @@ public class CalculatorGUI extends JFrame
 		cp.add(lblHex);
 		cp.add(txtHex);
 		cp.add(box1);
+		cp.add(box2);
 		cp.add(txtInsert);
 		cp.add(btnEnter);
 
 		btnEnter.addActionListener(listener);
-
-		box1.add(lblBox1);
-		box1.add(rdoBinary1);
-		box1.add(rdoBinary2);
+		rdoChoice1.addActionListener(listener);
 
 		grpButtons1.add(rdoBinary1);
 		grpButtons1.add(rdoBinary2);
@@ -100,6 +120,11 @@ public class CalculatorGUI extends JFrame
 			{
 				String phrase = txtInsert.getText();
 				txtBinary.setText(binary.getValue(phrase));
+			}
+			else if(rdoChoice1.isSelected())
+			{
+				rdoBinary1.setEnabled(true);
+				rdoBinary2.setEnabled(true);
 			}
 		}
 	}
