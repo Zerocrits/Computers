@@ -53,6 +53,7 @@ public class CalculatorGUI extends JFrame
 
 		rdoBinary1.setEnabled(false);
 		rdoBinary2.setEnabled(false);
+		btnEnter.setEnabled(false);
 
 		box1.add(lblBox1);
 		box1.add(rdoBinary1);
@@ -115,16 +116,52 @@ public class CalculatorGUI extends JFrame
         {
 			// find out what object was pressed:
 			Object source = new Object();
+			int choice = 0;
 			source = event.getSource();
-			if(source == btnEnter)
+			if(!(txtInsert.getText().equals("")))
 			{
-				String phrase = txtInsert.getText();
-				txtBinary.setText(binary.getValue(phrase));
+				btnEnter.setEnabled(true);
+				if(source == btnEnter && rdoChoice1.isSelected() == false)
+				{
+					if(rdoChoice2.isSelected())
+					{
+
+					}
+
+					else if(rdoChoice3.isSelected())
+					{
+
+					}
+
+					else if(rdoChoice4.isSelected())
+					{
+
+					}
+				}
 			}
-			else if(rdoChoice1.isSelected())
+			if(rdoChoice1.isSelected())
 			{
 				rdoBinary1.setEnabled(true);
 				rdoBinary2.setEnabled(true);
+				if(rdoBinary1.isSelected())
+				{
+					if(source == btnEnter)
+					{
+						String phrase = txtInsert.getText();
+						choice = 1;
+						txtBinary.setText(binary.getValue(phrase, choice));
+					}
+				}
+				else
+				{
+					if(source == btnEnter)
+					{
+						String phrase = txtInsert.getText();
+						choice = 2;
+						txtBinary.setText(binary.getValue(phrase, choice));
+					}
+				}
+				//disable radio button if 1 isnt selected
 			}
 		}
 	}

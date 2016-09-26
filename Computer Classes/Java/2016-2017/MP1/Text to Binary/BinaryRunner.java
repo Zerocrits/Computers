@@ -23,7 +23,8 @@ public class BinaryRunner
 	public void getPhrase(String phrase)
 	{
 		core = new BinaryConverter();
-		System.out.println("\nConverted to Binary: " + core.getValue(phrase));
+		int choice = 1;
+		System.out.println("\nConverted to Binary: " + core.getValue(phrase, choice));
 
 	}
 }
