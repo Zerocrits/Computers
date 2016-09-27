@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class CalculatorGUI extends JFrame
 {
-	private int APPLET_WIDTH = 900, APPLET_HEIGHT = 800;
+	private int APPLET_WIDTH = 900, APPLET_HEIGHT = 800, choice = 0;
 	private JLabel lblBinary, lblOctal, lblDecimal, lblHex, lblTitle, lblBox1;
 	private JButton btnEnter;
 	private JTextField txtInsert, txtBinary, txtOctal, txtDecimal, txtHex;
@@ -95,6 +95,9 @@ public class CalculatorGUI extends JFrame
 
 		btnEnter.addActionListener(listener);
 		rdoChoice1.addActionListener(listener);
+		rdoChoice2.addActionListener(listener);
+		rdoChoice3.addActionListener(listener);
+		rdoChoice4.addActionListener(listener);
 
 		grpButtons1.add(rdoBinary1);
 		grpButtons1.add(rdoBinary2);
@@ -116,27 +119,35 @@ public class CalculatorGUI extends JFrame
         {
 			// find out what object was pressed:
 			Object source = new Object();
-			int choice = 0;
 			source = event.getSource();
 			if(!(txtInsert.getText().equals("")))
 			{
 				btnEnter.setEnabled(true);
-				if(source == btnEnter && rdoChoice1.isSelected() == false)
+
+				if(source == btnEnter)
 				{
-					if(rdoChoice2.isSelected())
-					{
+					String phrase = txtInsert.getText();
+					txtBinary.setText(binary.getValue(phrase, choice));
+				}
+				if(rdoChoice2.isSelected())
+				{
+					rdoBinary1.setEnabled(false);
+					rdoBinary2.setEnabled(false);
 
-					}
+				}
 
-					else if(rdoChoice3.isSelected())
-					{
+				if(rdoChoice3.isSelected())
+				{
+					rdoBinary1.setEnabled(false);
+					rdoBinary2.setEnabled(false);
 
-					}
+				}
 
-					else if(rdoChoice4.isSelected())
-					{
+				if(rdoChoice4.isSelected())
+				{
+					rdoBinary1.setEnabled(false);
+					rdoBinary2.setEnabled(false);
 
-					}
 				}
 			}
 			if(rdoChoice1.isSelected())
@@ -145,23 +156,12 @@ public class CalculatorGUI extends JFrame
 				rdoBinary2.setEnabled(true);
 				if(rdoBinary1.isSelected())
 				{
-					if(source == btnEnter)
-					{
-						String phrase = txtInsert.getText();
-						choice = 1;
-						txtBinary.setText(binary.getValue(phrase, choice));
-					}
+					choice = 1;
 				}
 				else
 				{
-					if(source == btnEnter)
-					{
-						String phrase = txtInsert.getText();
-						choice = 2;
-						txtBinary.setText(binary.getValue(phrase, choice));
-					}
+					choice = 2;
 				}
-				//disable radio button if 1 isnt selected
 			}
 		}
 	}
