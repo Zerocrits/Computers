@@ -10,6 +10,7 @@ public class CalculatorGUI extends JFrame
 	private JTextField txtInsert, txtBinary, txtOctal, txtDecimal, txtHex;
 	private JRadioButton rdoBinary1, rdoBinary2, rdoChoice1, rdoChoice2, rdoChoice3, rdoChoice4;
 	private BinaryConverter binary;
+	private OctalConverter octal;
 	private ButtonGroup grpButtons1, grpButtons2;
 	private ButtonListener listener;
 
@@ -23,6 +24,7 @@ public class CalculatorGUI extends JFrame
 		btnEnter.addActionListener( new ButtonListener());
 
 		binary = new BinaryConverter();
+		octal = new OctalConverter();
 		txtBinary = new JTextField(50);
 		txtBinary.setEditable(false);
 		txtOctal = new JTextField(50);
@@ -128,11 +130,13 @@ public class CalculatorGUI extends JFrame
 				{
 					String phrase = txtInsert.getText();
 					txtBinary.setText(binary.getValue(phrase, choice));
+					txtOctal.setText(octal.getValue(phrase));
 				}
 				if(rdoChoice2.isSelected())
 				{
 					rdoBinary1.setEnabled(false);
 					rdoBinary2.setEnabled(false);
+
 
 				}
 
