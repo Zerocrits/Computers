@@ -14,12 +14,10 @@ public class BinaryConverter
 		choice = choice;
 		value = value;
 		String binary = "";
-		if(choice == 2)
-			binary = toAsciiBinary(value);
-		else if(choice == 1)
+		if(choice == 1)
 			binary = toNumericalBinary(value);
 		else
-			binary = "error man";
+			binary = toAsciiBinary(value);
 
 		return binary;
 	}

@@ -16,7 +16,7 @@ public class OctalConverter
 		binary = toBinary(value);
 		test = getNum(binary);
 
-		return test;
+		return binary;
 	}
 
 	public String toBinary(String value)
@@ -28,7 +28,7 @@ public class OctalConverter
 		for(byte b : bytes)
 		{
 			int val = b;
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 9; i++)
 			{
 				if(b == space && i == 0)
 					phrase += " ";
@@ -37,40 +37,36 @@ public class OctalConverter
 					binary.append((val & 128) == 0 ? 0 : 1);
 					val <<= 1;
 					phrase += binary;
-					if(i == 3)
+					if(i == 2 || i == 5)
 						phrase += " ";
 					binary.setLength(0);
 				}
 			}
+			phrase += " ";
 		}
 		return phrase;
 	}
 
 	public String getNum(String phrase)
 	{
-		int number = 0;
-		String Octal = "";
+		String values = "";
+		int quot, binary, i=1;
+		int[] octal = new int[phrase.length()];
 
-		for(int i = 0; i < phrase.length(); i++)
+		quot = Integer.parseInt(phrase);
+
+		while(quot != 0)
 		{
-			for(int j = 0; j < 4; j++)
-			{
-				if(phrase.charAt(i) != 0)
-				{
-					switch(j)
-					{
-						case 0: number += 8; break; //**should never trigger this, just 4th 0 just for effect**
-						case 1: number += 4; break;
-						case 2: number += 2; break;
-						case 3: number += 1; break;
-					}
-				}
+			octal[i++] = quot%8;
+			quot = quot/8;
+        }
 
-			}
-			Octal += number + " ";
-			number = 0;
-		}
-		return Octal;
+        for(int j = i-1; j > 0; j--)
+		{
+			values += octal[j];
+        }
+        return values;
+        //replace binary to octal
 	}
 
 	/*public String toOctal(String value)
