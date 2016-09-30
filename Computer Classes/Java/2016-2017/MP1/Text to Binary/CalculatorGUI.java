@@ -11,6 +11,7 @@ public class CalculatorGUI extends JFrame
 	private JRadioButton rdoBinary1, rdoBinary2, rdoChoice1, rdoChoice2, rdoChoice3, rdoChoice4;
 	private BinaryConverter binary;
 	private OctalConverter octal;
+	private DecimalConverter decimal;
 	private ButtonGroup grpButtons1, grpButtons2;
 	private ButtonListener listener;
 
@@ -25,6 +26,7 @@ public class CalculatorGUI extends JFrame
 
 		binary = new BinaryConverter();
 		octal = new OctalConverter();
+		decimal = new DecimalConverter();
 		txtBinary = new JTextField(50);
 		txtBinary.setEditable(false);
 		txtOctal = new JTextField(50);
@@ -67,8 +69,8 @@ public class CalculatorGUI extends JFrame
 		Box box2 = Box.createVerticalBox();
 		grpButtons2 = new ButtonGroup();
 		rdoChoice1 = new JRadioButton("Binary");
-		rdoChoice2 = new JRadioButton("Octal");
-		rdoChoice3 = new JRadioButton("Decimal");
+		rdoChoice2 = new JRadioButton("Decimal");
+		rdoChoice3 = new JRadioButton("Octal");
 		rdoChoice4 = new JRadioButton("Hex");
 
 		box2.add(rdoChoice1);
@@ -131,6 +133,7 @@ public class CalculatorGUI extends JFrame
 					String phrase = txtInsert.getText();
 					txtBinary.setText(binary.getValue(phrase, choice));
 					txtOctal.setText(octal.getValue(phrase));
+					txtDecimal.setText(decimal.getValue(phrase));
 				}
 				if(rdoChoice2.isSelected())
 				{

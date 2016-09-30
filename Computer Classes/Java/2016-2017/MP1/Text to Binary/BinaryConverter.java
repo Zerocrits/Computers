@@ -47,6 +47,14 @@ public class BinaryConverter
 			}
 		}
 		return phrase;
+
+		/*
+
+		String binary = "";
+				binary = ""+Integer.parseInt(value, 2);
+        return binary;
+
+		*/
 	}
 	public String toNumericalBinary(String value)
 	{

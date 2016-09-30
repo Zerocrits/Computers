@@ -3,90 +3,40 @@ import java.lang.*;
 
 public class OctalConverter
 {
+	private DecimalConverter decimal;
 	public OctalConverter()
 	{
 		String value = "";
+		decimal = new DecimalConverter();
 	}
 
 	public String getValue(String value)
 	{
 		value = value;
-		String test = "";
-		String binary = "";
-		binary = toBinary(value);
-		test = getNum(binary);
+		String decimalVal = "";
+		String octal = "";
+		decimalVal = decimal.getValue(value);
+		octal = toOctal(decimalVal);
 
-		return binary;
+		return octal;
 	}
 
-	public String toBinary(String value)
+	public String toOctal(String decimal)
 	{
-		String phrase = "";
-		byte[] bytes = value.getBytes();
-		byte space = 32;
-		StringBuilder binary = new StringBuilder();
-		for(byte b : bytes)
-		{
-			int val = b;
-			for (int i = 0; i < 9; i++)
-			{
-				if(b == space && i == 0)
-					phrase += " ";
-				else if(b != space)
-				{
-					binary.append((val & 128) == 0 ? 0 : 1);
-					val <<= 1;
-					phrase += binary;
-					if(i == 2 || i == 5)
-						phrase += " ";
-					binary.setLength(0);
-				}
-			}
-			phrase += " ";
-		}
-		return phrase;
-	}
+	        int inputNumber = Integer.parseInt(decimal);
+	        int copyOfInputNumber = inputNumber;
+	        String octal = "";
+	        int remainder = 0;
 
-	public String getNum(String phrase)
-	{
-		String values = "";
-		int quot, binary, i=1;
-		int[] octal = new int[phrase.length()];
+	        while (inputNumber > 0)
+	        {
+	            remainder = inputNumber%8;
 
-		quot = Integer.parseInt(phrase);
+	            octal =  remainder + octal;
 
-		while(quot != 0)
-		{
-			octal[i++] = quot%8;
-			quot = quot/8;
-        }
+	            inputNumber = inputNumber/8;
+	        }
 
-        for(int j = i-1; j > 0; j--)
-		{
-			values += octal[j];
-        }
-        return values;
-        //replace binary to octal
-	}
-
-	/*public String toOctal(String value)
-	{
-		int[] binary;
-		int y = 0;
-		String phrase = "";
-		while(value.length() % 3 != 0)
-			phrase+="0";
-		phrase+=value;
-		int num = Integer.parseInt(phrase);
-
-		for(int i = 0; i < phrase.length(); i++)
-		{
-			binary[y] += phrase.charAt[i];
-			y++;
-
-		}
-
-
-		return phrase;
-	}*/
+	        return octal;
+    }
 }
