@@ -131,31 +131,21 @@ public class CalculatorGUI extends JFrame
 				if(source == btnEnter)
 				{
 					String phrase = txtInsert.getText();
-					txtBinary.setText(binary.getValue(phrase, choice));
-					txtOctal.setText(octal.getValue(phrase));
+					//txtBinary.setText(binary.getValue(phrase, choice));
 					txtDecimal.setText(decimal.getValue(phrase));
+					//txtOctal.setText(octal.getValue(phrase));
 				}
-				if(rdoChoice2.isSelected())
+				/*if(rdoChoice2.isSelected())
 				{
-					rdoBinary1.setEnabled(false);
-					rdoBinary2.setEnabled(false);
-
-
 				}
 
 				if(rdoChoice3.isSelected())
 				{
-					rdoBinary1.setEnabled(false);
-					rdoBinary2.setEnabled(false);
-
 				}
 
 				if(rdoChoice4.isSelected())
 				{
-					rdoBinary1.setEnabled(false);
-					rdoBinary2.setEnabled(false);
-
-				}
+				}*/
 			}
 			if(rdoChoice1.isSelected())
 			{

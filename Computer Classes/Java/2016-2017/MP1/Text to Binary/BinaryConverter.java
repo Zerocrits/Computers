@@ -41,20 +41,12 @@ public class BinaryConverter
 					val <<= 1;
 					phrase += binary;
 					if(i == 7)
-						phrase += " ";
+						phrase += "";
 					binary.setLength(0);
 				}
 			}
 		}
 		return phrase;
-
-		/*
-
-		String binary = "";
-				binary = ""+Integer.parseInt(value, 2);
-        return binary;
-
-		*/
 	}
 	public String toNumericalBinary(String value)
 	{
