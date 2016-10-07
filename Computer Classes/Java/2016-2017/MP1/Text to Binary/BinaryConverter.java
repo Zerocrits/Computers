@@ -41,7 +41,7 @@ public class BinaryConverter
 					val <<= 1;
 					phrase += binary;
 					if(i == 7)
-						phrase += "";
+						phrase += " ";
 					binary.setLength(0);
 				}
 			}

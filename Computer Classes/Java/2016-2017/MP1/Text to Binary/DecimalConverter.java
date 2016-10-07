@@ -14,9 +14,11 @@ public class DecimalConverter
 		bin = new BinaryConverter();
 		value = value;
 
-		String binary = bin.toAsciiBinary(value);
-		String decimal = ""+Long.parseLong(binary.trim());
-		decimal = ""+Long.parseLong(decimal, 2);
+		String decimal = "";
+		for(int i = 0; i < value.length(); i++)
+		{
+		    decimal += (int)value.charAt(i) + " ";
+		}
 
 		return decimal;
 	}

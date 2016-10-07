@@ -14,14 +14,24 @@ public class HexConverter
 	{
 		value = value;
 		String decimalVal = "";
-		String hex = "";
+		String[] phrase = {};
 		decimalVal = decimal.getValue(value);
-		hex = toHex(decimalVal);
+		for(int i = 0; i < decimalVal; i++)
+		{
+			if(decimalVal.charAt(i) != 48 < 58)
+				phrase[i] += "" + decimalVal.charAt(i);
+			else
+				phrase[i] += decimalVal.charAt(i);
+//fix
+		}
+
+		int no = Integer.parseInt(value);
+		String hex = Integer.toHexString(no);
 
 		return hex;
 	}
 
-    public String toHex(String decimal)
+    /*public String toHex(String decimal)
 	{
         int inputNumber = Integer.parseInt(decimal);
         int copyOfInputNumber = inputNumber;
@@ -36,6 +46,6 @@ public class HexConverter
         }
 
         return hex;
-    }
+    }*/
 }
 

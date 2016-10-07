@@ -23,20 +23,25 @@ public class OctalConverter
 
 	public String toOctal(String decimal)
 	{
-	        int inputNumber = Integer.parseInt(decimal);
-	        int copyOfInputNumber = inputNumber;
-	        String octal = "";
-	        int remainder = 0;
+	    String[] values = decimal.split("\\s+");
+	    int n, r;
+	    String s = "";
 
-	        while (inputNumber > 0)
-	        {
-	            remainder = inputNumber%8;
+		for(int i = 0; i < values.length; i++)
+		{
+	    	n = Integer.parseInt(values[i]);
+			s=""; //variable for storing the result
 
-	            octal =  remainder + octal;
+			//array storing the digits (as characters) in the octal number system
+			char dig[]={'0','1','2','3','4','5','6','7'};
 
-	            inputNumber = inputNumber/8;
-	        }
-
-	        return octal;
+			while(n>0)
+			{
+				r=n%8; //finding remainder by dividing the number by 8
+				s += dig[r]+s+" "; //adding the remainder to the result and reversing at the same time
+				n=n/8;
+			}
+		}
+        return s;
     }
 }
