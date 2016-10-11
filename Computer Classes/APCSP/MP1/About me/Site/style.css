@@ -30,7 +30,7 @@ dd{
 	font-family:Verdana, Geneva, sans-serif
 }
 
-ul {
+ul1 {
    
     margin: 0;
     padding: 0;
@@ -48,7 +48,7 @@ li.left {
 
 li.left a {
 	display: block;
-	color: #0F0;
+	color: #0C3;
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
