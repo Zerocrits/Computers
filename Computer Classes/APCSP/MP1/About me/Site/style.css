@@ -1,9 +1,6 @@
 body{
 	background-color: #099;
-}
-
-body{
-	margin:0;
+	margin: 0;
 	
 }
 
@@ -15,12 +12,26 @@ p1{
 
 p2{
 	color: #33F;
-	font-size:16px;
+	font-size:24px;
+	font-family:Verdana, Geneva, sans-serif
+}
+
+dt{
+	color: #0F0;
+	font-size:36px;
+	font-family:"Arial Black", Gadget, sans-serif
+	margin: 5;
+
+}
+
+dd{
+	color: #33F;
+	font-size:24px;
 	font-family:Verdana, Geneva, sans-serif
 }
 
 ul {
-    list-style-type: none;
+   
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -30,11 +41,12 @@ ul {
     width: 100%;
 }
 
-li {
+
+li.left {
     float: left;
 }
 
-li a {
+li.left a {
 	display: block;
 	color: #0F0;
 	text-align: center;
@@ -42,47 +54,11 @@ li a {
 	text-decoration: none;
 }
 
-li a:hover:not(.active) {
+li.left a:hover:not(.active) {
     background-color: #366;
     opacity:0.8;
 }
 
 .active {
 	background-color: #900;
-}
-
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    top: 150%;
-    left: 50%;
-    margin-left: -60px;
-}
-
-.tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent black transparent;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
 }
