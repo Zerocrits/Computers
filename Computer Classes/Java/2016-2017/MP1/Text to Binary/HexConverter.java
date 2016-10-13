@@ -7,26 +7,16 @@ public class HexConverter
 	public HexConverter()
 	{
 		String value = "";
-		decimal = new DecimalConverter();
 	}
 
 	public String getValue(String value)
 	{
 		value = value;
-		decimal = new DecimalConverter();
-
 		String hex = "";
-		int num = 0;
 
 		for(int i = 0; i < value.length(); i++)
-		{
-			num = value.charAt(i);
-			hex += Integer.parseInt(num, 16);
-
-		}
-
+			hex += Integer.toHexString(value.charAt(i)) + " ";
 		return hex;
 	}
-
 }
 

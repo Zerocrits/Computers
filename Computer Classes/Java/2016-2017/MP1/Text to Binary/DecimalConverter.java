@@ -3,7 +3,6 @@ import java.lang.*;
 
 public class DecimalConverter
 {
-	private BinaryConverter bin;
 	public DecimalConverter()
 	{
 		String value = "";
@@ -11,7 +10,6 @@ public class DecimalConverter
 
 	public String getValue(String value)
 	{
-		bin = new BinaryConverter();
 		value = value;
 
 		String decimal = "";
@@ -21,19 +19,5 @@ public class DecimalConverter
 		}
 
 		return decimal;
-	}
-
-	public int getVal(String value)
-	{
-		bin = new BinaryConverter();
-		value = value;
-		int num = 0;
-
-		for(int i = 0; i < value.length(); i++)
-		{
-			num += value.charAt(i);
-		}
-
-		return num;
 	}
 }

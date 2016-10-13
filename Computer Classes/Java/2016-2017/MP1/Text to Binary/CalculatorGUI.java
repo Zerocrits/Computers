@@ -4,16 +4,14 @@ import javax.swing.*;
 
 public class CalculatorGUI extends JFrame
 {
-	private int APPLET_WIDTH = 900, APPLET_HEIGHT = 800, choice = 0;
+	private int APPLET_WIDTH = 900, APPLET_HEIGHT = 350, choice = 0;
 	private JLabel lblBinary, lblOctal, lblDecimal, lblHex, lblTitle, lblBox1;
 	private JButton btnEnter;
 	private JTextField txtInsert, txtBinary, txtOctal, txtDecimal, txtHex;
-	private JRadioButton rdoBinary1, rdoBinary2, rdoChoice1, rdoChoice2, rdoChoice3, rdoChoice4;
 	private BinaryConverter binary;
 	private OctalConverter octal;
 	private DecimalConverter decimal;
 	private HexConverter hex;
-	private ButtonGroup grpButtons1, grpButtons2;
 	private ButtonListener listener;
 
 	public CalculatorGUI()
@@ -37,7 +35,7 @@ public class CalculatorGUI extends JFrame
 		txtDecimal.setEditable(false);
 		txtHex = new JTextField(50);
 		txtHex.setEditable(false);
-		txtInsert = new JTextField(15);
+		txtInsert = new JTextField(30);
 		lblBinary = new JLabel("  Binary Conversion:");
 		lblBinary.setFont(new Font("Comic Sans MS", Font.BOLD, 26));
 		lblOctal = new JLabel("   Octal Conversion:");
@@ -52,39 +50,6 @@ public class CalculatorGUI extends JFrame
 		lblBox1.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		listener = new ButtonListener();
 
-		Box box1 = Box.createVerticalBox();
-		grpButtons1 = new ButtonGroup();
-		rdoBinary1 = new JRadioButton("Numerical");
-		rdoBinary2 = new JRadioButton("ASCII");
-
-		//rdoBinary1.setEnabled(false);
-		//rdoBinary2.setEnabled(false);
-		//btnEnter.setEnabled(false);
-
-		box1.add(lblBox1);
-		box1.add(rdoBinary1);
-		box1.add(rdoBinary2);
-
-		grpButtons1.add(rdoBinary1);
-		grpButtons1.add(rdoBinary2);
-
-		Box box2 = Box.createVerticalBox();
-		grpButtons2 = new ButtonGroup();
-		rdoChoice1 = new JRadioButton("Binary");
-		rdoChoice2 = new JRadioButton("Decimal");
-		rdoChoice3 = new JRadioButton("Octal");
-		rdoChoice4 = new JRadioButton("Hex");
-
-		box2.add(rdoChoice1);
-		box2.add(rdoChoice2);
-		box2.add(rdoChoice3);
-		box2.add(rdoChoice4);
-
-		grpButtons2.add(rdoChoice1);
-		grpButtons2.add(rdoChoice2);
-		grpButtons2.add(rdoChoice3);
-		grpButtons2.add(rdoChoice4);
-
 		cp.add(lblTitle);
 		cp.add(lblBinary);
 		cp.add(txtBinary);
@@ -94,19 +59,10 @@ public class CalculatorGUI extends JFrame
 		cp.add(txtDecimal);
 		cp.add(lblHex);
 		cp.add(txtHex);
-		cp.add(box1);
-		cp.add(box2);
 		cp.add(txtInsert);
 		cp.add(btnEnter);
 
 		btnEnter.addActionListener(listener);
-		rdoChoice1.addActionListener(listener);
-		rdoChoice2.addActionListener(listener);
-		rdoChoice3.addActionListener(listener);
-		rdoChoice4.addActionListener(listener);
-
-		grpButtons1.add(rdoBinary1);
-		grpButtons1.add(rdoBinary2);
 
 		setSize(APPLET_WIDTH, APPLET_HEIGHT);
 		setVisible(true);
@@ -133,34 +89,10 @@ public class CalculatorGUI extends JFrame
 				if(source == btnEnter)
 				{
 					String phrase = txtInsert.getText();
-					txtBinary.setText(binary.getValue(phrase, choice));
+					txtBinary.setText(binary.getValue(phrase));
 					txtDecimal.setText(decimal.getValue(phrase));
 					txtOctal.setText(octal.getValue(phrase));
 					txtHex.setText(hex.getValue(phrase));
-				}
-				/*if(rdoChoice2.isSelected())
-				{
-				}
-
-				if(rdoChoice3.isSelected())
-				{
-				}
-
-				if(rdoChoice4.isSelected())
-				{
-				}*/
-			}
-			if(rdoChoice1.isSelected())
-			{
-				rdoBinary1.setEnabled(true);
-				rdoBinary2.setEnabled(true);
-				if(rdoBinary1.isSelected())
-				{
-					choice = 1;
-				}
-				else
-				{
-					choice = 2;
 				}
 			}
 		}
