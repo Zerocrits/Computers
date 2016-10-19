@@ -1,79 +1,49 @@
 body{
-	background-color: #099;
+	background-color: #FFC;
+	margin: 0;
 }
 
-p1 {
-    background-color: powderblue;
-    color: red;
-    text-align: center;
-}
-
-body {margin:0;}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
-li {
-    float: left;
-}
-
-li a {
-	display: block;
-	color: #0F0;
+.navBar{
+	margin-top: 0%;
+	margin-left: 5%;
+	margin-right: 5%;
 	text-align: center;
-	padding: 14px 16px;
+	padding: 0px;
+}
+ul.bar {
+	list-style-type: none;
+	background-color: #CCC;
+	overflow: hidden;
+	display: inline-block;
+	padding: 0px;
+	border: 2px solid #000;
+}
+li.button {
+	list-style-type: none;
+	display: inline-block;
+	padding: 20px;
+}
+li.button a {
+	display: inline-block;
 	text-decoration: none;
+	color: #000;
+	text-align: center;
+	padding: 20px;
+}
+li.button .active {
+	background-color: #C00;
+	
+}
+li.button a:hover {
+    background-color: gray;
 }
 
-li a:hover:not(.active) {
-    background-color: #366;
-    opacity:0.8;
+.date{
+	
+	
 }
-
-.active {
-	background-color: #900;
-}
-
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    top: 150%;
-    left: 50%;
-    margin-left: -60px;
-}
-
-.tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent black transparent;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
+p.date{
+	background-color: red;
+	padding: 20px;
+	
 }

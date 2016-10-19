@@ -16,6 +16,11 @@ p2{
 	font-family:Verdana, Geneva, sans-serif
 }
 
+p3{
+	font-size: 14;
+	font-family:Verdana, Geneva, sans-serif
+}
+
 tr{
 	color: #CCC;
 	font-size:24px;
@@ -31,6 +36,7 @@ dt{
 
 }
 
+
 dd{
 	color: #33F;
 	font-size:24px;
@@ -38,6 +44,7 @@ dd{
 }
 
 ul1 {
+	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
@@ -46,10 +53,10 @@ ul1 {
 	top: 0;
 	width: 100%;
 }
-
-
+ 
 li.left {
 	float: left;
+	border-right: 1px solid #bbb;
 }
 
 li.left a {

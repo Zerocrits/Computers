@@ -3,15 +3,24 @@
 <html>
 	<head>
 		<title> Lum </title>
-		<center><p><br><br><image src="images/banner1.PNG" style="width:400px;height:150px;"> </center>
 	</head>
 
 	<body>
-		<ul>
-  			<li><a class="active" href="index.html">Home</a></li>
-  			<li><a href="page1/page1.html">News</a></li>
-  			<li><a href="page2/page2.html">Spreadsheets</a></li>
-  			<li><a href="../page3/page3.html">About</a></li>
-		</ul>
-	</body>	
+		<div class = "navBar">
+			<ul class = "bar">
+				<li class = "button"><a class="active" href="index.html">Home</a></li>
+				<li class = "button"><a href="page1/page1.html">News</a></li>
+				<li class = "button"><a href="page2/page2.html">Spreadsheets</a></li>
+				<li class = "button"><a href="../page3/page3.html">About</a></li>
+</ul>
+</div>
+		<div class = "date">
+			<p id="time"></p>
+				<script>
+					var d = new Date();
+					document.getElementById("time").innerHTML = d;
+</script>
+</div>
+
+</body>	
 </html>
