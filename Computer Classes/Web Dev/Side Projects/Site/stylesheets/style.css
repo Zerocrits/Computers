@@ -1,0 +1,97 @@
+body{
+	background-color: #FFC;
+	margin: 0;
+}
+
+.navBar{
+	margin-top: 0%;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-bottom: -5%;
+	text-align: center;
+	padding: 0px;
+}
+ul.bar {
+	list-style-type: none;
+	background-color: #CCC;
+	overflow: hidden;
+	display: inline-block;
+	padding: 0px;
+	border: 2px solid #000;
+}
+li.button {
+	list-style-type: none;
+	display: inline-block;
+	padding: 20px;
+}
+li.button a {
+	display: inline-block;
+	text-decoration: none;
+	color: #000;
+	text-align: center;
+	padding: 20px;
+}
+li.button .active {
+	background-color: #C00;
+	
+}
+li.button a:hover {
+    background-color: gray;
+}
+
+.body{
+	padding-top: 2%;
+}
+
+.date{
+	margin-left: 0%;
+	margin-top: 4%;
+	background-color: #b3ff99;
+	border: 2px solid #000;
+	display: inline-block;
+	padding: 2%;
+	width: 20%;
+	
+}
+p.time{
+	color: black;
+	margin-top: -3%;
+	margin-left: -3%;
+	margin-right: -3%;
+	margin-bottom: -3%;
+	padding: 0%;
+	font-size: 25px;
+	font-family:Verdana, Geneva, sans-serif
+}
+p.whatday{
+	color: black;
+	margin-top: 5%;
+	margin-left: -3%;
+	margin-right: -3%;
+	margin-bottom: 5%;
+	padding: 0%;
+	font-size: 25px;
+	font-family:Verdana, Geneva, sans-serif
+}
+
+.middlebody1{
+	margin-left: 4.4%;
+	margin-top: -5%;
+	background-color: #0870d1;
+	border: 2px solid #000;
+	display: inline-block;
+	padding-top: 2.4%;
+	width: 41.5%;
+}
+
+.calendar{
+	border: 2px solid #000;
+	display: inline-block;
+	background-color: #b3ff99;
+	
+}
+p.title{
+	text-align: center;
+	font-size: 25px;
+	
+}
