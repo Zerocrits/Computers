@@ -2,7 +2,13 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 <html>
 	<head>
-		<title> Home Page </title>
+		<title> Home Page no </title>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
+		<script> 
+			$(function(){
+				$("#includedContent").load("htmlApps/calendar.html"); 
+			});
+</script> 
 	</head>
 
 	<body>
@@ -25,6 +31,10 @@
 		<div class = "middlebody1">
 			<p class = "title"><b> Welcome to the Website </b></p>
 			
+</div>
+
+		<div class = "calendar">
+		<div id="includedContent"></div>
 </div>
 
 </body>	
