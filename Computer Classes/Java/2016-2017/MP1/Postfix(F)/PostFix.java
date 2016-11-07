@@ -13,13 +13,13 @@ public class PostFix
 
 	public PostFix()
 	{
-		Stack<Integer> stack = new Stack<Integer>();
+		stack = new Stack<Double>();
 		expression = "";
 	}
 
 	public PostFix(String exp)
 	{
-		Stack<Integer> stack = new Stack<Integer>();
+		stack = new Stack<Double>();
 		expression = exp;
 	}
 
@@ -32,14 +32,15 @@ public class PostFix
 	{
 		if(op == '+')
 			return one + two;
-		if(op == '-')
+		else if(op == '-')
 			return one - two;
-		if(op == '*')
+		else if(op == '*')
 			return one * two;
-		if(op == '/')
+		else if(op == '/')
 			return one / two;
-		if(op == '%')
+		else if(op == '%')
 			return one % two;
+
 		return 0.0;
 	}
 
@@ -48,23 +49,23 @@ public class PostFix
 		double num1 = 0;
 		double num2 = 0;
 
-		while(!stack.empty())
+		for(int i = 0; i < expression.length(); i++)
 		{
-			for(int i = 0; i < expression.length(); i++)
+			if(expression.charAt(i) >= 48 && expression.charAt(i) <= 57)
 			{
-				int t = Character.getNumericValue(expression.charAt(i))
-				if(expression.charAt(i) <= 57 || expression.charAt(i) >= 48 && stack.peek() !=)
-					num1 = stack.push();
-				else if(((int)((stack.peek()).charAt(i)) != 32))
-					num2 = stack.pop();
+				stack.push((double)Character.getNumericValue(expression.charAt(i)));
+			}
+			else if(expression.charAt(i)!= ' ')
+			{
+				num2 = stack.pop();
+				num1 = stack.pop();
+				stack.push(calc(num1,num2,expression.charAt(i)));
 			}
 		}
 	}
 
 	public String toString()
 	{
-		return null;
+		return expression + " = " + stack.peek();
 	}
-
-	//add a toString
 }
