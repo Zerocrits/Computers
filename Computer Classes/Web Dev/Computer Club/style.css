@@ -1,0 +1,45 @@
+html{
+	background-color: #666666;
+	font-family: "Berlin Sans FB";
+}
+
+.navBar{
+	text-align: center;
+	background-color: #F8F9EB;
+	border-style: solid;
+	border-width:2px;
+	margin:-10px;
+}
+ul.bar{
+	display: inline-block;
+	list-style-type: none;
+	padding: 0;
+	overflow: hidden;
+}
+li.barTitle{
+	text-decoration: none;
+	font-family: "Berlin Sans FB";
+	font-size: 28px;
+	display: inline-block;
+	color: #000000;
+	padding: 13px;
+	background-color: #F8F9EB;
+}
+li.barItem a{
+	display: inline-block;
+	color: #000000;
+	padding: 16px;
+	text-decoration: none;
+	background-color: #F8F9EB;
+}
+li.barItem a.active{
+	background-color: #F7522F;
+	color: #F2EDD8;
+}
+li.barItem a:hover:not(.active) {
+	background-color: #F7522F;
+	color: #F2EDD8;
+}
+li.floatLeft{
+	float: left;
+}

@@ -17,35 +17,35 @@ public class ListFunHouseRunner
 		       		new ListNode("up",
 			 		new ListNode("over",null))))))));
 
-		System.out.println("Lab15b Test Code\n\n");
+		System.out.println("**Lab 15b Test Code**\n");
 
-		System.out.println("Original list values\n");
+		System.out.println("Original list values:");
 		ListFunHouse.print(z);
 		System.out.println("\n");
 
 		System.out.println("num nodes = " + ListFunHouse.nodeCount(z));
 
-		System.out.println("\nList values after calling nodeCount\n");
+		System.out.println("\nList values after calling nodeCount:");
 		ListFunHouse.print(z);
 		System.out.println();
 
 		ListFunHouse.doubleFirst(z);
-		System.out.println("\nList values after calling doubleFirst\n");
+		System.out.println("\nList values after calling doubleFirst:");
 		ListFunHouse.print(z);
 		System.out.println();
 
 		ListFunHouse.doubleLast(z);
-		System.out.println("\nList values after calling doubleLast\n");
+		System.out.println("\nList values after calling doubleLast:");
 		ListFunHouse.print(z);
 		System.out.println();
 
 		ListFunHouse.removeXthNode(z,2);
-		System.out.println("\nList values after calling removeXthNode(2)\n");
+		System.out.println("\nList values after calling removeXthNode(2):");
 		ListFunHouse.print(z);
 		System.out.println();
 
 		ListFunHouse.setXthNode(z,2,"one");
-		System.out.println("\nList values after calling setXthNode(2,one)\n");
+		System.out.println("\nList values after calling setXthNode(2,one):");
 		ListFunHouse.print(z);
 		System.out.println();
 	}
