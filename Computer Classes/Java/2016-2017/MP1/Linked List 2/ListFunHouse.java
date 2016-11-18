@@ -7,7 +7,6 @@ public class ListFunHouse
 	//this method will print the entire list on the screen
 	public static void print(ListNode list)
 	{
-		ListNode current = new ListNode();
 		while(list != null)
 		{
 			System.out.print(list.getValue() + " ");
@@ -35,10 +34,11 @@ public class ListFunHouse
 		int length = nodeCount(list);
 		for(int i = 1; i < length+1; i++)
 		{
+			if(i == 1)
+				list = new ListNode(i-1, list);
 			list = new ListNode(i-1,temp);
 			temp = new ListNode(i,list);
 		}
-
 	}
 
 	//this method will create a new node with the same value as the last node and add this
@@ -71,15 +71,17 @@ public class ListFunHouse
 	{
 		int count = 0;
 		int length = nodeCount(list);
+		ListNode temp = new ListNode();
 		for(int i = 0; i < length; i++)
 		{
 			if(count == x)
 			{
-				list.setValue(value);
-				list = new ListNode(i,list);
+				count = 0;
+				temp = new ListNode(i, list);
 			}
 			else
 			{
+				temp = new ListNode(i, list);
 				count++;
 			}
 		}
@@ -90,15 +92,16 @@ public class ListFunHouse
 	{
 		int count = 0;
 		int length = nodeCount(list);
+		ListNode temp = new ListNode();
 		for(int i = 0; i < length; i++)
 		{
 			if(count == x)
 			{
-				list.setValue("");
-				list = new ListNode(i,list);
+				count = 0;
 			}
 			else
 			{
+				temp = new ListNode(i, list);
 				count++;
 			}
 		}
