@@ -29,24 +29,20 @@ public class ListFunHouseRunner
 		ListFunHouse.print(z);
 		System.out.println();
 
-		ListFunHouse.doubleFirst(z);
 		System.out.println("\nList values after calling doubleFirst:");
-		ListFunHouse.print(z);
+		ListFunHouse.doubleFirst(z);
 		System.out.println();
 
-		ListFunHouse.doubleLast(z);
 		System.out.println("\nList values after calling doubleLast:");
-		ListFunHouse.print(z);
+		ListFunHouse.doubleLast(z);
 		System.out.println();
 
-		ListFunHouse.removeXthNode(z,2);
 		System.out.println("\nList values after calling removeXthNode(2):");
-		ListFunHouse.print(z);
+		ListFunHouse.removeXthNode(z,2);
 		System.out.println();
 
-		ListFunHouse.setXthNode(z,2,"one");
 		System.out.println("\nList values after calling setXthNode(2,one):");
-		ListFunHouse.print(z);
+		ListFunHouse.setXthNode(z,2,"one");
 		System.out.println();
 	}
 }
