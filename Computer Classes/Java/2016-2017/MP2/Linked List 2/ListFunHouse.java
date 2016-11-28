@@ -38,16 +38,9 @@ public class ListFunHouse
 	//new node at the end.  Once finished, the last node will occur twice.
 	public static void doubleLast(ListNode list)
 	{
-		ListNode temp = new ListNode("",list);
-		ListNode last = new ListNode();
-		for(int i = 0; i < nodeCount(list); i++)
-		{
-			if(i == nodeCount(list)-1)
-				last.setValue(list.getValue());
-			else
-				temp.getNext();
-		}
-			temp.setNext(last);
+		ListNode temp = new ListNode(list.getValue(),list);
+		while(temp == null)
+			temp.setNext(list);
 		print(temp);
 	}
 
