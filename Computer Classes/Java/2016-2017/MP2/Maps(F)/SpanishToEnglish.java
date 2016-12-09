@@ -5,6 +5,7 @@
 import java.io.*;
 import java.util.*;
 import java.util.Map;
+import java.util.Hashtable;
 import java.util.TreeMap;
 import java.util.Scanner;
 
@@ -16,21 +17,17 @@ public class SpanishToEnglish
 
 	public SpanishToEnglish()
 	{
-		Map pairs = new TreeMap();
+		pairs = new TreeMap<String,String>();
 		Scanner sc = new Scanner(System.in);
 		try {
 		    File file = new File("spantoeng.dat");
 		    sc = new Scanner(file);
 		    numKey = sc.nextInt();
 		    sc.nextLine();
-			while(sc.hasNextLine() && numKey != 0)
+			while(sc.hasNextLine() && numKey > 0)
 			{
 				numKey--;
 				putEntry(sc.nextLine());
-			}
-			while(sc.hasNextLine())
-			{
-				System.out.println(translate(sc.nextLine()));
 			}
 		}catch (FileNotFoundException e)
 		{
@@ -42,38 +39,24 @@ public class SpanishToEnglish
 	public void putEntry(String entry)
 	{
 		String[] list = entry.split(" ");
-		pairs = new TreeMap();
 		pairs.put(list[0], list[1]);
-
-		Set set = pairs.entrySet();
-		Iterator iterator = set.iterator();
-		while(iterator.hasNext())
-		{
-			Map.Entry mentry = (Map.Entry)iterator.next();
-			System.out.println(mentry.getKey() + "=" + mentry.getValue());
-		}
-
 	}
 
 	public String translate(String sent)
 	{
 		String output = "";
 		String[] list = sent.split(" ");
-		for(int i = 0; i < list.length-1; i++)
+		for(int i = 0; i < list.length; i++)
 		{
 			if(pairs.containsKey(list[i]));
-				//System.out.println(list[i] + " " + pairs.values());
-				output += pairs.get(list[i]);
-				//output += list[i].get(pairs);
+				output += pairs.get(list[i]) + " ";
 
 		}
 		return output;
-		//http://docs.oracle.com/javase/7/docs/api/java/util/TreeMap.html
 	}
 
 	public String toString()
 	{
-		return "";
-		//return pairs.toString().replaceAll("\\,","\n");
+		return pairs.toString().replaceAll("\\,","\n");
 	}
 }
