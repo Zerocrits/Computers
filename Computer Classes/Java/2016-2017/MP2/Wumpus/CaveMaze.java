@@ -34,16 +34,19 @@ public class CaveMaze
 			caves[num] = new Cave(name, num, num1, num2, num3);
 		}
 		// Determine the number of Wumpi and Grenades as specified above
-		numWumpi = 5;
+		numWumpi = 3;
 		numGrenades = numWumpi*3;
+
+
+
 		//**** Place each Wumpi
 		// Note: They should be placed randomly - however you also need to ensure that they
 		//	are only placed in an empty cave... continue to check cave location contents
 		//  until you find an available cave.
-		for(int i = 0; i < numCaves; i++)
+		for(int i = 0; i < numWumpi; i++)
 		{
-			randomCave = ((int)(Math.random() * numCaves));
-			if(caves[randomCave].getContents() == CaveContents.EMPTY)
+			randomCave = ((int)(Math.random() * caves.length));
+			if(caves[randomCave].getContents() == CaveContents.EMPTY && randomCave != 0)
 				caves[randomCave].setContents(CaveContents.WUMPUS);
 			else
 				i--;
@@ -54,8 +57,8 @@ public class CaveMaze
 		// Note: Same procedure, but there is just one bat to place.
 		for(int i = 0; i < 1; i++)
 		{
-			randomCave = ((int)(Math.random() * numCaves+1));
-			if(caves[randomCave].getContents() == CaveContents.EMPTY)
+			randomCave = ((int)(Math.random() * numCaves-1)+1);
+			if(caves[randomCave].getContents() == CaveContents.EMPTY && randomCave != 0)
 				caves[randomCave].setContents(CaveContents.BATS);
 			else
 				i--;
@@ -66,8 +69,8 @@ public class CaveMaze
 		// Note: Same procedure that you used for placing a bat
 		for(int i = 0; i < 1; i++)
 		{
-			randomCave = ((int)(Math.random() * numCaves+1));
-			if(caves[randomCave].getContents() == CaveContents.EMPTY)
+			randomCave = ((int)(Math.random() * numCaves-1)+1);
+			if(caves[randomCave].getContents() == CaveContents.EMPTY && randomCave != 0)
 				caves[randomCave].setContents(CaveContents.PIT);
 			else
 				i--;
@@ -89,17 +92,23 @@ public class CaveMaze
 	*/
 	public String move(int tunnel)
 	{
-		currentCave = caves[tunnel];
-		if(tunnel < 4 || tunnel > 0)
+		if(tunnel < 4 && tunnel > 0)
 		{
-			if(caves[tunnel].getContents() == CaveContents.WUMPUS)
-				return "I smell a wumpus";
-			else if(caves[tunnel].getContents() == CaveContents.BATS)
-				return "Bats nearby";
-			else if(caves[tunnel].getContents() == CaveContents.PIT)
-				return "I feel a draft";
+			currentCave = caves[currentCave.getAdjNumber(tunnel)];
+			if(currentCave.getContents() == CaveContents.BATS)
+			{
+				currentCave = caves[(int)(Math.random()*caves.length)];
+				currentCave.markAsVisited();
+				return "There is a bat in this room, you have been moved.";
+			}
+			if(currentCave.getContents() == CaveContents.WUMPUS)
+				return "Oops there was a wumpus here, you have died.";
+			if(currentCave.getContents() == CaveContents.PIT)
+				return "You just fell into an endless pit.";
+			else
+				return "Bug in code, no content here.";
 		}
-		return "ERROR: INVALID PATH";
+		return "ERROR: INVALID PATH" + tunnel;
   	}
 
 	/**
@@ -114,14 +123,16 @@ public class CaveMaze
 	*/
 	public String toss(int tunnel)
 	{
+		Cave target = caves[currentCave.getAdjNumber(tunnel)];
 		String result = "";
-		if(tunnel < 4 || tunnel > 0 && numGrenades > 0)
+		int randomCave = (int)(Math.random()*caves.length)+1;
+		if(numGrenades > 0)
 		{
-			if(caves[tunnel].getContents() == CaveContents.WUMPUS)
+			if(target.getContents() == CaveContents.WUMPUS)
 			{
 				numGrenades--;
 				numWumpi--;
-				caves[tunnel].setContents(CaveContents.EMPTY);
+				target.setContents(CaveContents.EMPTY);
 				result = "You Just Killed a Wumpus!";
 			}
 			else
@@ -130,7 +141,6 @@ public class CaveMaze
 				result = "You Didn't Hit Anything";
 			}
 		}
-
 		return result;
 	}
 
@@ -144,6 +154,7 @@ public class CaveMaze
 	{
 		String message = "You are currently in " + currentCave.getCaveName();
 		boolean wumpusNearby = false, batsNearby = false, pitNearby = false;
+		//Cave adj = caves[(int)(Math.random()*caves.length)+1];
 
 		// Show the 3 adjacent rooms (the name of the room if visited, "unknown" otherwise)
 		// Update the boolean flags (above) based on the CaveContents for each adjacent room
@@ -153,24 +164,24 @@ public class CaveMaze
 		for(int i = 1; i <= 3; i++)
 		{
 			Cave adjCave = caves[currentCave.getAdjNumber(i)];
-			if(adjCave.getContents == CaveContents.PIT)
-			{
+			message += "\nCave " + i + ": ";
+			if(adjCave.hasBeenVisited() == true)
+				message += adjCave.getCaveName();
+			else
+				message += "Unknown!";
+			if(adjCave.getContents() == CaveContents.PIT)
 				pitNearby = true;
-				message += "\nI feel a draft";
-
-			}
-			if(adjCave.getContents == CaveContents.BATS)
-			{
+			if(adjCave.getContents() == CaveContents.BATS)
 				batsNearby = true;
-				message += "\nBats nearby";
-			}
-			if(adjCave.getContents == CaveContents.WUMPUS)
-			{
+			if(adjCave.getContents() == CaveContents.WUMPUS)
 				wumpusNearby = true;
-				message += "\nI smell a wumpus";
-			}
-
 		}
+		if(batsNearby == true)
+			message += "\nI smell a wumpus";
+		if(wumpusNearby == true)
+			message += "\nBats nearby";
+		if(pitNearby == true)
+			message += "\nI feel a draft";
 
 		return message;
 	}
@@ -197,11 +208,8 @@ public class CaveMaze
 	*/
 	public boolean stillWumpi()
 	{
-		for(int i = 0; i < caves.length; i++)
-		{
-			if(caves[i].getContents() == CaveContents.WUMPUS)
-				return true;
-		}
+		if(numWumpi > 0)
+			return true;
 		return false;
 	}
 }

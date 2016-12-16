@@ -35,11 +35,11 @@ public class HuntTheWumpusRunner
                 target = input.nextInt();
             }
 
-            if (action == 't')
+            if(action == 't')
             {
                 System.out.println(maze.toss(target));
             }
-            else if (action == 'm')
+            else if(action == 'm')
             {
                 System.out.println(maze.move(target));
             }

@@ -15,8 +15,10 @@ public class Cave
 	*/
 	public Cave(String name, int num, int adj1, int adj2, int adj3)
     {
+		visited = false;
 		caveName = name;
 		caveNumber = num;
+		caveContents = caveContents.EMPTY;
 		adj1 = this.adj1;
 		adj2 = this.adj2;
 		adj3 = this.adj3;
@@ -28,8 +30,12 @@ public class Cave
 	*	@return the number of the adjacent cave through that tunnel (or -1 if the tunnel number is not 1-3)*/
 	public int getAdjNumber(int tunnel)
 	{
-		if(tunnel > 0 || tunnel < 4)
-			return tunnel;
+		if(tunnel == 1)
+			return adj1;
+		else if(tunnel == 2)
+			return adj2;
+		else if(tunnel == 3)
+			return adj3;
 		else
 			return -1;
 	}
