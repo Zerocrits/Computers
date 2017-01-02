@@ -8,7 +8,7 @@ public class Agram
 
 	public Agram(String tdeck)
 	{
-		deck = tdeck.split(" ");
+		deck = tdeck.split(", ");
 		dealerCard = new String[5];
 		setPlayer();
 		setDealer();
@@ -35,6 +35,7 @@ public class Agram
 	public String toString()
 	{
 		AgramCard suit = new AgramCard(dealerCard, playerLead);
-		return suit.getSuit();
+		String result = suit.getSuit();
+		return result;
 	}
 }

@@ -14,5 +14,4 @@ public class AgramRunner
 		System.out.println("The best card to pick is: " + game.toString());
 	}
 
-
 }

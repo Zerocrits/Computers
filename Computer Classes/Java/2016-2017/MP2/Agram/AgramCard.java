@@ -1,8 +1,9 @@
 import java.util.*;
+import java.io.*;
 
 public class AgramCard
 {
-	String[] deck;
+	String[] deck, Zcards;
 	String lead;
 
 	public AgramCard()
@@ -10,11 +11,10 @@ public class AgramCard
 		deck = new String[5];
 		lead = "";
 	}
-	public AgramCard(String[] cards, String lead)
+	public AgramCard(String[] cards, String leader)
 	{
 		deck = cards;
-		lead = this.lead;
-		//System.out.println(deck[0] + " " + deck[4] + " " + cards[0]);
+		lead = leader;
 	}
 	public boolean getValue(String value)
 	{
@@ -32,14 +32,13 @@ public class AgramCard
 		String ranks = "CDHS"; //clubs diamonds hearts spades
 		for(int i = 0; i < deck.length; i++)
 		{
-			System.out.println("made it here");
-			if(ranks.indexOf(deck[i].charAt(1)) >= ranks.indexOf(lead.charAt(1)))//null
+			if(ranks.indexOf(deck[i].substring(1)) == ranks.indexOf(lead.substring(1)))//null
 			{
 				if(getValue(deck[i]) == true)
 				{
 					return deck[i];
 				}
-			}
+			}//add so if its not the same card type it can still find it
 		}
 		return "No Winnable Card";
 	}
