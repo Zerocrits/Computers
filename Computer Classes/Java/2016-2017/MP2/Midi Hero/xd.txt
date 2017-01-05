@@ -1,0 +1,2 @@
+http://stackoverflow.com/questions/35690046/converting-musical-note-strings-to-midi-pitch-number
+
