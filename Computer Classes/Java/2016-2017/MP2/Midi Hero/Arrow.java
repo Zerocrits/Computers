@@ -8,30 +8,30 @@ import java.io.IOException;
 import java.awt.event.KeyListener;
 import java.awt.Rectangle;
 
-public class Arrows implements KeyListener
+public class Arrow implements KeyListener
 {
-	private int y;
+	private int y, upY, downY, leftY, rightY;
 	private int x;
-	private int airTime;
+	private int score;
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp;
 	private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     public Arrow(Game game)
     {
 		try {
-			 imgLeft = ImageIO.read(new File("leftArrow.PNG"));
-			 imgRight = ImageIO.read(new File("leftArrow.PNG"));
-			 imgUp = ImageIO.read(new File("leftArrow.PNG"));
-			 imgDown = ImageIO.read(new File("leftArrow.PNG"));
+			 //imgLeft = ImageIO.read(new File("leftArrow.PNG"));
+			 //imgRight = ImageIO.read(new File("rightArrow.PNG"));
+			 imgUp = ImageIO.read(new File("upArrow.PNG"));
+			 //imgDown = ImageIO.read(new File("downArrow.PNG"));
 		}catch (IOException e) {
 
 			e.printStackTrace();
 			System.exit(1);
 		}
 
-		x = 40;
-        y = 506;
-        upPressed=downPressed=leftPressed=rightPressed=false;
+		x = 0;
+        y = 0;
+        upPressed = downPressed = leftPressed = rightPressed = false;
     }
 
     public int getY()
@@ -49,27 +49,26 @@ public class Arrows implements KeyListener
 	{
 		if(upPressed)
 		{
-			airTime=20;
-			jumping=true;
+			if(upY==200)
+				score += 10;
 		}
 
 		if(downPressed)
 		{
-			y-=airTime;
-			airTime--;
+			if(downY==200)
+				score += 10;
 		}
 
 		if(leftPressed)
 		{
-			jumping=false;
-			falling=true;
-			airTime=20;
+			if(leftY==200)
+				score += 10;
 		}
 
 		if(rightPressed)
 		{
-			y+=airTime;
-			airTime--;
+			if(rightY==200)
+				score += 10;
 		}
 	}
 
@@ -80,7 +79,7 @@ public class Arrows implements KeyListener
 
 	public void render(Graphics g) //draws player
 	{
-		g.drawImage(imgPlayer,x,y,null);
+		g.drawImage(imgUp,x,y,null);
 	}
 
     public void keyPressed(KeyEvent e)
@@ -122,7 +121,6 @@ public class Arrows implements KeyListener
 			rightPressed=false;
         }
     }
-
     public void keyTyped(KeyEvent e)
 	{
 

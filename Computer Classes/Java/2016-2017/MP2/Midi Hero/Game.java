@@ -11,33 +11,29 @@ import java.awt.Font;
 public class Game implements Runnable
 {
 	private Display display;
-	public int width, height, gamesetting, highscore;
+	public int width, height, highscore;
 	public String title;
 	private boolean running;
 	private Thread thread;
-	private Player player;
-	private Wall wall;
+	private Arrow arrow;
 	private int score;
 	private BufferStrategy bs;
 	private Graphics g;
 	private BufferedImage imgBackground;
 
-	public Game(String title, int width, int height, int gamesetting)
+	public Game(String title, int width, int height)
 	{
 		this.width = width;
 		this.height = height;
 		this.title = title;
-		this.gamesetting = gamesetting;
-		player = new Player(this);
-		wall = new Wall(this, gamesetting);
+		arrow = new Arrow(this);
 		score = highscore = 0;
 	}
 
 	private void reset()
 	{
 		display.getFrame().dispose();
-		player = new Player(this);
-		wall = new Wall(this, gamesetting);
+		arrow = new Arrow(this);
 		score=0;
 		init();
 	}
@@ -45,7 +41,7 @@ public class Game implements Runnable
 	{
 		display = new Display(title, width, height);
 
-		display.getFrame().addKeyListener(player);
+		display.getFrame().addKeyListener(arrow);
 	}
 
 	public Display getDisplay()
@@ -55,9 +51,8 @@ public class Game implements Runnable
 
 	public void tick()
 	{
-		//timers for player and wall
-		player.tick();
-		wall.tick();
+		//timers for arrow and wall
+		arrow.tick();
 	}
 
 	public void render()
@@ -74,7 +69,7 @@ public class Game implements Runnable
 		//reset screen
 		g.clearRect(0,0,width,height);
 
-		//draws background, player, wall
+		//draws background, arrow,
 		try {
 			 imgBackground = ImageIO.read(new File("Background.PNG"));
 		}catch (IOException e) {
@@ -89,8 +84,7 @@ public class Game implements Runnable
 
 		g.drawString("Score: " + getScore(), 100, 100);
 		g.drawString("High Score: " + getHighScore(), 550, 100);
-		player.render(g);
-		wall.render(g);
+		arrow.render(g);
 
 		//displays image(buffered image)
 		bs.show();
@@ -170,9 +164,9 @@ public class Game implements Runnable
 
 	public void hitDetect()
 	{
-		if(player.getFrame().intersects(wall.getFrame()))
-		{
-			int input = JOptionPane.showOptionDialog(null, "You have died, Want to try again?", "YOU LOSE!", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+		//if(arrow.getFrame().intersects(wall.getFrame()))
+		//{
+			/*int input = JOptionPane.showOptionDialog(null, "You have died, Want to try again?", "YOU LOSE!", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
 			if(input == JOptionPane.YES_OPTION)
 			{
@@ -183,7 +177,7 @@ public class Game implements Runnable
 				display.getFrame().dispose();
 				System.exit(0);
 				stop();
-			}
-   		}
+			}*/
+   		//}
 	}
 }
