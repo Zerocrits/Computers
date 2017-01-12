@@ -13,7 +13,7 @@ public class Game implements Runnable
 	private Display display;
 	public int width, height, highscore;
 	public String title;
-	private boolean running;
+	private boolean moving;
 	private Thread thread;
 	private Arrow arrow;
 	private int score;
@@ -21,11 +21,11 @@ public class Game implements Runnable
 	private Graphics g;
 	private BufferedImage imgBackground;
 
-	public Game(String title, int width, int height)
+	public Game(int width, int height)
 	{
 		this.width = width;
 		this.height = height;
-		this.title = title;
+		title = "MidiHero";
 		arrow = new Arrow(this);
 		score = highscore = 0;
 	}
@@ -80,10 +80,9 @@ public class Game implements Runnable
 
 		g.drawImage(imgBackground,0,0,null);
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("Serif", Font.BOLD, 50));
+		g.setFont(new Font("Serif", Font.BOLD, 20));
 
-		g.drawString("Score: " + getScore(), 100, 100);
-		g.drawString("High Score: " + getHighScore(), 550, 100);
+		g.drawString("Score: " + getScore(), 10, 50);
 		arrow.render(g);
 
 		//displays image(buffered image)
@@ -97,13 +96,13 @@ public class Game implements Runnable
 		init();
 
 		//timer with frames
-		final double fps = 60;
+		final double fps = 65;
 		double timePerTick = 1000000000 / fps;
 		double delta = 0;
 		long now;
 		long lastTime = System.nanoTime();
 
-		while(running)
+		while(moving)
 		{
 			now = System.nanoTime();
 			delta +=(now - lastTime) / timePerTick;
@@ -113,6 +112,7 @@ public class Game implements Runnable
 				tick();
 				render();
 				delta--;
+				System.out.println(delta);
 			}
 		}
 		stop();
@@ -121,9 +121,9 @@ public class Game implements Runnable
 	/*START THREAD*/
 	public synchronized void start()
 	{
-		if(running)
+		if(moving)
 			return;
-		running = true;
+		moving = true;
 		thread = new Thread(this);
 		thread.start();
 	}
@@ -131,20 +131,15 @@ public class Game implements Runnable
 	/*STOP THREAD SAFELY*/
 	public synchronized void stop()
 	{
-		if(!running)
+		if(!moving)
 			return;
-		running = false;
+		moving = false;
 		try{
 			thread.join();
 		}catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-	}
-
-	public void addScore()
-	{
-		score++;
 	}
 
 	public int getHighScore()
@@ -156,6 +151,7 @@ public class Game implements Runnable
 
 	public int getScore()
 	{
+		score = arrow.getScore();
 		if(score<2)
 			return 0;
 		else
