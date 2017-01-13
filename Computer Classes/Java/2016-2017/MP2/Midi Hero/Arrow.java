@@ -11,8 +11,10 @@ import java.awt.Rectangle;
 public class Arrow implements KeyListener
 {
 	private int y, upY, downY, leftY, rightY;
+	private int[] y2 = new int[4];
 	private int x, upX, downX, leftX, rightX;
 	private int score, speed, multiplyer;
+	private String[] side = new String[4];
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp, imgUpHit, imgDownHit, imgLeftHit, imgRightHit;
 	private boolean upPressed, downPressed, leftPressed, rightPressed;
 
@@ -33,16 +35,16 @@ public class Arrow implements KeyListener
 			System.exit(1);
 		}
 
-		upY = 450;
-		downY = 430;
-		leftY = 410;
-		rightY = 400;
+		for(int i = 0; i < y2.length; i++)
+		{
+			int random = (int) (Math.random()*200)+800;
+			y2[i] = random;
+		}
 		y = 30;
         upX = 190;
         downX = 260;
         leftX = 120;
         rightX = 330;
-        upPressed = downPressed = leftPressed = rightPressed = false;
     }
 
 	public int getScore()
@@ -53,19 +55,31 @@ public class Arrow implements KeyListener
 	//checks location and uses timer
 	public void tick()
 	{
-		int random = (int) (Math.random()*200)+800;
-		if(upY < -60)
+		for(int i = 0; i < y2.length; i++)
+		{
+			if(y2[i] < -60)
+			{
+				int random = (int) (Math.random()*200)+800;
+				y2[i] = random;
+			}
+			else
+				y2[i] = y2[i] - 3;
+		}
+
+
+
+		/*if(upY < -60)
 			upY = random;
 		if(downY < -60)
 			downY = random;
 		if(leftY < -60)
 			leftY = random;
 		if(rightY < -60)
-			rightY = random;
-		upY = upY - 3;
-		downY = downY - 3;
-		leftY = leftY - 3;
-		rightY = rightY - 3;
+			rightY = random;*/
+		/*upY = upY - 5;
+		downY = downY - 5;
+		leftY = leftY - 5;
+		rightY = rightY - 5;*/
 	}
 
 	public void render(Graphics g) //draws player
@@ -75,47 +89,67 @@ public class Arrow implements KeyListener
 		g.drawImage(imgLeftHit,leftX,y,null);
 		g.drawImage(imgRightHit,rightX,y,null);
 
-		g.drawImage(imgUp,upX,upY,null); //arrows
-		g.drawImage(imgDown,downX,downY,null);
-		g.drawImage(imgLeft,leftX,leftY,null);
-		g.drawImage(imgRight,rightX,rightY,null);
-
+		for(int i = 0; i < y2.length; i++)
+		{
+			int random = (int) (Math.random()*2);
+			System.out.println("Start: " + random + y2[i]);
+			switch(random)
+			{
+				case 0: side[i] = "left";
+				case 1: side[i] = "down";
+				case 2: side[i] = "right";
+				case 3: side[i] = "up";
+			}
+			if(side[i] == "up")
+				g.drawImage(imgUp,upX,y2[i],null);
+			else if(side[i] == "down")
+				g.drawImage(imgDown,downX,y2[i],null);
+			else if(side[i] == "left")
+				g.drawImage(imgLeft,leftX,y2[i],null);
+			else if(side[i] == "right")
+				g.drawImage(imgRight,rightX,y2[i],null);
+		}
 	}
 
     public void keyPressed(KeyEvent e)
     {
-        if (e.getKeyCode() == KeyEvent.VK_UP)
-        {
-			if(upY<50 && upY>0)
-			{
-				upY = 700;
-				score += 10;
-			}
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		for(int i = 0; i < y2.length; i++)
 		{
-			if(downY<50 && downY>0)
+			int random = (int) (Math.random()*200)+800;
+			System.out.println("end: " + random);
+			if (e.getKeyCode() == KeyEvent.VK_UP)
 			{
-				downY = 700;
-				score += 10;
+				if(y2[i]<50 && y2[i]>0 && upX == 190)
+				{
+					y2[i] = random;
+					score += 10;
+				}
 			}
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			if(leftY<50 && leftY>0)
+			if (e.getKeyCode() == KeyEvent.VK_DOWN)
 			{
-				leftY = 700;
-				score += 10;
+				if(y2[i]<50 && y2[i]>0 && downX == 260)
+				{
+					y2[i] = random;
+					score += 10;
+				}
 			}
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			if(rightY<50 && rightY>0)
+			if (e.getKeyCode() == KeyEvent.VK_LEFT)
 			{
-				rightY = 700;
-				score += 10;
+				if(y2[i]<50 && y2[i]>0 && leftX == 120)
+				{
+					y2[i] = random;
+					score += 10;
+				}
 			}
-        }
+			if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+			{
+				if(y2[i]<50 && y2[i]>0 && rightX == 330)
+				{
+					y2[i] = random;
+					score += 10;
+				}
+			}
+		}
     }
 
     public void keyReleased(KeyEvent e)

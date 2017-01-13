@@ -96,7 +96,7 @@ public class Game implements Runnable
 		init();
 
 		//timer with frames
-		final double fps = 65;
+		final double fps = 60;
 		double timePerTick = 1000000000 / fps;
 		double delta = 0;
 		long now;
@@ -112,7 +112,7 @@ public class Game implements Runnable
 				tick();
 				render();
 				delta--;
-				System.out.println(delta);
+				//System.out.println(delta);
 			}
 		}
 		stop();
