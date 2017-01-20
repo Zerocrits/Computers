@@ -16,6 +16,7 @@ public class Game implements Runnable
 	private boolean moving;
 	private Thread thread;
 	private Arrow arrow;
+	private Marker marker;
 	private int score;
 	private BufferStrategy bs;
 	private Graphics g;
@@ -27,20 +28,13 @@ public class Game implements Runnable
 		this.height = height;
 		title = "MidiHero";
 		arrow = new Arrow(this);
+		marker = new Marker(this);
 		score = highscore = 0;
 	}
 
-	private void reset()
-	{
-		display.getFrame().dispose();
-		arrow = new Arrow(this);
-		score=0;
-		init();
-	}
 	private void init()
 	{
 		display = new Display(title, width, height);
-
 		display.getFrame().addKeyListener(arrow);
 	}
 
@@ -51,8 +45,7 @@ public class Game implements Runnable
 
 	public void tick()
 	{
-		//timers for arrow and wall
-		arrow.tick();
+		arrow.tick(); //timers for arrow
 	}
 
 	public void render()
@@ -65,9 +58,6 @@ public class Game implements Runnable
 			return;
 		}
 		g = bs.getDrawGraphics();
-
-		//reset screen
-		g.clearRect(0,0,width,height);
 
 		//draws background, arrow,
 		try {
@@ -112,7 +102,6 @@ public class Game implements Runnable
 				tick();
 				render();
 				delta--;
-				//System.out.println(delta);
 			}
 		}
 		stop();
@@ -151,7 +140,7 @@ public class Game implements Runnable
 
 	public int getScore()
 	{
-		score = arrow.getScore();
+		score += 4; //add streak
 		if(score<2)
 			return 0;
 		else
@@ -160,20 +149,9 @@ public class Game implements Runnable
 
 	public void hitDetect()
 	{
-		//if(arrow.getFrame().intersects(wall.getFrame()))
-		//{
-			/*int input = JOptionPane.showOptionDialog(null, "You have died, Want to try again?", "YOU LOSE!", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-
-			if(input == JOptionPane.YES_OPTION)
-			{
-				reset();
-			}
-			else
-			{
-				display.getFrame().dispose();
-				System.exit(0);
-				stop();
-			}*/
-   		//}
+		if(marker.getFrame().intersects(arrow.getFrame()))
+		{
+			getScore();
+   		}
 	}
 }
