@@ -74,11 +74,12 @@ public class Game implements Runnable
 
 		g.drawString("Score: " + getScore(), 10, 50);
 		arrow.render(g);
+		marker.render(g);
 
 		//displays image(buffered image)
 		bs.show();
 		g.dispose();
-		hitDetect();
+		//hitDetect();
 	}
 
 	public void run()
@@ -147,11 +148,11 @@ public class Game implements Runnable
 			return score-1;
 	}
 
-	public void hitDetect()
+	/*public void hitDetect()
 	{
 		if(marker.getFrame().intersects(arrow.getFrame()))
 		{
 			getScore();
    		}
-	}
+	}*/
 }

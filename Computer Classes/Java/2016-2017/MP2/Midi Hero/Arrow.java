@@ -13,6 +13,7 @@ public class Arrow implements KeyListener
 {
 	private int y, upY, downY, leftY, rightY;
 	private int[] y2 = new int[10];
+	private int[] whatSide = new int[10];
 	private int x, upX, downX, leftX, rightX;
 	private int score, speed, multiplyer;
 	private int[] side = new int[10];
@@ -30,6 +31,10 @@ public class Arrow implements KeyListener
 
 			e.printStackTrace();
 			System.exit(1);
+		}
+		for(int i = 0; i < y2.length; i++)
+		{
+			whatSide(true,i);
 		}
 
 		/*for(int i = 0; i < y2.length; i++)
@@ -54,34 +59,35 @@ public class Arrow implements KeyListener
         rightX = 330;
     }
 
-	public Rectangle getFrame() //hitbox
-	{
-		int side = 0;
-
-		for(int i = 0; i < y2.length; i++)
-		{
-			if(getSide() == 0)
-				side = upX;
-			else if(getSide() == 1)
-				side = downX;
-			else if(getSide() == 2)
-				side = leftX;
-			else if(getSide() == 3)
-				side = rightX;
-		}
-
-		return new Rectangle(side,y2[i],80,80);
-	}
-
 	public int getSide()
 	{
-		int side = -1;
+		int random = (int) (Math.random()*4);
+		return random;
+	}
+
+	public int whatSide(boolean change, int side)
+	{
 		for(int i = 0; i < y2.length; i++)
 		{
-			int random = (int) (Math.random()*y2.length);
-			side = random;
+			if(change == true && side == i)
+			{
+				whatSide[i] = getSide();
+				return whatSide[i];
+			}
 		}
-		return side;
+		return -1;
+	}
+
+	public int getY()
+	{
+		int y = 0;
+
+		for(int i = 0; i < y2.length; i++)
+		{
+
+		}
+
+		return y;
 	}
 
 	public void getLocation()
@@ -114,13 +120,14 @@ public class Arrow implements KeyListener
 	{
 		for(int i = 0; i < y2.length; i++)
 		{
-			if(getSide() == 0)
+			int side = whatSide(false,i);
+			if(side == 0)
 				g.drawImage(imgUp,upX,y2[i],null);
-			else if(getSide() == 1)
+			else if(side == 1)
 				g.drawImage(imgDown,downX,y2[i],null);
-			else if(getSide() == 2)
+			else if(side == 2)
 				g.drawImage(imgLeft,leftX,y2[i],null);
-			else if(getSide() == 3)
+			else if(side == 3)
 				g.drawImage(imgRight,rightX,y2[i],null);
 		}
 	}
@@ -129,34 +136,36 @@ public class Arrow implements KeyListener
     {
 		for(int i = 0; i < y2.length; i++)
 		{
-			int random = (int) (Math.random()*200)+800;
-			System.out.println("end: " + random);
 			if (e.getKeyCode() == KeyEvent.VK_UP)
 			{
-				if(y2[i]<50 && y2[i]>0 && upX == 190)
+				if(y2[i]<50 && y2[i]>0)
 				{
 					y2[i] = -50;
+					whatSide(true,i);
 				}
 			}
 			else if (e.getKeyCode() == KeyEvent.VK_DOWN)
 			{
-				if(y2[i]<50 && y2[i]>0 && downX == 260)
+				if(y2[i]<50 && y2[i]>0)
 				{
 					y2[i] = -50;
+					whatSide(true,i);
 				}
 			}
 			else if (e.getKeyCode() == KeyEvent.VK_LEFT)
 			{
-				if(y2[i]<50 && y2[i]>0 && leftX == 120)
+				if(y2[i]<50 && y2[i]>0)
 				{
 					y2[i] = -50;
+					whatSide(true,i);
 				}
 			}
 			else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 			{
-				if(y2[i]<50 && y2[i]>0 && rightX == 330)
+				if(y2[i]<50 && y2[i]>0)
 				{
 					y2[i] = -50;
+					whatSide(true,i);
 				}
 			}
 		}
@@ -183,6 +192,5 @@ public class Arrow implements KeyListener
     }
     public void keyTyped(KeyEvent e)
 	{
-
 	}
 }

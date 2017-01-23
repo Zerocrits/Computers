@@ -39,22 +39,6 @@ public class Marker implements KeyListener
 
     }
 
-	public Rectangle getFrame() //hitbox
-	{
-		int side = 0;
-
-		if(arrow.getSide() == 0)
-			side = upX;
-		else if(arrow.getSide() == 1)
-			side = downX;
-		else if(arrow.getSide() == 2)
-			side = leftX;
-		else if(arrow.getSide() == 3)
-			side = rightX;
-
-		return new Rectangle(side,y,80,80);
-	}
-
 	public void render(Graphics g)
 	{
 		g.drawImage(imgUpHit,upX,y,null); //white hitboxes
@@ -67,31 +51,31 @@ public class Marker implements KeyListener
     {
 		if (e.getKeyCode() == KeyEvent.VK_UP)
 		{
-			if(upX == 190)
+			/*if(upX == 190)
 			{
 				score += 4;
-			}
+			}*/
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
-			if(downX == 260)
+			/*if(downX == 260)
 			{
 				score += 4;
-			}
+			}*/
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_LEFT)
 		{
-			if(leftX == 120)
+			/*if(leftX == 120)
 			{
 				score += 4;
-			}
+			}*/
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 		{
-			if(rightX == 330)
+			/*if(rightX == 330)
 			{
 				score += 4;
-			}
+			}*/
 		}
     }
 
