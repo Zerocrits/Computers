@@ -73,8 +73,8 @@ public class Game implements Runnable
 		g.setFont(new Font("Serif", Font.BOLD, 20));
 
 		g.drawString("Score: " + getScore(), 10, 50);
-		arrow.render(g);
 		marker.render(g);
+		arrow.render(g);
 
 		//displays image(buffered image)
 		bs.show();
@@ -139,9 +139,14 @@ public class Game implements Runnable
 		return highscore;
 	}
 
+	public int addScore()
+	{
+		score += 4;
+		return score;
+	}
 	public int getScore()
 	{
-		score += 4; //add streak
+		//add streak
 		if(score<2)
 			return 0;
 		else

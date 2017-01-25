@@ -74,6 +74,10 @@ public class Arrow implements KeyListener
 				whatSide[i] = getSide();
 				return whatSide[i];
 			}
+			else if(change == false && side == i)
+			{
+				return whatSide[i];
+			}
 		}
 		return -1;
 	}
@@ -94,19 +98,45 @@ public class Arrow implements KeyListener
 	{
 		for(int i = 0; i < y2.length; i++)
 		{
-			if(y2[i] < -60)
+			int random = (int) (Math.random()*400)+600;
+			if(i == 0)
 			{
-				for(int j = 0; j < y2.length; j++)
+				if(y2[i] - y2[y2.length-1] > 65)
 				{
-					int random = (int) (Math.random()*200)+800;
-					if((y2[j] > y2[i] && y2[j] - 65 > y2[i]) || (y2[j] < y2[i] && y2[j] + 65 < y2[i]))
-						System.out.println("test");
-					else
-						y2[j] = random;
+					y2[i] += -3;
+					System.out.println(y2[0] + "   asdasASdsadasSDASDAS   " + y2[1]);
+				}
+				else
+				{
+					y2[i] = random;
+					i--;
 				}
 			}
+			else if(y2[i] > y2[i-1] && i > 0)
+			{
+				if(y2[i] - y2[i-1] > 65)
+				{
+					//System.out.println("y2[i-1] - y2[i] > 65");
+					System.out.println(y2[i] + "   asdas   " + y2[i-1]);
+					y2[i] += -3;
+				}
+			}
+			else if(y2[i-1] > 935 && i > 0)
+			{
+				//System.out.println("OOPS");
+				y2[i-1] = random;
+				i--;
+			}
 			else
-				y2[i] = y2[i] - 3;
+			{
+				/*if(i == y2.length-1)
+				{
+					y2[i] = random;
+					random = (int) (Math.random()*400)+600;
+				}*/
+				y2[i] = random;
+				i--;
+			}
 		}
 	}
 

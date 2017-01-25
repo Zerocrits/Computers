@@ -53,28 +53,28 @@ public class Marker implements KeyListener
 		{
 			/*if(upX == 190)
 			{
-				score += 4;
+				game.addScore;
 			}*/
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
 			/*if(downX == 260)
 			{
-				score += 4;
+				game.addScore;
 			}*/
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_LEFT)
 		{
 			/*if(leftX == 120)
 			{
-				score += 4;
+				game.addScore;
 			}*/
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 		{
 			/*if(rightX == 330)
 			{
-				score += 4;
+				game.addScore;
 			}*/
 		}
     }
