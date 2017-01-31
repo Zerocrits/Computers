@@ -71,33 +71,46 @@ public class Arrow implements KeyListener
 
 	public void getLocation()
 	{
+		boolean once = false;
+		int random = (int) (Math.random()*400)+700;
+		y2[y2.length-1] = random;
+
 		for(int i = 0; i < y2.length; i++)
 		{
-			int random = (int) (Math.random()*400)+700;
+			random = (int) (Math.random()*400)+700;
+			if(once == false)
+			{
+				y2[i] = random;
+				if(i == y2.length-1)
+					once = true;
+			}
 			if(i == 0)
 			{
-				if(Math.abs(y2[i] - y2[y2.length-1]) > 65 && y2[i] > -300) //abs is messed up
-				{
-					y2[i] += -3;
-					System.out.println(i + "     " + y2[i] + "   <-- i=0 SUBTRACT 3   " + y2[y2.length-1]);
-				}
-				else if(y2[y2.length-1] > 920)
+				if(y2[y2.length-1] > 920)
 				{
 					System.out.println(i + "     " + y2[i] + "   END IS BIGGER THEN 920 -->  " + y2[y2.length-1]);
-					y2[i] = random;
+					y2[y2.length-1] = random;
 					i--;
+				}
+				else if(((y2[i]+1000) - (y2[y2.length-1]+1000)) > 65 && (y2[i] > -300)) //abs is messed up
+				{
+					y2[i] += -3;
+					System.out.println((y2[i]+1000 - y2[y2.length-1]+1000));
+					System.out.println(i + "     " + y2[i] + "   <-- i=0 SUBTRACT 3   " + y2[y2.length-1]);
 				}
 				else
 				{
 					System.out.println(i + "     " + y2[i] + "   <-- RANDOM 0   " + y2[y2.length-1]);
 					y2[i] = random;
+					whatSide(true,i);
 					i--;
 				}
 			}
-			else if(Math.abs(y2[i] > y2[i-1]) && y2[i] > -300)
+			else if(((y2[i]+1000) - (y2[y2.length-1]+1000))> 65 && (y2[i] > -300))
 			{
-				if(Math.abs(y2[i] - y2[i-1]) > 65)
+				if(((y2[i]+1000) - (y2[y2.length-1]+1000)) > 65)
 				{
+					System.out.println((y2[i]+1000) - (y2[y2.length-1]+1000));
 					System.out.println(i + "     " + y2[i] + "   <--- SUBTRACT 3   " + y2[i-1]);
 					y2[i] += -3;
 				}
@@ -105,20 +118,23 @@ public class Arrow implements KeyListener
 			else if(y2[i-1] > 920)
 			{
 				System.out.println(i + "     " + y2[i] + "   ABOVE 920 -->   " + y2[i-1]);
-				y2[i] = random;
+				y2[i-1] = random;
+				i--;
 			}
 			else if(y2[i] < -300)
 			{
 				System.out.println(i + "     " + y2[i] + "   <--- LESS THAN -300 Y2 RESET   " + y2[i-1]);
-				whatSide(true,i);
 				y2[i] = random;
+				whatSide(true,i);
 				i--;
 			}
-			/*else
+			else
 			{
 				System.out.println(i + "     " + y2[i] + "  <--- NOT ENOUGH SPACE BETWEEN   " + y2[i-1]);
-				y2[i] = 2000;
-			}*/
+				i = random;
+				//y2[i] = 2000;
+				i--;
+			}
 		}
 	}
 
