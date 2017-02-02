@@ -18,7 +18,7 @@ public class BitStringRunner
 		{
 			System.out.println("***Bit String***");
 
-			System.out.println("Hint: LCIRC-2 00001");
+			System.out.println("Hint: LSHIFT-2 010001");
 			System.out.print("\nEnter Equation: ");
 			equation = sc.nextLine();
 			bit = new BitString(equation);
@@ -27,7 +27,66 @@ public class BitStringRunner
 
 			System.out.print("Again? ");
 			choice = sc.nextLine();
+			System.out.println("\n\n");
 		}
 		System.out.println("Thanks For Using Bit-String!");
 	}
 }
+/*
+
+***Bit String***
+Hint: LSHIFT-2 010001
+
+Enter Equation: LSHIFT-2 010001
+Side: L
+Index: 2
+Action: SHIFT
+Bits: 010001
+Answer: 000100
+Again? Yes
+
+
+
+***Bit String***
+Hint: LSHIFT-2 010001
+
+Enter Equation: RSHIFT-2 010001
+Side: R
+Index: 2
+Action: SHIFT
+Bits: 010001
+Answer: 000100
+Again? Yes
+
+
+
+***Bit String***
+Hint: LSHIFT-2 010001
+
+Enter Equation: LCIRC-2 010001
+Side: L
+Index: 2
+Action: CIRC
+Bits: 010001
+Answer: 000101
+Again? Yes
+
+
+
+***Bit String***
+Hint: LSHIFT-2 010001
+
+Enter Equation: RCIRC-2 010001
+Side: R
+Index: 2
+Action: CIRC
+Bits: 010001
+Answer: 010100
+Again? No
+
+
+
+Thanks For Using Bit-String!
+Press any key to continue . . .
+
+*/

@@ -44,14 +44,15 @@ public class BitString
 
 		num = expression.indexOf(" ")+1;
 		bits = expression.substring(num,expression.length());
+		solve();
 	}
 
 	/** Performs an l-shift operation on the bits - the result is stored in String answer */
 	public void lShift()
 	{
-		for(int i = 0; i < bits.length()-1; i++)
+		for(int i = index; i < bits.length(); i++)
 		{
-			answer += bits.charAt(i+index);
+			answer += bits.charAt(i);
 		}
 		for(int i = 0; i < index; i++)
 		{
@@ -66,7 +67,7 @@ public class BitString
 		{
 			answer += "0";
 		}
-		for(int i = 0; i < bits.length()-1+index; i++)
+		for(int i = 0; i < bits.length()-index; i++)
 		{
 			answer += bits.charAt(i);
 		}
@@ -75,8 +76,7 @@ public class BitString
 	/** Performs an l-circ operation on the bits - the result is stored in String answer */
 	public void lCirc()
 	{
-		answer = "";
-		for(int i = index; i < bits.length()-1; i++)
+		for(int i = index; i < bits.length(); i++)
 		{
 			answer += bits.charAt(i);
 		}
@@ -89,11 +89,11 @@ public class BitString
 	/** Performs an r-circ operation on the bits - the result is stored in String answer */
 	public void rCirc()
 	{
-		for(int i = bits.length()-1+index; i >= 0; i--)
+		for(int i = bits.length()-index; i < bits.length(); i++)
 		{
 			answer += bits.charAt(i);
 		}
-		for(int i = 0; i < bits.length()-1+index; i++)
+		for(int i = 0; i < bits.length()-index; i++)
 		{
 			answer += bits.charAt(i);
 		}
@@ -102,16 +102,17 @@ public class BitString
 	/** Calls the appropriate method based upon the values of leftRight and circShift */
 	public void solve()
 	{
-		if(leftRight == "L")
+		answer = "";
+		if(leftRight.equals("L"))
 		{
-			if(circShift == "CIRC")
+			if(circShift.equals("CIRC"))
 				lCirc();
 			else
 				lShift();
 		}
-		else if(leftRight == "R")
+		else if(leftRight.equals("R"))
 		{
-			if(circShift == "CIRC")
+			if(circShift.equals("CIRC"))
 				rCirc();
 			else
 				rShift();
@@ -121,6 +122,6 @@ public class BitString
 	/* @return the whole expression along with the answer */
 	public String toString()
 	{
-		return "Side: " + leftRight + "\nAction: " + circShift + "\nBits: " + bits + "\nAnswer: " + answer;
+		return "Side: " + leftRight + "\nIndex: " + index + "\nAction: " + circShift + "\nBits: " + bits + "\nAnswer: " + answer;
 	}
 }
