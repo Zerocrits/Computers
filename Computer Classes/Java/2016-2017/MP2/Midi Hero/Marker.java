@@ -30,7 +30,6 @@ public class Marker implements KeyListener
 			System.exit(1);
 		}
 
-		Arrow arrow = new Arrow(game);
 		y = 30;
 		upX = 190;
 		downX = 260;

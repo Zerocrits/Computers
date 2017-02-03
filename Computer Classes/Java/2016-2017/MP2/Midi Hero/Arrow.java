@@ -1,22 +1,23 @@
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.lang.*;
 import java.awt.Graphics;
 import javax.imageio.ImageIO;
-import java.io.IOException;
+import java.io.*;
 import java.awt.event.KeyListener;
 import java.awt.Rectangle;
+import java.util.Scanner;
+import java.awt.*;
+import javax.swing.*;
+import java.io.FileReader;
 
 public class Arrow implements KeyListener
 {
 	private int y, upY, downY, leftY, rightY;
-	private int[] y2 = new int[10]; //Y axis for each side
-	private int[] whatSide = new int[10]; //chooses side for each arrow
 	private int x, upX, downX, leftX, rightX;
 	private int score, speed, multiplyer;
-	private int[] side = new int[10];
+	private int[][] keys;
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp;
 	private boolean upPressed, downPressed, leftPressed, rightPressed;
 
@@ -32,12 +33,8 @@ public class Arrow implements KeyListener
 			e.printStackTrace();
 			System.exit(1);
 		}
-		for(int i = 0; i < y2.length; i++)
-		{
-			whatSide(true,i);
-		}
 
-		getLocation();
+		String[][] keys = new String[readKeys()][1];
 
 		y = 30;
         upX = 190;
@@ -46,151 +43,78 @@ public class Arrow implements KeyListener
         rightX = 330;
     }
 
-	public int getSide()
-	{
-		int random = (int) (Math.random()*4);
-		return random;
-	}
-
-	public int whatSide(boolean change, int side)
-	{
-		for(int i = 0; i < y2.length; i++)
+    public int readKeys()
+    {
+		String filename = "Song-keys/sample.txt";
+		int[][] keys;
+		int length = 0;;
+		System.out.println("Made it herelol");
+		try
 		{
-			if(change == true && side == i)
-			{
-				whatSide[i] = getSide();
-				return whatSide[i];
-			}
-			else if(change == false && side == i)
-			{
-				return whatSide[i];
-			}
-		}
-		return -1;
-	}
+			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));
+			Scanner file = new Scanner(new File(filename));
+			size.skip(Long.MAX_VALUE);
+			length = (size.getLineNumber()/2)+1;
+			keys = new int[length][2];
 
-	public void getLocation()
-	{
-		boolean once = false;
-		int random = (int) (Math.random()*400)+700;
-		y2[y2.length-1] = random;
+			for(int i = 0; i < length-2; i++)
+			{
+				keys[i][0] = file.nextInt();
+				keys[i][1] = file.nextInt();
+				System.out.println(keys[i][0]);
+				System.out.println(keys[i][1]);
+			}
 
-		for(int i = 0; i < y2.length; i++)
-		{
-			random = (int) (Math.random()*400)+700;
-			if(once == false)
-			{
-				y2[i] = random;
-				if(i == y2.length-1)
-					once = true;
-			}
-			if(i == 0)
-			{
-				if(y2[y2.length-1] > 920)
-				{
-					System.out.println(i + "     " + y2[i] + "   END IS BIGGER THEN 920 -->  " + y2[y2.length-1]);
-					y2[y2.length-1] = random;
-					i--;
-				}
-				else if(((y2[i]+1000) - (y2[y2.length-1]+1000)) > 65 && (y2[i] > -300)) //abs is messed up
-				{
-					y2[i] += -3;
-					System.out.println((y2[i]+1000 - y2[y2.length-1]+1000));
-					System.out.println(i + "     " + y2[i] + "   <-- i=0 SUBTRACT 3   " + y2[y2.length-1]);
-				}
-				else
-				{
-					System.out.println(i + "     " + y2[i] + "   <-- RANDOM 0   " + y2[y2.length-1]);
-					y2[i] = random;
-					whatSide(true,i);
-					i--;
-				}
-			}
-			else if(((y2[i]+1000) - (y2[y2.length-1]+1000))> 65 && (y2[i] > -300))
-			{
-				if(((y2[i]+1000) - (y2[y2.length-1]+1000)) > 65)
-				{
-					System.out.println((y2[i]+1000) - (y2[y2.length-1]+1000));
-					System.out.println(i + "     " + y2[i] + "   <--- SUBTRACT 3   " + y2[i-1]);
-					y2[i] += -3;
-				}
-			}
-			else if(y2[i-1] > 920)
-			{
-				System.out.println(i + "     " + y2[i] + "   ABOVE 920 -->   " + y2[i-1]);
-				y2[i-1] = random;
-				i--;
-			}
-			else if(y2[i] < -300)
-			{
-				System.out.println(i + "     " + y2[i] + "   <--- LESS THAN -300 Y2 RESET   " + y2[i-1]);
-				y2[i] = random;
-				whatSide(true,i);
-				i--;
-			}
-			else
-			{
-				System.out.println(i + "     " + y2[i] + "  <--- NOT ENOUGH SPACE BETWEEN   " + y2[i-1]);
-				i = random;
-				//y2[i] = 2000;
-				i--;
-			}
+			size.close(); //prevent resource leak
 		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return length;
 	}
 
 	//checks location and uses timer
 	public void tick()
 	{
-		getLocation();
+
 	}
 
 	public void render(Graphics g)
 	{
-		for(int i = 0; i < y2.length; i++)
-		{
-			int side = whatSide(false,i);
-			if(side == 0)
+		//for(int i = 0; i < keys.length; i++)
+		//{
+			//int side = whatSide(false,i);
+			/*if(side == 0)
 				g.drawImage(imgUp,upX,y2[i],null);
 			else if(side == 1)
 				g.drawImage(imgDown,downX,y2[i],null);
 			else if(side == 2)
 				g.drawImage(imgLeft,leftX,y2[i],null);
 			else if(side == 3)
-				g.drawImage(imgRight,rightX,y2[i],null);
-		}
+				g.drawImage(imgRight,rightX,y2[i],null);*/
+		//}
 	}
 
     public void keyPressed(KeyEvent e)
     {
-		for(int i = 0; i < y2.length; i++)
+		for(int i = 0; i < keys.length; i++)
 		{
 			if (e.getKeyCode() == KeyEvent.VK_UP)
 			{
-				if(y2[i]<50 && y2[i]>0)
-				{
-					y2[i] += -100;
-				}
+
 			}
 			else if (e.getKeyCode() == KeyEvent.VK_DOWN)
 			{
-				if(y2[i]<50 && y2[i]>0)
-				{
-					y2[i] += -100;
-				}
+
 			}
 			else if (e.getKeyCode() == KeyEvent.VK_LEFT)
 			{
-				if(y2[i]<50 && y2[i]>0)
-				{
-					y2[i] += -100;
-				}
+
 			}
 			else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 			{
-				if(y2[i]<50 && y2[i]>0)
-				{
-					y2[i] += -100;
-				}
+
 			}
 		}
     }
