@@ -17,7 +17,9 @@ public class Arrow implements KeyListener
 	private int y, upY, downY, leftY, rightY;
 	private int x, upX, downX, leftX, rightX;
 	private int score, speed, multiplyer;
-	private int[][] keys;
+	public int global, spot, length, print;
+	public int[][] keys;
+	public int[] keysY, side;
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp;
 	private boolean upPressed, downPressed, leftPressed, rightPressed;
 
@@ -34,8 +36,17 @@ public class Arrow implements KeyListener
 			System.exit(1);
 		}
 
-		String[][] keys = new String[readKeys()][1];
+		keys = new int[getLength()][2]; //may need to be 1?
+		keysY = new int[keys.length];
+		side = new int[keys.length];
 
+		setDefault();
+		readKeys();
+
+		print = 0;
+		global = 0;
+		length = 0;
+		spot = 0;
 		y = 30;
         upX = 190;
         downX = 260;
@@ -43,57 +54,123 @@ public class Arrow implements KeyListener
         rightX = 330;
     }
 
-    public int readKeys()
+    public int getLength()
     {
 		String filename = "Song-keys/sample.txt";
-		int[][] keys;
-		int length = 0;;
-		System.out.println("Made it herelol");
+		System.out.println("getLength()");
 		try
 		{
 			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));
 			Scanner file = new Scanner(new File(filename));
 			size.skip(Long.MAX_VALUE);
 			length = (size.getLineNumber()/2)+1;
-			keys = new int[length][2];
-
-			for(int i = 0; i < length-2; i++)
-			{
-				keys[i][0] = file.nextInt();
-				keys[i][1] = file.nextInt();
-				System.out.println(keys[i][0]);
-				System.out.println(keys[i][1]);
-			}
-
 			size.close(); //prevent resource leak
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
-
 		return length;
+	}
+
+    public void readKeys()
+    {
+		String filename = "Song-keys/sample.txt";
+		System.out.println("readKeys()");
+		try
+		{
+			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));
+			Scanner file = new Scanner(new File(filename));
+			size.skip(Long.MAX_VALUE);
+			length = (size.getLineNumber()/2)+1;
+
+			for(int i = 0; i < length-2; i++)
+			{
+				System.out.println(spot);
+				keys[i][0] = file.nextInt();//needs to only get next once
+				keys[i][1] = file.nextInt();
+
+				System.out.println(keys[i][0] + "this is 0"); //delete
+				System.out.println(keys[i][1] + "this is 1");
+
+			}
+			size.close(); //prevent resource leak
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	public void placeKeys()
+	{
+		System.out.println("******************"+spot+"*********************");
+		if(setTime(keys[spot][1]) == true)
+		{
+			side[spot] = setSide(keys[spot][0]);
+			System.out.println(keys[spot][0]);
+			System.out.println(keys[spot][1]);
+			spot++;
+		}
+	}
+	public boolean setTime(int tick)
+	{
+		boolean timer = false;
+		if(timer == false)
+		{
+			if(tick == global)//cant access keys
+			{
+				System.out.println("time got" + tick + "time needed:"+global);
+				return true;
+			}
+		}
+		return timer;
+	}
+
+	public int setSide(int side)
+	{
+		System.out.println("Side: " + side);
+		return side;
+	}
+
+	public void setSpot()
+	{
+		System.out.println("length: " + length);
+		for(int i = 0; i < length-1; i++)
+		{
+			keysY[i] += -3;
+		}
+	}
+
+	public void setDefault()//make so as this is called it sets it
+	{
+		for(int i = 0; i < length-1; i++)
+		{
+			keysY[i] = 300;
+		}
 	}
 
 	//checks location and uses timer
 	public void tick()
 	{
-
+		global++;
+		System.out.println("Global: " + global);
+		placeKeys();
+		setSpot();
 	}
 
 	public void render(Graphics g)
 	{
-		//for(int i = 0; i < keys.length; i++)
-		//{
-			//int side = whatSide(false,i);
-			/*if(side == 0)
-				g.drawImage(imgUp,upX,y2[i],null);
-			else if(side == 1)
-				g.drawImage(imgDown,downX,y2[i],null);
-			else if(side == 2)
-				g.drawImage(imgLeft,leftX,y2[i],null);
-			else if(side == 3)
-				g.drawImage(imgRight,rightX,y2[i],null);*/
-		//}
+		System.out.println("got to render" + keysY[0]);
+		for(int i = 0; i <= spot; i++)
+		{
+			if(side[i] == 0)
+				g.drawImage(imgUp,upX,keysY[spot],null);
+			else if(side[i] == 1)
+				g.drawImage(imgDown,downX,keysY[spot],null);
+			else if(side[i] == 2)
+				g.drawImage(imgLeft,leftX,keysY[spot],null);
+			else if(side[i] == 3)
+				g.drawImage(imgRight,rightX,keysY[spot],null);
+		}
 	}
 
     public void keyPressed(KeyEvent e)
