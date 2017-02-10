@@ -27,3 +27,35 @@ public class AscendingRunner
 		System.out.println("Thanks For Using Ascending Runner Program!");
 	}
 }
+/*
+
+                **Ascending Strings**
+
+Input a String: 31415926538
+3 8 14 35 159
+Again? Yes
+                **Ascending Strings**
+
+Input a String: 314159265
+3 5 14 62 159
+Again? Yes
+                **Ascending Strings**
+
+Input a String: 201617
+2 7 16
+Again? Yes
+                **Ascending Strings**
+
+Input a String: 123456789
+1 9 23 87 456
+Again? Yes
+                **Ascending Strings**
+
+Input a String: 1223334444
+1 4 22 44 333
+Again? No
+Thanks For Using Ascending Runner Program!
+Press any key to continue . . .
+
+*/
+
