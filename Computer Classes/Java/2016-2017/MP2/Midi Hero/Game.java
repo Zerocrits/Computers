@@ -35,7 +35,7 @@ public class Game implements Runnable
 	private void init()
 	{
 		display = new Display(title, width, height);
-		display.getFrame().addKeyListener(arrow);
+		display.getFrame().addKeyListener(marker);
 	}
 
 	public Display getDisplay()

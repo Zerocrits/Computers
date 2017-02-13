@@ -5,19 +5,17 @@ import java.lang.*;
 import java.awt.Graphics;
 import javax.imageio.ImageIO;
 import java.io.*;
-import java.awt.event.KeyListener;
 import java.awt.Rectangle;
 import java.util.Scanner;
 import java.awt.*;
 import javax.swing.*;
 import java.io.FileReader;
 
-public class Arrow implements KeyListener
+public class Arrow
 {
-	private int y, upY, downY, leftY, rightY;
-	private int x, upX, downX, leftX, rightX;
+	private int x;
 	private int score, speed, multiplyer;
-	public int global, spot, length, print;
+	public int global, spot, length, print, min;
 	public int[][] keys;
 	public int[] keysY, side;
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp;
@@ -40,24 +38,19 @@ public class Arrow implements KeyListener
 		keysY = new int[keys.length];
 		side = new int[keys.length];
 
-		setDefault();
 		readKeys();
 
 		print = 0;
 		global = 0;
 		length = 0;
 		spot = 0;
-		y = 30;
-        upX = 190;
-        downX = 260;
-        leftX = 120;
-        rightX = 330;
+		min = 0;
+		x = 120;
     }
 
     public int getLength()
     {
 		String filename = "Song-keys/sample.txt";
-		System.out.println("getLength()");
 		try
 		{
 			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));
@@ -75,7 +68,6 @@ public class Arrow implements KeyListener
     public void readKeys()
     {
 		String filename = "Song-keys/sample.txt";
-		System.out.println("readKeys()");
 		try
 		{
 			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));
@@ -88,10 +80,6 @@ public class Arrow implements KeyListener
 				System.out.println(spot);
 				keys[i][0] = file.nextInt();//needs to only get next once
 				keys[i][1] = file.nextInt();
-
-				System.out.println(keys[i][0] + "this is 0"); //delete
-				System.out.println(keys[i][1] + "this is 1");
-
 			}
 			size.close(); //prevent resource leak
 		}
@@ -134,18 +122,28 @@ public class Arrow implements KeyListener
 	public void setSpot()
 	{
 		System.out.println("length: " + length);
-		for(int i = 0; i < length-1; i++)
+		for(int i = min; i < spot; i++)
 		{
-			keysY[i] += -3;
+			if(keysY[min] < -110) //decreases size of for loops
+			{
+				keysY[min] = -500;
+				min++;
+			}
+			if(i == spot-1)
+				keysY[i] = 300;
+			else
+				keysY[i] += -3;
 		}
 	}
 
-	public void setDefault()//make so as this is called it sets it
+	public int getSpot()
 	{
-		for(int i = 0; i < length-1; i++)
-		{
-			keysY[i] = 300;
-		}
+		return spot;
+	}
+
+	public void setLocation()
+	{
+		keysY[spot] = -110;
 	}
 
 	//checks location and uses timer
@@ -160,62 +158,16 @@ public class Arrow implements KeyListener
 	public void render(Graphics g)
 	{
 		System.out.println("got to render" + keysY[0]);
-		for(int i = 0; i <= spot; i++)
+		for(int i = min; i < spot; i++)
 		{
 			if(side[i] == 0)
-				g.drawImage(imgUp,upX,keysY[spot],null);
+				g.drawImage(imgLeft,x,keysY[i],null);
 			else if(side[i] == 1)
-				g.drawImage(imgDown,downX,keysY[spot],null);
+				g.drawImage(imgUp,x+70,keysY[i],null);
 			else if(side[i] == 2)
-				g.drawImage(imgLeft,leftX,keysY[spot],null);
+				g.drawImage(imgDown,x+140,keysY[i],null);
 			else if(side[i] == 3)
-				g.drawImage(imgRight,rightX,keysY[spot],null);
+				g.drawImage(imgRight,x+210,keysY[i],null);
 		}
-	}
-
-    public void keyPressed(KeyEvent e)
-    {
-		for(int i = 0; i < keys.length; i++)
-		{
-			if (e.getKeyCode() == KeyEvent.VK_UP)
-			{
-
-			}
-			else if (e.getKeyCode() == KeyEvent.VK_DOWN)
-			{
-
-			}
-			else if (e.getKeyCode() == KeyEvent.VK_LEFT)
-			{
-
-			}
-			else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-			{
-
-			}
-		}
-    }
-
-    public void keyReleased(KeyEvent e)
-    {
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-        {
-			upPressed=false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			downPressed=false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			leftPressed=false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			rightPressed=false;
-        }
-    }
-    public void keyTyped(KeyEvent e)
-	{
 	}
 }

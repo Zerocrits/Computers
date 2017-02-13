@@ -48,12 +48,11 @@ public class Marker implements KeyListener
 
     public void keyPressed(KeyEvent e)
     {
+		int spot = arrow.getSpot();
 		if (e.getKeyCode() == KeyEvent.VK_UP)
 		{
-			/*if(upX == 190)
-			{
-				game.addScore;
-			}*/
+			if(arrow.keysY[spot] > 30 && arrow.keysY[spot] < 60) //get rid of loop do minimum then you can just delete it from loop to save data
+				arrow.setLocation();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
