@@ -96,7 +96,6 @@ public class Game implements Runnable
 		//displays image(buffered image)
 		bs.show();
 		g.dispose();
-		hitDetect();
 	}
 
 	public void run()

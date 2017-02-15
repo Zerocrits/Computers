@@ -61,7 +61,7 @@ public class Game implements Runnable
 
 		//draws background, arrow,
 		try {
-			 imgBackground = ImageIO.read(new File("Background.PNG"));
+			 imgBackground = ImageIO.read(new File("pictures/Background.PNG"));
 		}catch (IOException e) {
 
 			e.printStackTrace();
@@ -79,7 +79,6 @@ public class Game implements Runnable
 		//displays image(buffered image)
 		bs.show();
 		g.dispose();
-		//hitDetect();
 	}
 
 	public void run()
@@ -152,12 +151,4 @@ public class Game implements Runnable
 		else
 			return score-1;
 	}
-
-	/*public void hitDetect()
-	{
-		if(marker.getFrame().intersects(arrow.getFrame()))
-		{
-			getScore();
-   		}
-	}*/
 }

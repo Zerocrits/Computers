@@ -14,37 +14,36 @@ import java.io.FileReader;
 public class Arrow
 {
 	private int x;
-	private int score, speed, multiplyer;
-	public int global, spot, length, print, min;
-	public int[][] keys;
-	public int[] keysY, side;
+	private int score, speed, multiplyer, spot;
+	private int global, length, min;
+	private int[][] keys;
+	private int[] keysY, side;
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp;
 	private boolean upPressed, downPressed, leftPressed, rightPressed;
+
+	public Arrow()
+	{
+	}
 
     public Arrow(Game game)
     {
 		try {
-			 imgLeft = ImageIO.read(new File("leftArrow.PNG"));
-			 imgRight = ImageIO.read(new File("rightArrow.PNG"));
-			 imgUp = ImageIO.read(new File("upArrow.PNG"));
-			 imgDown = ImageIO.read(new File("downArrow.PNG"));
+			 imgLeft = ImageIO.read(new File("pictures/leftArrow.PNG"));
+			 imgRight = ImageIO.read(new File("pictures/rightArrow.PNG"));
+			 imgUp = ImageIO.read(new File("pictures/upArrow.PNG"));
+			 imgDown = ImageIO.read(new File("pictures/downArrow.PNG"));
 		}catch (IOException e) {
 
 			e.printStackTrace();
 			System.exit(1);
 		}
 
+		spot = 1;
 		keys = new int[getLength()][2]; //may need to be 1?
 		keysY = new int[keys.length];
 		side = new int[keys.length];
 
 		readKeys();
-
-		print = 0;
-		global = 0;
-		length = 0;
-		spot = 0;
-		min = 0;
 		x = 120;
     }
 
@@ -91,6 +90,7 @@ public class Arrow
 	public void placeKeys()
 	{
 		System.out.println("******************"+spot+"*********************");
+		System.out.println("****"+global+"****");
 		if(setTime(keys[spot][1]) == true)
 		{
 			side[spot] = setSide(keys[spot][0]);
@@ -119,6 +119,13 @@ public class Arrow
 		return side;
 	}
 
+	public int sideHere()
+	{
+		int test = 55;
+		return test;
+
+	}
+
 	public void setSpot()
 	{
 		System.out.println("length: " + length);
@@ -138,12 +145,14 @@ public class Arrow
 
 	public int getSpot()
 	{
+		//keysY[0] = 555;
+		System.out.println(length+"hello"+spot);
 		return spot;
 	}
 
 	public void setLocation()
 	{
-		keysY[spot] = -110;
+		keysY[getSpot()] = -110;
 	}
 
 	//checks location and uses timer
