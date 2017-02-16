@@ -14,7 +14,7 @@ import java.awt.Rectangle;
 public class Marker implements KeyListener
 {
 	private int score, speed, multiplyer;
-	private int y, x, upX, downX, leftX, rightX;
+	private int y, x, upX, downX, leftX, rightX,center;
 	private BufferedImage imgUpHit, imgDownHit, imgLeftHit, imgRightHit;
 	private Arrow arrow;
 	private boolean upPressed, downPressed, leftPressed, rightPressed;
@@ -32,9 +32,10 @@ public class Marker implements KeyListener
 			System.exit(1);
 		}
 
-		arrow = new Arrow();
+		arrow = game.getArrow();
 
 		y = 30;
+		center=60;
 		upX = 190;
 		downX = 260;
 		leftX = 120;
@@ -52,11 +53,10 @@ public class Marker implements KeyListener
 
     public void keyPressed(KeyEvent e)
     {
-		int spot = 5;
+		int spot = 0;
 		if (e.getKeyCode() == KeyEvent.VK_UP)
 		{
 			spot = arrow.getSpot();
-			System.out.println("IT WORKS" + arrow.sideHere());
 
 			//if((spot > 30) && (spot < 60)) //get rid of loop do minimum then you can just delete it from loop to save data
 				//arrow.setLocation();

@@ -151,4 +151,9 @@ public class Game implements Runnable
 		else
 			return score-1;
 	}
+
+	public Arrow getArrow()
+	{
+		return arrow;
+	}
 }

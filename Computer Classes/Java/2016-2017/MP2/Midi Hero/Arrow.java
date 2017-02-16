@@ -21,10 +21,6 @@ public class Arrow
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp;
 	private boolean upPressed, downPressed, leftPressed, rightPressed;
 
-	public Arrow()
-	{
-	}
-
     public Arrow(Game game)
     {
 		try {
@@ -119,16 +115,10 @@ public class Arrow
 		return side;
 	}
 
-	public int sideHere()
-	{
-		int test = 55;
-		return test;
-
-	}
-
 	public void setSpot()
 	{
 		System.out.println("length: " + length);
+		System.out.println(getSpot()+"THISISSPOTA");
 		for(int i = min; i < spot; i++)
 		{
 			if(keysY[min] < -110) //decreases size of for loops
