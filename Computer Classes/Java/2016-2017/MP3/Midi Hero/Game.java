@@ -13,8 +13,9 @@ public class Game implements Runnable
 	private Display display;
 	public int width, height, highscore;
 	public String title;
-	private boolean moving;
+	private boolean isPlaying;
 	private Thread thread;
+	private ArrowLogic logic;
 	private Arrow arrow;
 	private Marker marker;
 	private int score;
@@ -24,11 +25,13 @@ public class Game implements Runnable
 
 	public Game(int width, int height)
 	{
+		isPlaying = false;
 		this.width = width;
 		this.height = height;
 		title = "MidiHero";
-		arrow = new Arrow(this);
 		marker = new Marker(this);
+		logic = new ArrowLogic(this);
+		arrow = new Arrow(this);
 		score = highscore = 0;
 	}
 
@@ -45,7 +48,7 @@ public class Game implements Runnable
 
 	public void tick()
 	{
-		arrow.tick(); //timers for arrow
+		logic.tick();
 	}
 
 	public void render()
@@ -92,7 +95,7 @@ public class Game implements Runnable
 		long now;
 		long lastTime = System.nanoTime();
 
-		while(moving)
+		while(isPlaying)
 		{
 			now = System.nanoTime();
 			delta +=(now - lastTime) / timePerTick;
@@ -110,9 +113,9 @@ public class Game implements Runnable
 	/*START THREAD*/
 	public synchronized void start()
 	{
-		if(moving)
+		if(isPlaying)
 			return;
-		moving = true;
+		isPlaying = true;
 		thread = new Thread(this);
 		thread.start();
 	}
@@ -120,9 +123,9 @@ public class Game implements Runnable
 	/*STOP THREAD SAFELY*/
 	public synchronized void stop()
 	{
-		if(!moving)
+		if(!isPlaying)
 			return;
-		moving = false;
+		isPlaying = false;
 		try{
 			thread.join();
 		}catch (InterruptedException e) {

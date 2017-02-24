@@ -78,7 +78,7 @@ public class Player implements KeyListener
 
 	public Rectangle getFrame() //hitbox
 	{
-		return new Rectangle(x,y,25,25);
+		return new Rectangle(x,y,25, 25);
 	}
 
 	public void render(Graphics g) //draws player

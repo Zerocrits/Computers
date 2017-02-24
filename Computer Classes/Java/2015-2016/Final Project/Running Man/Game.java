@@ -59,6 +59,7 @@ public class Game implements Runnable
 		//timers for player and wall
 		player.tick();
 		wall.tick();
+		hitDetect();
 	}
 
 	public void render()
