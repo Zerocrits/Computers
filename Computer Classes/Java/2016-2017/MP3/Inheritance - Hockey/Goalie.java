@@ -1,18 +1,17 @@
 public class Goalie extends Player
 {
 	private int saves, goalsAgainst, shutouts;
-	private double savePercent;
+	private double savePercent, goalsAgainstAverage;
 
-	public Goalie(String z, String x, String y, int gp, int pim, int years)
+	public Goalie(String team, String position, String name, int rating, int gamesPlayed, int PIM,
+				  int saves, int goalsAgainst, int shutouts, double savePercent, double goalsAgainstAverage)
 	{
-		saves = goalsAgainst = shutouts = 0;
-		savePercent = 0.0;
-		super.getName(z);
-		super.getTeam(x);
-		super.getPosition(y);
-		super.getGamesPlayed(gp);
-		super.getPIM(pim);
-		super.getYears(years);
+		super(team, position, name, rating ,gamesPlayed, PIM);
+		this.saves = saves;
+		this.goalsAgainst = goalsAgainst;
+		this.shutouts = shutouts;
+		this.savePercent = savePercent;
+		this.goalsAgainstAverage = goalsAgainstAverage;
 	}
 
 	public int getSaves(int saves)
@@ -33,9 +32,28 @@ public class Goalie extends Player
 		return shutouts;
 	}
 
-	public double savePercent(double savePercent)
+	public double getSavePercent(double savePercent)
 	{
 		this.savePercent = savePercent;
 		return savePercent;
+	}
+
+	public double getGoalsAgainstAverage(double goalsAgainstAverage)
+	{
+		this.goalsAgainstAverage = goalsAgainstAverage;
+		return goalsAgainstAverage;
+	}
+
+	public String toString()
+	{
+		String result = super.toString();
+
+		result += "\nSaves: " + saves
+		+"\nGoals Against: " + goalsAgainst
+		+"\nShutouts: " + shutouts
+		+"\nSave Percentage: " + savePercent
+		+"\nGoals Against Average: " + goalsAgainstAverage;
+
+		return result;
 	}
 }

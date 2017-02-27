@@ -1,16 +1,16 @@
 public class Player
 {
 	private String team, position, name;
-	private int gamesPlayed, PIM, years;
+	private int gamesPlayed, PIM, rating;
 
-	public Player(String team, String position, String name, int gamesPlayed, int PIM, int years)
+	public Player(String team, String position, String name, int rating, int gamesPlayed, int PIM)
 	{
 		this.team = team;
 		this.position = position;
 		this.name = name;
 		this.gamesPlayed = gamesPlayed;
 		this.PIM = PIM;
-		this.years = years;
+		this.rating = rating;
 
 	}
 
@@ -44,9 +44,20 @@ public class Player
 		return PIM;
 	}
 
-	public int getYears(int years)
+	public int getRating(int rating)
 	{
-		this.years = years;
-		return years;
+		this.rating = rating;
+		return rating;
+	}
+
+	public String toString()
+	{
+		String result = "Player: " + name
+					   +"\nTeam: " + team
+					   +"\nPosition: " + position
+					   +"\nRating: " + rating
+					   +"\nGames Played: " + gamesPlayed
+					   +"\nPenalties in Minutes: " + PIM;
+		return result;
 	}
 }

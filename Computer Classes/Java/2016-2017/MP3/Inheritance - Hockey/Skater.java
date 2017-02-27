@@ -1,15 +1,15 @@
 public class Skater extends Player
 {
-	private int goals, assists, points, pointsPerGame, powerPlayGoals,
+	private int goals, assists, points, powerPlayGoals,
 				powerPlayPoints, shortHandedGoals, shortHandedPoints,
 				overtimeGoals, shots;
-	private double shotPercent;
+	private double shotPercent, pointsPerGame;
 
 
-	public Skater(String team, String position, String name, int gamesPlayed, int PIM, int years, int goals, int assists,
-				  int points, int pointsPerGame, int shots, int shortHandedGoals, int shortHandedPoints, int overtimeGoals, double shotPercent)
+	public Skater(String team, String position, String name, int rating, int gamesPlayed, int PIM, int goals, int assists,
+				  int points, double pointsPerGame, int shots, int shortHandedGoals, int shortHandedPoints, int overtimeGoals, double shotPercent)
 	{
-		super(team, position, name, gamesPlayed, PIM, years);
+		super(team, position, name, rating, gamesPlayed, PIM);
 		this.goals = goals;
 		this.assists = assists;
 		this.points = points;
@@ -41,7 +41,7 @@ public class Skater extends Player
 		return points;
 	}
 
-	public int getPointsPerGame(int pointsPerGame)
+	public double getPointsPerGame(double pointsPerGame)
 	{
 		this.pointsPerGame = pointsPerGame;
 		return pointsPerGame;
@@ -87,5 +87,24 @@ public class Skater extends Player
 	{
 		this.shotPercent = shotPercent;
 		return shotPercent;
+	}
+
+	public String toString()
+	{
+		String result = super.toString();
+
+		result += "\nGoals: " + goals
+	    +"\nAssists: " + assists
+	    +"\nPoints: " + points
+	    +"\nPoints Per Game: " + pointsPerGame
+	    +"\nShots Taken: " + shots
+	    +"\nPowerplay Goals: " + powerPlayGoals
+	    +"\nPowerplay Points: " + powerPlayPoints
+	    +"\nOvertime Goals: " + overtimeGoals
+	    +"\nShorthanded Goals: " + shortHandedGoals
+	    +"\nShorthanded Points: " + shortHandedPoints
+	    +"\nShot Percent: " + shotPercent;
+
+		return result;
 	}
 }

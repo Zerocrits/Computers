@@ -2,12 +2,14 @@ public class Defender extends Skater
 {
 	private int takeAways, blockedShots, hits;
 
-	public Defender(String team, String position, String name, int gamesPlayed, int PIM, int years, int goals, int assists,
+	public Defender(String team, String position, String name, int rating, int gamesPlayed, int PIM, int goals, int assists,
 				  int points, int pointsPerGame, int shots, int shortHandedGoals, int shortHandedPoints, int overtimeGoals,
 				  double shotPercent, int takeAways, int blockedShots, int hits)
 	{
-		takeAways = blockedShots = hits = 0;
-		super(team, position, name, gamesPlayed, PIM, years);
+		super(team, position, name, rating ,gamesPlayed, PIM, goals, assists, points, pointsPerGame, shots, shortHandedGoals, shortHandedPoints, overtimeGoals, shotPercent);
+		this.takeAways = takeAways;
+		this.blockedShots = blockedShots;
+		this.hits = hits;
 	}
 
 	public int getTakeAways(int takeAways)
@@ -26,5 +28,15 @@ public class Defender extends Skater
 	{
 		this.hits = hits;
 		return hits;
+	}
+
+	public String toString()
+	{
+		String result = super.toString();
+
+		result += "\nTakeaways: " + takeAways
+		+"\nBlocked Shots: " + blockedShots;
+
+		return result;
 	}
 }
