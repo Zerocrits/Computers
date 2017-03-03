@@ -29,9 +29,9 @@ public class Game implements Runnable
 		this.width = width;
 		this.height = height;
 		title = "MidiHero";
-		marker = new Marker(this);
-		logic = new ArrowLogic(this);
-		arrow = new Arrow(this);
+		marker = new Marker();
+		logic = new ArrowLogic();
+		arrow = new Arrow();
 		score = highscore = 0;
 	}
 

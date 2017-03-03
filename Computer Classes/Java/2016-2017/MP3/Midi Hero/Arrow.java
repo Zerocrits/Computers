@@ -11,17 +11,17 @@ import java.awt.*;
 import javax.swing.*;
 import java.io.FileReader;
 
-public class Arrow
+public class Arrow extends ArrowLogic
 {
 	private int score, speed, multiplyer, spot, x;
 	private int length, min;
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp;
-	private ArrowLogic logic;
+	//private ArrowLogic logic;
 	private boolean upPressed, downPressed, leftPressed, rightPressed;
 
-    public Arrow(Game game)
+    public Arrow()
     {
-		logic = new ArrowLogic();
+		//logic = new ArrowLogic(game); //two instances
 
 		try {
 			 imgLeft = ImageIO.read(new File("pictures/leftArrow.PNG"));
@@ -39,21 +39,23 @@ public class Arrow
 
 	public void render(Graphics g)
 	{
-		spot = logic.getSpot();
-		min = logic.getMin();
-		for(int i = min; i < spot; i++)
+		spot = getSpot();
+		min = getMin();
+		for(int i = min; i <= spot; i++)
 		{
-			System.out.println("KeysY: " + logic.getKeysY(i));
-			System.out.println("min: " + logic.getMin());
-			System.out.println("Spot: " + logic.getSpot());
-			if(logic.getSide(i) == 0)
-				g.drawImage(imgLeft,x,logic.getKeysY(i),null);
-			else if(logic.getSide(i) == 1)
-				g.drawImage(imgUp,x+70,logic.getKeysY(i),null);
-			else if(logic.getSide(i) == 2)
-				g.drawImage(imgDown,x+140,logic.getKeysY(i),null);
-			else if(logic.getSide(i) == 3)
-				g.drawImage(imgRight,x+210,logic.getKeysY(i),null);
+			//System.out.println("min: " + super.getMin());
+			//System.out.println("Spot: " + super.getSpot());
+			System.out.println("KeysYG: " +i+"hi" + keysY[i]);
+			//System.out.println("KeysY: " + getKeysY(i));
+			//System.out.println("side: " + super.getSide(i));
+			if(getSide(i) == 0)
+				g.drawImage(imgLeft,x,getKeysY(i),null);
+			else if(getSide(i) == 1)
+				g.drawImage(imgUp,x+70,getKeysY(i),null);
+			else if(getSide(i) == 2)
+				g.drawImage(imgDown,x+140,getKeysY(i),null);
+			else if(getSide(i) == 3)
+				g.drawImage(imgRight,x+210,getKeysY(i),null);
 		}
 	}
 }

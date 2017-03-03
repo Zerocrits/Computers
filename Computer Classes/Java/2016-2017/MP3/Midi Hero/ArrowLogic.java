@@ -15,20 +15,19 @@ public class ArrowLogic
 {
 	private int spot = 1;
 	private int global, length;
-	private int min = 0;;
-	private int[][] keys;
-	private int[] keysY, side;
+	private int min = 0;
+	public int[][] keys;
+	public int[] keysY, side;
 
-    public ArrowLogic(Game game)
+    public ArrowLogic()
     {
 		keys = new int[getLength()][2]; //may need to be 1?
-		keysY = new int[keys.length];
-		side = new int[keys.length];
-
+		keysY = new int[getLength()];
+		side = new int[getLength()];
 		readKeys();
     }
 
-    public ArrowLogic(){}
+    //public ArrowLogic(){}
 
     public int getLength()
     {
@@ -59,9 +58,14 @@ public class ArrowLogic
 
 			for(int i = 0; i < length-2; i++)
 			{
-				//System.out.println(spot);
-				keys[i][0] = file.nextInt();//needs to only get next once
+				keysY[i] = 600;
+				side[i] = -1;
+				keys[i][0] = file.nextInt();
 				keys[i][1] = file.nextInt();
+				System.out.println(keys[i][0]);
+				System.out.println(keys[i][1]);
+				System.out.println(keysY[i]);
+				System.out.println(side[i]);
 			}
 			size.close(); //prevent resource leak
 		}
@@ -72,14 +76,12 @@ public class ArrowLogic
 
 	public void placeKeys()
 	{
-		//System.out.println("******************"+spot+"*********************");
-		//System.out.println("****"+global+"****");
 		if(setTime(keys[spot][1]) == true)
 		{
 			side[spot] = getSide(keys[spot][0]);
 			System.out.println(keys[spot][0]);
-			System.out.println(keys[spot][1]);
 			spot++;
+			//System.out.println(spot+"spot went up");
 		}
 	}
 	public boolean setTime(int tick)
@@ -87,36 +89,33 @@ public class ArrowLogic
 		boolean timer = false;
 		if(timer == false)
 		{
-			if(tick == global)//cant access keys
-			{
-				//System.out.println("time got" + tick + "time needed:"+global);
+			//System.out.println(tick+"got em"+global);
+			if(tick == global)
 				return true;
-			}
 		}
 		return timer;
 	}
 
 	public void setSpot()
 	{
-		//System.out.println("length: " + length);
-		//System.out.println(spot+"THISISSPOTA");
-		for(int i = min; i < spot; i++)
+		for(int i = min; i <= spot; i++)
 		{
-			if(keysY[min] < -110) //decreases size of for loops
+			if(keysY[i] < -110) //decreases size of forloop
 			{
-				keysY[min] = -500;
+				//System.out.println(min+"got here"+spot);
+				keysY[i] = -500;
 				min++;
 			}
-			if(i == spot-1)
-				keysY[i] = 300;
 			else
+			{
+				System.out.println(i+"hello?" + keysY[i]);
 				keysY[i] += -3;
+			}
 		}
 	}
 
 	public int getSpot()
 	{
-		//System.out.println(length+"hello"+spot);
 		return spot;
 	}
 
@@ -125,26 +124,16 @@ public class ArrowLogic
 		return global;
 	}
 
-	public void setLocation()
-	{
-		keysY[getSpot()] = -110;
-	}
-
-	public int getKeys(int i, int j)
-	{
-		return keys[i][j];
-	}
-
 	public int getKeysY(int i)
 	{
-		System.out.println(keysY[i]);
-		return keysY[i];
+		int key = keysY[i];
+		return key;
 	}
 
 	public int getSide(int i)
 	{
-		//System.out.println("Side: " + side[i]);
-		return side[i];
+		int direction = side[i];
+		return direction;
 	}
 
 	public int getMin()
@@ -159,6 +148,6 @@ public class ArrowLogic
 		//System.out.println("Global: " + global);
 		placeKeys();
 		setSpot();
-		System.out.println(getKeysY(0));
+		//System.out.println(getKeysY(min));
 	}
 }

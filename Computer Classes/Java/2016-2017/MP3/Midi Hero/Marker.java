@@ -21,7 +21,7 @@ public class Marker implements KeyListener
 	private Game game;
 	private boolean upPressed, downPressed, leftPressed, rightPressed;
 
-    public Marker(Game game)
+    public Marker()
     {
 		try {
 			 imgUpHit = ImageIO.read(new File("pictures/upHit.PNG"));
@@ -34,8 +34,7 @@ public class Marker implements KeyListener
 			System.exit(1);
 		}
 
-		arrow = new Arrow(game);
-		logic = new ArrowLogic();
+		//logic = new ArrowLogic();
 
 		y = 30;
 		center=60;
@@ -59,26 +58,26 @@ public class Marker implements KeyListener
 		int spot = 0;
 		if (e.getKeyCode() == KeyEvent.VK_UP)
 		{
-			spot = logic.getSpot();
+			//spot = logic.getSpot();
 
 			//if((spot > 30) && (spot < 60)) //get rid of loop do minimum then you can just delete it from loop to save data
 				//arrow.setLocation();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
-			spot = logic.getSpot();
+			//spot = logic.getSpot();
 			//if((arrow.keysY[spot] > 30) && (arrow.keysY[spot] < 60)) //get rid of loop do minimum then you can just delete it from loop to save data
 				//arrow.setLocation();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_LEFT)
 		{
-			spot = logic.getSpot();
+			//spot = logic.getSpot();
 			//if((arrow.keysY[spot] > 30) && (arrow.keysY[spot] < 60)) //get rid of loop do minimum then you can just delete it from loop to save data
 				//arrow.setLocation();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 		{
-			spot = logic.getSpot();
+			//spot = logic.getSpot();
 			//if((arrow.keysY[spot] > 30) && (arrow.keysY[spot] < 60)) //get rid of loop do minimum then you can just delete it from loop to save data
 				//arrow.setLocation();
 		}
