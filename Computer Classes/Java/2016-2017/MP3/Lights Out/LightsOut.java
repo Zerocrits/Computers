@@ -1,7 +1,7 @@
 public class LightsOut
 {
-	private boolean[][] grid;
-	private boolean[][] nextGrid;
+	private boolean[][] grid = new boolean[8][8];
+	private boolean[][] nextGrid = new boolean[8][8];
 	private String[] hex;
 	private String hexi;
 	private String binary;
@@ -9,8 +9,6 @@ public class LightsOut
 
 	public LightsOut(String hexi, int gridNum)
 	{
-		grid = new boolean[8][8];
-		nextGrid = new boolean[8][8];
 		String[] hex = hexi.split(" ");
 		binary = "";
 		this.gridNum = gridNum;
@@ -24,9 +22,13 @@ public class LightsOut
 		if(gridNum == 1)
 			gridOne(binary);
 		else if(gridNum == 2)
+		{
 			gridTwo(binary);
+			System.out.println(testBoard());
+		}
 
 		binary = hexi;
+		System.out.println(testBoard());
 	}
 
 	public String hexToBinary(String hex)
@@ -69,7 +71,6 @@ public class LightsOut
 			}
 		}
 		System.out.println(showGrid(gridNum));
-		System.out.println(testBoard());
 	}
 
 	public String showGrid(int num)
@@ -113,36 +114,35 @@ public class LightsOut
 			{
 				if(grid[i][j] == true)
 				{
-					if((i < 6 && i > 1) && (j < 6 && j > 1))
-					{
-						if(grid[i+1][j] == nextGrid[i+1][j]) //do opposite
-							notIt = true;
-						if(grid[i+2][j] == nextGrid[i+2][j])
-							notIt = true;
-						if(grid[i+1][j+1] == nextGrid[i+1][j+1])
-							notIt = true;
-						if(grid[i][j+1] == nextGrid[i][j+1])
-							notIt = true;
-						if(grid[i][j+2] == nextGrid[i][j+2])
-							notIt = true;
-						if(grid[i-1][j+1] == nextGrid[i-1][j+1])
-							notIt = true;
-						if(grid[i-1][j] == nextGrid[i-1][j])
-							notIt = true;
-						if(grid[i-2][j] == nextGrid[i-2][j])
-							notIt = true;
-						if(grid[i-1][j-1] == nextGrid[i-1][j-1])
-							notIt = true;
-						if(grid[i-1][j] == nextGrid[i-1][j])
-							notIt = true;
-						if(grid[i-2][j] == nextGrid[i-2][j])
-							notIt = true;
-						if(grid[i-1][j+1] == nextGrid[i-1][j+1])
-							notIt = true;
+					if(grid[i+1][j] == nextGrid[i+1][j]) //do opposite
+						notIt = true;
+					if(grid[i+2][j] == nextGrid[i+2][j])
+						notIt = true;
+					if(grid[i+1][j+1] == nextGrid[i+1][j+1])
+						notIt = true;
+					if(grid[i][j+1] == nextGrid[i][j+1])
+						notIt = true;
+					if(grid[i][j+2] == nextGrid[i][j+2])
+						notIt = true;
+					if(grid[i-1][j+1] == nextGrid[i-1][j+1])
+						notIt = true;
+					if(grid[i-1][j] == nextGrid[i-1][j])
+						notIt = true;
+					if(grid[i-2][j] == nextGrid[i-2][j])
+						notIt = true;
+					if(grid[i-1][j-1] == nextGrid[i-1][j-1])
+						notIt = true;
+					if(grid[i-1][j] == nextGrid[i-1][j])
+						notIt = true;
+					if(grid[i-2][j] == nextGrid[i-2][j])
+						notIt = true;
+					if(grid[i-1][j+1] == nextGrid[i-1][j+1])
+						notIt = true;
 
-						if(notIt == false)
-							answer += i + "jjjjjjj" + j;
-					}
+					if(notIt == false)
+						answer += i + "jjjjjjj" + j;
+
+					System.out.println("wat " + notIt);
 				}
 			}
 		}

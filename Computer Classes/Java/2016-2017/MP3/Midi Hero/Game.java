@@ -30,7 +30,6 @@ public class Game implements Runnable
 		this.height = height;
 		title = "MidiHero";
 		marker = new Marker();
-		logic = new ArrowLogic();
 		arrow = new Arrow();
 		score = highscore = 0;
 	}
@@ -48,7 +47,7 @@ public class Game implements Runnable
 
 	public void tick()
 	{
-		logic.tick();
+		arrow.tick();
 	}
 
 	public void render()
