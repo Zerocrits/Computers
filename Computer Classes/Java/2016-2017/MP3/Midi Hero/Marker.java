@@ -1,4 +1,3 @@
-import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -8,16 +7,14 @@ import java.awt.Graphics;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import javax.swing.*;
-import java.awt.event.KeyListener;
 import java.awt.Rectangle;
 
-public class Marker extends ArrowLogic implements KeyListener
+public class Marker
 {
 	private int score, speed, multiplyer;
-	private int y, x, upX, downX, leftX, rightX,center;
+	private int y, x, upX, downX, leftX, rightX, center;
+	private int spot, min;
 	private BufferedImage imgUpHit, imgDownHit, imgLeftHit, imgRightHit;
-	private Arrow arrow;
-	private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     public Marker()
     {
@@ -34,7 +31,7 @@ public class Marker extends ArrowLogic implements KeyListener
 
 
 		y = 30;
-		center=60;
+		center = 60;
 		upX = 190;
 		downX = 260;
 		leftX = 120;
@@ -48,60 +45,5 @@ public class Marker extends ArrowLogic implements KeyListener
 		g.drawImage(imgDownHit,downX,y,null);
 		g.drawImage(imgLeftHit,leftX,y,null);
 		g.drawImage(imgRightHit,rightX,y,null);
-	}
-
-    public void keyPressed(KeyEvent e)
-    {
-		int i = getMin();
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			if(side[i] == 1)
-			{
-				if((keysY[i] > 30) && (keysY[i] < 60)) //get rid of loop do minimum then you can just delete it from loop to save data
-					keysY[i] = -70;
-			}
-		}
-		else if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			//spot = logic.getSpot();
-			//if((arrow.keysY[spot] > 30) && (arrow.keysY[spot] < 60)) //get rid of loop do minimum then you can just delete it from loop to save data
-				//arrow.setLocation();
-		}
-		else if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			//spot = logic.getSpot();
-			//if((arrow.keysY[spot] > 30) && (arrow.keysY[spot] < 60)) //get rid of loop do minimum then you can just delete it from loop to save data
-				//arrow.setLocation();
-		}
-		else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			//spot = logic.getSpot();
-			//if((arrow.keysY[spot] > 30) && (arrow.keysY[spot] < 60)) //get rid of loop do minimum then you can just delete it from loop to save data
-				//arrow.setLocation();
-		}
-    }
-
-    public void keyReleased(KeyEvent e)
-    {
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-        {
-			upPressed=false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			downPressed=false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			leftPressed=false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			rightPressed=false;
-        }
-    }
-    public void keyTyped(KeyEvent e)
-	{
-
 	}
 }

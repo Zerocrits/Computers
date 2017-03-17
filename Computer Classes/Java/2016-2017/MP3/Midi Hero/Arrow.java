@@ -10,11 +10,12 @@ import java.util.Scanner;
 import java.awt.*;
 import javax.swing.*;
 import java.io.FileReader;
+import java.awt.event.KeyListener;
 
-public class Arrow extends ArrowLogic
+public class Arrow extends ArrowLogic implements KeyListener
 {
-	private int score, speed, multiplyer, spot, x;
-	private int length, min;
+	private int score, speed, multiplyer, x;
+	private int spot, min;
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp;
 	private boolean upPressed, downPressed, leftPressed, rightPressed;
 
@@ -39,6 +40,11 @@ public class Arrow extends ArrowLogic
 		super.tick();
 	}
 
+	public int getScore()
+	{
+		return score;
+	}
+
 	public void render(Graphics g)
 	{
 		spot = getSpot();
@@ -57,5 +63,112 @@ public class Arrow extends ArrowLogic
 			else if(side[i] == 3)
 				g.drawImage(imgRight,x+210,keysY[i],null);
 		}
+	}
+
+    public void keyPressed(KeyEvent e)
+    {
+		spot = getSpot();
+		min = getMin();
+
+		if(e.getKeyCode() == KeyEvent.VK_W)
+			upPressed = true;
+		if(e.getKeyCode() == KeyEvent.VK_A)
+			leftPressed = true;
+		if(e.getKeyCode() == KeyEvent.VK_S)
+			downPressed = true;
+		if(e.getKeyCode() == KeyEvent.VK_D)
+			rightPressed == true;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		for(int i = min; i <= spot; i++)
+		{
+			if(e.getKeyCode() == KeyEvent.VK_W)
+			{
+				if(side[i] == 1)
+				{
+					if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					{
+						if((keysY[i] > 0) && (keysY[i] < 60))
+						{
+							score++;
+							keysY[i] = -100;
+						}
+					}
+				}
+			}
+			else if (e.getKeyCode() == KeyEvent.VK_S)
+			{
+				if(side[i] == 2)
+				{
+					if((keysY[i] > 0) && (keysY[i] < 60))
+					{
+						score++;
+						keysY[i] = -100;
+					}
+				}
+			}
+			else if (e.getKeyCode() == KeyEvent.VK_A)
+			{
+				if(side[i] == 0)
+				{
+					if((keysY[i] > 0) && (keysY[i] < 60))
+					{
+						score++;
+						keysY[i] = -100;
+					}
+				}
+			}
+			else if (e.getKeyCode() == KeyEvent.VK_D)
+			{
+				if(side[i] == 3)
+				{
+					if((keysY[i] > 0) && (keysY[i] < 60))
+					{
+						score++;
+						keysY[i] = -100;
+					}
+				}
+			}
+			System.out.println(getKeysY(i));
+		}
+    }
+
+    public void keyReleased(KeyEvent e)
+    {
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+        {
+			upPressed=false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			downPressed=false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			leftPressed=false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			rightPressed=false;
+        }
+    }
+    public void keyTyped(KeyEvent e)
+	{
+
 	}
 }

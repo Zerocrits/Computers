@@ -29,15 +29,15 @@ public class Game implements Runnable
 		this.width = width;
 		this.height = height;
 		title = "MidiHero";
-		marker = new Marker();
 		arrow = new Arrow();
+		marker = new Marker();
 		score = highscore = 0;
 	}
 
 	private void init()
 	{
 		display = new Display(title, width, height);
-		display.getFrame().addKeyListener(marker);
+		display.getFrame().addKeyListener(arrow);
 	}
 
 	public Display getDisplay()
@@ -74,7 +74,7 @@ public class Game implements Runnable
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Serif", Font.BOLD, 20));
 
-		g.drawString("Score: " + getScore(), 10, 50);
+		g.drawString("Score: " + addScore(), 10, 50);
 		marker.render(g);
 		arrow.render(g);
 
@@ -142,8 +142,7 @@ public class Game implements Runnable
 
 	public int addScore()
 	{
-		score += 4;
-		return score;
+		return arrow.getScore();
 	}
 	public int getScore()
 	{
@@ -152,10 +151,5 @@ public class Game implements Runnable
 			return 0;
 		else
 			return score-1;
-	}
-
-	public Arrow getArrow()
-	{
-		return arrow;
 	}
 }

@@ -21,7 +21,7 @@ public class ArrowLogic
 
     public ArrowLogic()
     {
-		keys = new int[getLength()][3]; //may need to be 1?
+		keys = new int[getLength()][2]; //may need to be 1?
 		keysY = new int[getLength()];
 		side = new int[getLength()];
 		keyTime = new int[getLength()];
@@ -94,14 +94,21 @@ public class ArrowLogic
 	{
 		for(int i = min; i < spot; i++)
 		{
-			if(keysY[i] < -50) //decreases size of forloop
+			if(keysY[i] < -30) //decreases size of forloop
 			{
-				keysY[i] = -500;
+				keysY[i] = -100;
 				min++;
 			}
 			else
 				keysY[i] += -3;
+			System.out.println("**"+keysY[i]+"**");
 		}
+	}
+
+	public int getKeysY(int i)
+	{
+		int num = keysY[i];
+		return num;
 	}
 
 	public int getSide(int i)
@@ -127,6 +134,5 @@ public class ArrowLogic
 		System.out.println("Global: " + global);
 		placeKeys();
 		setSpot();
-		//System.out.println(getKeysY(min));
 	}
 }
