@@ -18,6 +18,7 @@ public class Game implements Runnable
 	private ArrowLogic logic;
 	private Arrow arrow;
 	private Marker marker;
+	private ImageChooser imagechooser;
 	private int score;
 	private BufferStrategy bs;
 	private Graphics g;
@@ -31,6 +32,7 @@ public class Game implements Runnable
 		title = "MidiHero";
 		arrow = new Arrow();
 		marker = new Marker();
+		imagechooser = new ImageChooser();
 		score = highscore = 0;
 	}
 
@@ -74,9 +76,15 @@ public class Game implements Runnable
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Serif", Font.BOLD, 20));
 
-		g.drawString("Score: " + addScore(), 10, 50);
+		g.drawString("Score: " + addScore(getMultiplyer(getStreak())), 10, 50);
+		//g.drawString("Streak: " + getStreak(), 10, 80);
+		g.drawString("Multiplyer: " + getMultiplyer(getStreak()), 10, 110);
+		imagechooser.setStreak(getStreak());
+		imagechooser.setMultiplyer(getMultiplyer(getStreak()));
+		imagechooser.setScore(addScore(getMultiplyer(getStreak())));
 		marker.render(g);
 		arrow.render(g);
+		imagechooser.render(g);
 
 		//displays image(buffered image)
 		bs.show();
@@ -133,23 +141,34 @@ public class Game implements Runnable
 
 	}
 
-	public int getHighScore()
+	/*public int getHighScore()
 	{
-		if(highscore < getScore())
-			highscore = getScore();
+		if(highscore < addScore())
+			highscore = addScore();
 		return highscore;
+	}*/
+
+	public int addScore(int multiplyer)
+	{
+		score = (arrow.getScore() * multiplyer);
+		return score;
 	}
 
-	public int addScore()
+	public int getStreak()
 	{
-		return arrow.getScore();
+		return arrow.getStreak();
 	}
-	public int getScore()
+
+	public int getMultiplyer(int streak)
 	{
-		//add streak
-		if(score<2)
-			return 0;
-		else
-			return score-1;
+		if(streak <= 10)
+			return 1;
+		else if(streak <= 20)
+			return 2;
+		else if(streak <= 28)
+			return 3;
+		else if(streak >= 35)
+			return 4;
+		return -1;
 	}
 }

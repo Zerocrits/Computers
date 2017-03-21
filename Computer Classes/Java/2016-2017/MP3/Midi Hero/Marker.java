@@ -19,10 +19,10 @@ public class Marker
     public Marker()
     {
 		try {
-			 imgUpHit = ImageIO.read(new File("pictures/upHit.PNG"));
-			 imgDownHit = ImageIO.read(new File("pictures/downHit.PNG"));
-			 imgLeftHit = ImageIO.read(new File("pictures/leftHit.PNG"));
-			 imgRightHit = ImageIO.read(new File("pictures/rightHit.PNG"));
+			 imgUpHit = ImageIO.read(new File("pictures/arrows/upHit.PNG"));
+			 imgDownHit = ImageIO.read(new File("pictures/arrows/downHit.PNG"));
+			 imgLeftHit = ImageIO.read(new File("pictures/arrows/leftHit.PNG"));
+			 imgRightHit = ImageIO.read(new File("pictures/arrows/rightHit.PNG"));
 		}catch (IOException e) {
 
 			e.printStackTrace();

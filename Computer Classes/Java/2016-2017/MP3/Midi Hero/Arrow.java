@@ -14,18 +14,18 @@ import java.awt.event.KeyListener;
 
 public class Arrow extends ArrowLogic implements KeyListener
 {
-	private int score, speed, multiplyer, x;
-	private int spot, min;
+	private int score, speed, streak, x;
+	private int spot, i;
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp;
 	private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     public Arrow()
     {
 		try {
-			 imgLeft = ImageIO.read(new File("pictures/leftArrow.PNG"));
-			 imgRight = ImageIO.read(new File("pictures/rightArrow.PNG"));
-			 imgUp = ImageIO.read(new File("pictures/upArrow.PNG"));
-			 imgDown = ImageIO.read(new File("pictures/downArrow.PNG"));
+			 imgLeft = ImageIO.read(new File("pictures/arrows/leftArrow.PNG"));
+			 imgRight = ImageIO.read(new File("pictures/arrows/rightArrow.PNG"));
+			 imgUp = ImageIO.read(new File("pictures/arrows/upArrow.PNG"));
+			 imgDown = ImageIO.read(new File("pictures/arrows/downArrow.PNG"));
 		}catch (IOException e) {
 
 			e.printStackTrace();
@@ -45,10 +45,15 @@ public class Arrow extends ArrowLogic implements KeyListener
 		return score;
 	}
 
+	public int getStreak()
+	{
+		return streak;
+	}
+
 	public void render(Graphics g)
 	{
 		spot = getSpot();
-		min = getMin();
+		int min = getMin();
 		for(int i = min; i < spot; i++)
 		{
 			System.out.println("\n*****Side: " + side[i]);
@@ -67,8 +72,8 @@ public class Arrow extends ArrowLogic implements KeyListener
 
     public void keyPressed(KeyEvent e)
     {
-		spot = getSpot();
-		min = getMin();
+		//spot = getSpot();
+		i = getMin();
 
 		if(e.getKeyCode() == KeyEvent.VK_W)
 			upPressed = true;
@@ -77,92 +82,79 @@ public class Arrow extends ArrowLogic implements KeyListener
 		if(e.getKeyCode() == KeyEvent.VK_S)
 			downPressed = true;
 		if(e.getKeyCode() == KeyEvent.VK_D)
-			rightPressed == true;
+			rightPressed = true;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		for(int i = min; i <= spot; i++)
+		if(side[i] == 1)
 		{
-			if(e.getKeyCode() == KeyEvent.VK_W)
+			if((keysY[i] > 0) && (keysY[i] < 60))
 			{
-				if(side[i] == 1)
+				if(e.getKeyCode() == KeyEvent.VK_SPACE)
 				{
-					if(e.getKeyCode() == KeyEvent.VK_ENTER)
-					{
-						if((keysY[i] > 0) && (keysY[i] < 60))
-						{
-							score++;
-							keysY[i] = -100;
-						}
-					}
+					score++;
+					streak++;
+					keysY[i] = -100;
 				}
 			}
-			else if (e.getKeyCode() == KeyEvent.VK_S)
-			{
-				if(side[i] == 2)
-				{
-					if((keysY[i] > 0) && (keysY[i] < 60))
-					{
-						score++;
-						keysY[i] = -100;
-					}
-				}
-			}
-			else if (e.getKeyCode() == KeyEvent.VK_A)
-			{
-				if(side[i] == 0)
-				{
-					if((keysY[i] > 0) && (keysY[i] < 60))
-					{
-						score++;
-						keysY[i] = -100;
-					}
-				}
-			}
-			else if (e.getKeyCode() == KeyEvent.VK_D)
-			{
-				if(side[i] == 3)
-				{
-					if((keysY[i] > 0) && (keysY[i] < 60))
-					{
-						score++;
-						keysY[i] = -100;
-					}
-				}
-			}
-			System.out.println(getKeysY(i));
 		}
+		if(side[i] == 2)
+		{
+			if((keysY[i] > 0) && (keysY[i] < 60))
+			{
+				if(e.getKeyCode() == KeyEvent.VK_SPACE)
+				{
+					score++;
+					streak++;
+					keysY[i] = -100;
+				}
+			}
+		}
+		if(side[i] == 0)
+		{
+			if((keysY[i] > 0) && (keysY[i] < 60))
+			{
+				if(e.getKeyCode() == KeyEvent.VK_SPACE)
+				{
+					score++;
+					streak++;
+					keysY[i] = -100;
+				}
+			}
+		}
+		if(side[i] == 3)
+		{
+			if((keysY[i] > 0) && (keysY[i] < 60))
+			{
+				if(e.getKeyCode() == KeyEvent.VK_SPACE)
+				{
+					score++;
+					streak++;
+					keysY[i] = -100;
+				}
+			}
+		}
+
+		if(keysY[i] < -10 && keysY[i] > -30)
+			streak = 0;
+
+		System.out.println(getKeysY(i));
     }
 
     public void keyReleased(KeyEvent e)
     {
-		if (e.getKeyCode() == KeyEvent.VK_UP)
+		if (e.getKeyCode() == KeyEvent.VK_W)
         {
 			upPressed=false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN)
+        if (e.getKeyCode() == KeyEvent.VK_S)
 		{
 			downPressed=false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        if (e.getKeyCode() == KeyEvent.VK_A)
 		{
 			leftPressed=false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        if (e.getKeyCode() == KeyEvent.VK_D)
 		{
 			rightPressed=false;
         }
