@@ -11,9 +11,9 @@ import java.awt.*;
 import javax.swing.*;
 import java.io.FileReader;
 
-public class ArrowLogic
+public class ArrowLogic extends ImageChooser
 {
-	private int spot = 1;
+	private int spot = 0;
 	private int global, length;
 	private int min = 0;
 	public int[][] keys;
@@ -21,7 +21,7 @@ public class ArrowLogic
 
     public ArrowLogic()
     {
-		keys = new int[getLength()][2]; //may need to be 1?
+		keys = new int[getLength()][2];
 		keysY = new int[getLength()];
 		side = new int[getLength()];
 		keyTime = new int[getLength()];
@@ -74,35 +74,36 @@ public class ArrowLogic
 
 	public void placeKeys()
 	{
-		if(setTime(keys[spot][1]) == true)
-		{
-			side[spot] = getSide(keys[spot][0]);
-			System.out.println("SPOT IS INCREASING: " + keys[spot][0]);
+		if(setTime(keyTime[spot]) == true)
 			spot++;
-		}
 	}
 	public boolean setTime(int tick)
 	{
-		boolean timer = false;
-		if(timer == false)
-			if(tick == global)
-				return true;
-		return timer;
+		if(tick == global)
+			return true;
+		return false;
 	}
 
 	public void setSpot()
 	{
 		for(int i = min; i < spot; i++)
 		{
-			if(keysY[i] < -30) //decreases size of forloop
+			if(keysY[i] <= -3) //decreases size of forloop
 			{
 				keysY[i] = -100;
 				min++;
 			}
 			else
 				keysY[i] += -3;
-			System.out.println("**"+keysY[i]+"**");
+			//System.out.println("**"+keysY[i]+"**");
 		}
+	}
+
+	public boolean checkWon()
+	{
+		if(lives < 0)
+			return false;
+		return true;
 	}
 
 	public int getKeysY(int i)

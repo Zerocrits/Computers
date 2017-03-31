@@ -14,10 +14,9 @@ import java.awt.event.KeyListener;
 
 public class Arrow extends ArrowLogic implements KeyListener
 {
-	private int score, speed, streak, x;
-	private int spot, i;
-	private BufferedImage imgLeft, imgRight, imgDown, imgUp;
-	private boolean upPressed, downPressed, leftPressed, rightPressed;
+	private int spot, i, x;
+	private BufferedImage imgLeft, imgRight, imgDown, imgUp, imgBar;
+	private boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
 
     public Arrow()
     {
@@ -26,32 +25,32 @@ public class Arrow extends ArrowLogic implements KeyListener
 			 imgRight = ImageIO.read(new File("pictures/arrows/rightArrow.PNG"));
 			 imgUp = ImageIO.read(new File("pictures/arrows/upArrow.PNG"));
 			 imgDown = ImageIO.read(new File("pictures/arrows/downArrow.PNG"));
+			 imgBar = ImageIO.read(new File("pictures/arrows/barArrows.PNG"));
 		}catch (IOException e) {
 
 			e.printStackTrace();
 			System.exit(1);
 		}
 
-		x = 120;
+		x = 200;
     }
 
 	public void tick()
 	{
 		super.tick();
-	}
 
-	public int getScore()
-	{
-		return score;
-	}
-
-	public int getStreak()
-	{
-		return streak;
+		i = getMin();
+		if(keysY[i] < 0 && keysY[i] > -10)
+		{
+			keysY[i] = -100;
+			missNote();
+			setMultiplyer();
+		}
 	}
 
 	public void render(Graphics g)
 	{
+		super.render(g);
 		spot = getSpot();
 		int min = getMin();
 		for(int i = min; i < spot; i++)
@@ -60,104 +59,119 @@ public class Arrow extends ArrowLogic implements KeyListener
 			System.out.println("***KeysY: " + keysY[i]);
 
 			if(side[i] == 0)
-				g.drawImage(imgLeft,x,keysY[i],null);
+				g.drawImage(imgLeft,x,keysY[i],65,65,null);
 			else if(side[i] == 1)
-				g.drawImage(imgUp,x+70,keysY[i],null);
+				g.drawImage(imgUp,x+70,keysY[i],65,65,null);
 			else if(side[i] == 2)
-				g.drawImage(imgDown,x+140,keysY[i],null);
+				g.drawImage(imgDown,x+140,keysY[i],65,65,null);
 			else if(side[i] == 3)
-				g.drawImage(imgRight,x+210,keysY[i],null);
+				g.drawImage(imgRight,x+210,keysY[i],65,65,null);
+			else if(side[i] == 4)
+				g.drawImage(imgBar,x,keysY[i],null);
 		}
 	}
 
     public void keyPressed(KeyEvent e)
     {
-		//spot = getSpot();
 		i = getMin();
 
-		if(e.getKeyCode() == KeyEvent.VK_W)
-			upPressed = true;
 		if(e.getKeyCode() == KeyEvent.VK_A)
 			leftPressed = true;
-		if(e.getKeyCode() == KeyEvent.VK_S)
-			downPressed = true;
+		if(e.getKeyCode() == KeyEvent.VK_W)
+			upPressed = true;
 		if(e.getKeyCode() == KeyEvent.VK_D)
 			rightPressed = true;
+		if(e.getKeyCode() == KeyEvent.VK_S)
+			downPressed = true;
+		if(e.getKeyCode() == KeyEvent.VK_SPACE)
+			spacePressed = true;
 
 
-		if(side[i] == 1)
+		if(side[i] == 0 && leftPressed == true)
 		{
 			if((keysY[i] > 0) && (keysY[i] < 60))
 			{
-				if(e.getKeyCode() == KeyEvent.VK_SPACE)
+				if(spacePressed == true)
 				{
-					score++;
-					streak++;
+					setStreak();
+					setScore();
 					keysY[i] = -100;
+					spacePressed = false;
 				}
 			}
 		}
-		if(side[i] == 2)
+		if(side[i] == 1 && upPressed == true)
 		{
 			if((keysY[i] > 0) && (keysY[i] < 60))
 			{
-				if(e.getKeyCode() == KeyEvent.VK_SPACE)
+				if(spacePressed == true)
 				{
-					score++;
-					streak++;
+					setStreak();
+					setScore();
 					keysY[i] = -100;
+					spacePressed = false;
 				}
 			}
 		}
-		if(side[i] == 0)
+		if(side[i] == 2 && downPressed == true)
 		{
 			if((keysY[i] > 0) && (keysY[i] < 60))
 			{
-				if(e.getKeyCode() == KeyEvent.VK_SPACE)
+				if(spacePressed == true)
 				{
-					score++;
-					streak++;
+					setStreak();
+					setScore();
 					keysY[i] = -100;
+					spacePressed = false;
 				}
 			}
 		}
-		if(side[i] == 3)
+		if(side[i] == 3 && rightPressed == true)
 		{
 			if((keysY[i] > 0) && (keysY[i] < 60))
 			{
-				if(e.getKeyCode() == KeyEvent.VK_SPACE)
+				if(spacePressed == true)
 				{
-					score++;
-					streak++;
+					setStreak();
+					setScore();
 					keysY[i] = -100;
+					spacePressed = false;
 				}
 			}
 		}
-
-		if(keysY[i] < -10 && keysY[i] > -30)
-			streak = 0;
+		if(side[i] == 4)
+		{
+			if((keysY[i] > 0) && (keysY[i] < 60))
+			{
+				if(spacePressed == true)
+				{
+					setStreak();
+					setScore();
+					keysY[i] = -100;
+					spacePressed = false;
+				}
+			}
+		}
 
 		System.out.println(getKeysY(i));
     }
 
     public void keyReleased(KeyEvent e)
     {
-		if (e.getKeyCode() == KeyEvent.VK_W)
-        {
-			upPressed=false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_S)
-		{
-			downPressed=false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_A)
-		{
-			leftPressed=false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_D)
-		{
-			rightPressed=false;
-        }
+		if(e.getKeyCode() == KeyEvent.VK_W)
+			//upPressed = false;
+
+        if(e.getKeyCode() == KeyEvent.VK_S)
+			//downPressed = false;
+
+        if(e.getKeyCode() == KeyEvent.VK_A)
+			//leftPressed = false;
+
+        if(e.getKeyCode() == KeyEvent.VK_D)
+			//rightPressed = false;
+
+        if(e.getKeyCode() == KeyEvent.VK_SPACE)
+        	spacePressed = false;
     }
     public void keyTyped(KeyEvent e)
 	{

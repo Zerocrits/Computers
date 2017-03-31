@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import javax.swing.JOptionPane;
 
 public class Display
 {
@@ -49,5 +50,21 @@ public class Display
 	public JFrame getFrame()
 	{
 		return frame;
+	}
+
+	public void youLose()
+	{
+		JOptionPane.showMessageDialog(frame, "You Have lost!\nPress OK to restart!", "You Lose!", JOptionPane.ERROR_MESSAGE);
+		frame.setVisible(false); //you can't see me!
+		frame.dispose(); //Destroy the JFrame object
+		restart();
+	}
+
+	public void restart()
+	{
+		///fix
+		MidiHeroGUI yes = new MidiHeroGUI();
+		//Game game = new Game(800, 500);
+		//game.start();
 	}
 }
