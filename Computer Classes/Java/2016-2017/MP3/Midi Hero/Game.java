@@ -139,8 +139,8 @@ public class Game implements Runnable
 	{
 		if(arrow.checkWon() == false)
 		{
-			music.stopSong();
 			isPlaying = false;
+			music.stopSong();
 			display.youLose();
 		}
 	}
