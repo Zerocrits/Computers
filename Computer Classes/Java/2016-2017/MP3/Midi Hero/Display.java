@@ -6,14 +6,14 @@ import javax.swing.JOptionPane;
 
 public class Display
 {
-	private JFrame frame;
+	public JFrame frame;
 	private Canvas canvas;
 	private String title;
 	private int width, height;
 
-	public Display(String title, int width, int height)
+	public Display(int width, int height)
 	{
-		this.title = title;
+		title = "Midi Hero";
 		this.width = width;
 		this.height = height;
 

@@ -28,7 +28,6 @@ public class Game implements Runnable
 		isPlaying = false;
 		this.width = width;
 		this.height = height;
-		title = "MidiHero";
 		arrow = new Arrow();
 		marker = new Marker();
 		music = new PlayMusic();
@@ -38,7 +37,7 @@ public class Game implements Runnable
 
 	private void init()
 	{
-		display = new Display(title, width, height);
+		display = new Display(width, height);
 		display.getFrame().addKeyListener(arrow);
 		display.getFrame().addKeyListener(marker);
 	}
