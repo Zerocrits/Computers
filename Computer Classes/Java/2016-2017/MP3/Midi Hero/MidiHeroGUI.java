@@ -7,12 +7,13 @@ import javax.swing.border.*;
 public class MidiHeroGUI
 {
 	public MidiHeroGUI()
-	//public static void main(String[] args)
 	{
-		//Display display = new Display(800,500);
-		//display.restart();
-		Game game = new Game(800, 500, "Songs/sample.WAV");
+		Game game = new Game(800, 500, "Songs/sample");
 		game.start();
-
     }
+
+    public static void main(String[] args)
+    {
+		MidiHeroGUI gui = new MidiHeroGUI();
+	}
 }

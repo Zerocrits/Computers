@@ -14,8 +14,10 @@ import java.io.FileReader;
 public class ArrowLogic extends ImageChooser
 {
 	private int spot = 0;
-	private int global, length;
+	public int global = -1;
+	private int length;
 	private int min = 0;
+	public String filename;
 	public int[][] keys;
 	public int[] keysY, side, keyTime;
 
@@ -28,9 +30,13 @@ public class ArrowLogic extends ImageChooser
 		readKeys();
     }
 
+    public void setFile(String file)
+    {
+		filename = file;
+	}
+
     public int getLength()
     {
-		String filename = "Song-keys/sample.txt";
 		try
 		{
 			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));
@@ -47,7 +53,6 @@ public class ArrowLogic extends ImageChooser
 
     public void readKeys()
     {
-		String filename = "Song-keys/sample.txt";
 		try
 		{
 			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));

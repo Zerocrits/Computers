@@ -28,11 +28,11 @@ public class Game implements Runnable
 		isPlaying = false;
 		this.width = width;
 		this.height = height;
-		arrow = new Arrow();
+		arrow = new Arrow(song);
 		marker = new Marker();
 		music = new PlayMusic();
 		score = highscore = 0;
-		this.song = song;
+		this.song = song + ".WAV";
 	}
 
 	private void init()
@@ -126,13 +126,6 @@ public class Game implements Runnable
 		}
 
 	}
-
-	/*public int getHighScore()
-	{
-		if(highscore < addScore())
-			highscore = addScore();
-		return highscore;
-	}*/
 
 	public void gameLost()
 	{

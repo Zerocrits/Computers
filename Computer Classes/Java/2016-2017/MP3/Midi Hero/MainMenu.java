@@ -31,7 +31,7 @@ public class MainMenu extends JFrame
 		{
 			public void mousePressed(MouseEvent me)
 			{
-				gui = new MidiHeroGUI();
+				startProgram();
 			}
 		});
 
@@ -44,5 +44,15 @@ public class MainMenu extends JFrame
 	public static void main(String[] args)
 	{
 		MainMenu menu = new MainMenu();
+
+		//Game game = new Game(800, 500, "Songs/sample.WAV");
+		//game.start(); //this works...?
+	}
+
+	public void startProgram()
+	{
+		dispose();
+		Game game = new Game(800, 500, "Songs/sample.WAV");
+		game.start();
 	}
 }

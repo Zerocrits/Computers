@@ -17,8 +17,10 @@ public class Arrow extends ArrowLogic implements KeyListener
 	private int spot, i, x;
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp, imgBar;
 	private boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
+	public boolean dev = true;
+	private SongCreator sc;
 
-    public Arrow()
+    public Arrow(String song)
     {
 		try {
 			 imgLeft = ImageIO.read(new File("pictures/arrows/leftArrow.PNG"));
@@ -32,6 +34,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 			System.exit(1);
 		}
 
+		setFile(song);
 		x = 200;
     }
 
@@ -97,6 +100,9 @@ public class Arrow extends ArrowLogic implements KeyListener
 					setScore();
 					keysY[i] = -100;
 					spacePressed = false;
+
+					if(dev == true)
+						sc = new SongCreator(side[i],global,filename+"new");
 				}
 			}
 		}
@@ -159,16 +165,16 @@ public class Arrow extends ArrowLogic implements KeyListener
     public void keyReleased(KeyEvent e)
     {
 		if(e.getKeyCode() == KeyEvent.VK_W)
-			//upPressed = false;
+			upPressed = false;
 
         if(e.getKeyCode() == KeyEvent.VK_S)
-			//downPressed = false;
+			downPressed = false;
 
         if(e.getKeyCode() == KeyEvent.VK_A)
-			//leftPressed = false;
+			leftPressed = false;
 
         if(e.getKeyCode() == KeyEvent.VK_D)
-			//rightPressed = false;
+			rightPressed = false;
 
         if(e.getKeyCode() == KeyEvent.VK_SPACE)
         	spacePressed = false;

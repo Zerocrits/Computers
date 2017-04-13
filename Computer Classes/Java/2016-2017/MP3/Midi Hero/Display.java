@@ -55,7 +55,7 @@ public class Display
 	public void youLose()
 	{//do a you win page to cover white screen bug
 		JOptionPane.showMessageDialog(frame, "You Have lost!\nPress OK to restart!", "You Lose!", JOptionPane.ERROR_MESSAGE);
-		//frame.setVisible(true); //you can't see me!
+		frame.setVisible(true); //you can't see me!
 		//frame.dispose(); //Destroy the JFrame object
 		restart();
 	}
