@@ -28,11 +28,11 @@ public class Game implements Runnable
 		isPlaying = false;
 		this.width = width;
 		this.height = height;
-		arrow = new Arrow(song);
+		arrow = new Arrow();
 		marker = new Marker();
 		music = new PlayMusic();
 		score = highscore = 0;
-		this.song = song + ".WAV";
+		this.song = "Songs/" + song + ".WAV";
 	}
 
 	private void init()

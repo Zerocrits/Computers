@@ -8,7 +8,7 @@ public class MidiHeroGUI
 {
 	public MidiHeroGUI()
 	{
-		Game game = new Game(800, 500, "Songs/sample");
+		Game game = new Game(800, 500, "sample");
 		game.start();
     }
 

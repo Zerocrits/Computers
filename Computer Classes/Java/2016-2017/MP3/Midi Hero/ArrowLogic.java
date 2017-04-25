@@ -30,13 +30,9 @@ public class ArrowLogic extends ImageChooser
 		readKeys();
     }
 
-    public void setFile(String file)
-    {
-		filename = file;
-	}
-
     public int getLength()
     {
+		filename = "Song-keys/sample.txt";
 		try
 		{
 			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));
@@ -53,6 +49,7 @@ public class ArrowLogic extends ImageChooser
 
     public void readKeys()
     {
+		filename = "Song-keys/sample.txt";
 		try
 		{
 			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));

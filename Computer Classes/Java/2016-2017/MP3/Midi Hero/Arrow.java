@@ -34,7 +34,6 @@ public class Arrow extends ArrowLogic implements KeyListener
 			System.exit(1);
 		}
 
-		setFile(song);
 		x = 200;
     }
 
