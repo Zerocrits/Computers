@@ -39,25 +39,23 @@ public class Players
 
 	public String otherPlayersDeck()
 	{
+		//card.shuffle();
 		cards = "";
-		for(int i = 1; i < handarr.length; i++)
+		for(int i = 1; i <= handarr.length; i++)
 		{
+			cards = ""+card.deal();
+
 			for(int j = 1; j < handarr.length; j++)
 			{
-				cards = ""+card.deal();
-				System.out.println(card.size() + "   " + handarr[j]);
 				if(cards.equals(handarr[j]))
 				{
-					i++;
-					j=-0;
+					i--;
+					j=handarr.length;
 				}
 				if(j == handarr.length-1)
 				{
-					//j = handarr.length-1;
 					otherDeck += ""+cards;
-
-					if(i != (card.size()-1))
-						otherDeck += ", ";
+					otherDeck += ", ";
 				}
 			}
 		}
