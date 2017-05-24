@@ -20,7 +20,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 	public boolean dev = true;
 	private SongCreator sc;
 
-    public Arrow(String song)
+    public Arrow()
     {
 		try {
 			 imgLeft = ImageIO.read(new File("pictures/arrows/leftArrow.PNG"));

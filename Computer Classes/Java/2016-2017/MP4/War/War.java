@@ -7,18 +7,20 @@ public class War
 	private Players player = new Players();
 	private Deck deck;
 
-	int p1 = 0; //card score
-	int p2 = 0;
-	int d1 = 0; //discard spot
-	int d2 = 0;
-	int l1 = 0; //deck location
-	int l2 = 0;
-	int cardsDown = 0;
+	private int p1 = 0; //card score
+	private int p2 = 0;
+	private int d1 = 0; //discard spot
+	private int d2 = 0;
+	private int l1 = 0; //deck location
+	private int l2 = 0;
+	private int cardsDown = 0;
+	private int rollover = 0;
 
+	private String result = "";
 	private String Player1 = "Bob";
 	private String Player2 = "Paul";
-	String[] deck1, deck2;
-	String[] discard1, discard2;
+	private String[] deck1, deck2;
+	private String[] discard1, discard2;
 	private String[] ranks = {"2","3","4","5","6","7","8","9","1","J","Q","K","A"};
 
 	public War()
@@ -54,6 +56,12 @@ public class War
 
 		while(again.equalsIgnoreCase("y"))
 		{
+			System.out.println("made it" +l1);
+			if(l1 == 1) //time to shuffle
+				startShuffle(false, 0, "Player1");
+			if(l2 == 1)
+				startShuffle(false, 0, "Player2");
+
 			for(int i = 0; i < ranks.length; i++)
 			{
 				if(ranks[i].charAt(0) == deck1[l1].charAt(0))
@@ -87,23 +95,43 @@ public class War
 				d2++;
 			}
 
-			if(l1 == 1) //time to shuffffffffffle
-				startShuffle(false, 0, "Player1");
-			if(l2 == 1)
-				startShuffle(false, 0, "Player2");
-
-			else if(getWinner(p1, p2) == "same")
+			if(getWinner(p1, p2) == "same")
 			{
 				while(anotherWar.equalsIgnoreCase("y"))
 				{
 					anotherWar = "n";
-					cardWar(p1, p2, d1, d2, l1, l2); //happens  before shuffle
+					result = cardWar(p1, p2, d1, d2, l1, l2);
 
-					if(getWinner(p1, p2) == "same") //p is not changing so infinite loop
+					if(result == "same")
 						anotherWar = "y";
 					else
 						anotherWar = "n";
+
+					for(int i = 0; i < 4*rollover; i++)
+					{
+						if(result == "p1")
+						{
+							discard1[d1] = deck1[l1];
+							d1++;
+							l1--;
+							discard1[d1] = deck2[l2];
+							d1++;
+							l2--;
+						}
+						if(result == "p2")
+						{
+							discard2[d2] = deck1[l1];
+							d2++;
+							l1--;
+							discard2[d2] = deck2[l2];
+							d2++;
+							l2--;
+						}
+						if(result == "same")
+							rollover += 1;
+					}
 				}
+				rollover = 0;
 			}
 			l1--;
 			l2--;
@@ -137,12 +165,13 @@ public class War
 
 
 
-	public void cardWar(int p1, int p2, int d1, int d2, int l1, int l2)
+	public String cardWar(int p1, int p2, int d1, int d2, int l1, int l2)
 	{
 		String deck = "";
 		boolean middleWar = false;
+		cardsDown = 0;
 
-		if((l1 <= 4 || l2 <= 4) || (l1 <= 4 && l2 <= 4)) //time to shuffffffffffle
+		if((l1 <= 4 || l2 <= 4) || (l1 <= 4 && l2 <= 4)) //time to shuffle
 		{
 			middleWar = true;
 
@@ -152,63 +181,37 @@ public class War
 				startShuffle(middleWar, l2, "Player2");
 		}
 
+		middleWar = false;
+
 		System.out.println("\n**Player1 Cards Sent to War: ");
 		for(int i = 1; i <= 3; i++)
 		{
-			System.out.println(i+". "+ deck1[l1-i]);
+			l1--;
+			System.out.println("[" + (l1) + "]" + i + ". " + deck1[l1]);
 		}
 
 		System.out.println("\n****Player2 Cards Sent to War: ");
 		for(int i = 1; i <= 3; i++)
 		{
-			System.out.println(i+". "+ deck2[l2-i]);
+			l2--;
+			System.out.println("[" + (l2) + "]" + i + ". " + deck2[l2]);
 		}
 
-		cardsDown += -3;
+		l1--;
+		l2--;
 
-		System.out.println("\nPlayer1: " + deck1[l1-4]);
-		System.out.println("Player2: " + deck2[l2-4]);
+		System.out.println("\n[" + (l1) + "]Player1: " + deck1[l1]);
+		System.out.println("[" + (l2) + "]Player2: " + deck2[l2]);
 
-		cardsDown += -1;
 
 		for(int i = 0; i < ranks.length; i++)
 		{
-			if(ranks[i].charAt(0) == deck1[l1+cardsDown].charAt(0))
+			if(ranks[i].charAt(0) == deck1[l1].charAt(0))
 				p1 = i;
-			if(ranks[i].charAt(0) == deck2[l2+cardsDown].charAt(0))
+			if(ranks[i].charAt(0) == deck2[l2].charAt(0))
 				p2 = i;
 		}
-
-		if(getWinner(p1, p2) == "p1")
-		{
-			System.out.println("Player1 Wins!");
-			for(int i = 0; i < 3+cardsDown; i++)
-			{
-				discard1[d1] = deck1[l1];
-				d1++;
-				l1--;
-				discard1[d1] = deck2[l2];
-				d1++;
-				l2--;
-			}
-		}
-
-		else if(getWinner(p1, p2) == "p2")
-		{
-			for(int i = 0; i < 3+cardsDown; i++)
-			{
-				System.out.println("Player2 Wins!");
-				discard2[d2] = deck1[l1];
-				d2++;
-				l1--;
-				discard2[d2] = deck2[l2];
-				d2++;
-				l2--;
-			}
-		}
-
-		else if(getWinner(p1, p2) == "Same")
-			cardWar(p1,p2,d1,d2,l1,l2);
+		return getWinner(p1, p2);
 	}
 
 
@@ -216,10 +219,20 @@ public class War
 
 	public void startShuffle(boolean midwar, int num, String player)
 	{
+		int temp = 0;
 		String[] tdeck;
+
+		System.out.println("*******SHUFFLING " + player);
+
 		if(player == "Player1")
 		{
-			tdeck = new String[discard1.length + num];
+			for(int i = 0; i < discard1.length; i++)
+			{
+				if(discard1[i] != null)
+					temp++;
+			}
+
+			tdeck = new String[temp + num];
 			for(int i = 0; i < tdeck.length-num; i++)
 			{
 				if(i < num)
@@ -235,10 +248,19 @@ public class War
 				deck1[i] = tdeck[i];
 			}
 			Collections.shuffle(Arrays.asList(deck1));
+			l1 = deck1.length-1;
+			discard1 = new String[temp*2];
+			d1 = 0;
 		}
 		if(player == "Player2")
 		{
-			tdeck = new String[discard2.length + num];
+			for(int i = 0; i < discard2.length; i++)
+			{
+				if(discard2[i] != null)
+					temp++;
+			}
+
+			tdeck = new String[temp + num];
 			for(int i = 0; i < tdeck.length-num; i++)
 			{
 				if(i < num)
@@ -254,6 +276,9 @@ public class War
 				deck2[i] = tdeck[i];
 			}
 			Collections.shuffle(Arrays.asList(deck2));
+			l2 = deck2.length-1;
+			discard2 = new String[temp*2];
+			d2 = 0;
 		}
 	}
 }
