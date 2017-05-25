@@ -50,8 +50,11 @@ public class Game implements Runnable
 	public void tick()
 	{
 		arrow.tick();
-		render();
-		gameLost();
+		if(arrow.devMode == false)
+		{
+			render();
+			gameLost();
+		}
 	}
 
 	public void render()

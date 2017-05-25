@@ -20,7 +20,7 @@ public class ArrowLogic extends ImageChooser
 	public String filename;
 	public int[][] keys;
 	public int[] keysY, side, keyTime;
-	public boolean devMode = false;
+	public boolean devMode = true;
 	private SongCreator creator;
 
     public ArrowLogic()
@@ -35,8 +35,8 @@ public class ArrowLogic extends ImageChooser
 		}
 		if(devMode == true)
 		{
-			side = new int[10000];
-			keyTime = new int[10000];
+			side = new int[500];
+			keyTime = new int[500];
 			startDevMode();
 		}
 
@@ -147,8 +147,11 @@ public class ArrowLogic extends ImageChooser
 	{
 		global++;
 		System.out.println("Global: " + global);
-		placeKeys();
-		setSpot();
+		if(devMode == false)
+		{
+			placeKeys();
+			setSpot();
+		}
 	}
 
 	public void devModeTime(int length)

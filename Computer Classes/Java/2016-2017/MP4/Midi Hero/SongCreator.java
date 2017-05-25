@@ -1,4 +1,4 @@
-import java.io.BufferedWriter;
+import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
@@ -6,7 +6,7 @@ import java.io.File;
 public class SongCreator
 {
 	private File file;
-	private BufferedWriter bw;
+	private PrintWriter bw;
 	private FileWriter fw;
 
 	public SongCreator()
@@ -18,11 +18,12 @@ public class SongCreator
 		try {
 
 			fw = new FileWriter(Filename);
-			bw = new BufferedWriter(fw);
+			bw = new PrintWriter(fw);
 			for(int i = 0; i < note.length; i++)
 			{
-				bw.write(note[i] + "\n" + time[i] + "\n");
+				bw.println(note[i] + "\nhi" + time[i] + "\n");
 			}
+			bw.close();
 
 
 		} catch (IOException e) {

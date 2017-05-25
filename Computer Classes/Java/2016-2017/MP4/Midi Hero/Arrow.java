@@ -17,7 +17,6 @@ public class Arrow extends ArrowLogic implements KeyListener
 	private int spot, i, x;
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp, imgBar;
 	private boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
-	public boolean dev = true;
 	private SongCreator sc;
 
     public Arrow()
@@ -41,12 +40,15 @@ public class Arrow extends ArrowLogic implements KeyListener
 	{
 		super.tick();
 
-		i = getMin();
-		if(keysY[i] < 0 && keysY[i] > -10)
+		if(devMode == false)
 		{
-			keysY[i] = -100;
-			missNote();
-			setMultiplyer();
+			i = getMin();
+			if(keysY[i] < 0 && keysY[i] > -10)
+			{
+				keysY[i] = -100;
+				missNote();
+				setMultiplyer();
+			}
 		}
 	}
 
@@ -101,8 +103,6 @@ public class Arrow extends ArrowLogic implements KeyListener
 						keysY[i] = -100;
 						spacePressed = false;
 
-						if(dev == true)
-							sc = new SongCreator(side[i],global,filename+"new");
 					}
 				}
 			}
