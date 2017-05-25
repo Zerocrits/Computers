@@ -13,13 +13,16 @@ public class SongCreator
 	{
 	}
 
-	public SongCreator(int note, int time, String Filename)
+	public SongCreator(int[] note, int[] time, String Filename)
 	{
 		try {
 
 			fw = new FileWriter(Filename);
 			bw = new BufferedWriter(fw);
-			bw.write(note + "\n" + time + "\n");
+			for(int i = 0; i < note.length; i++)
+			{
+				bw.write(note[i] + "\n" + time[i] + "\n");
+			}
 
 
 		} catch (IOException e) {

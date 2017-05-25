@@ -88,77 +88,129 @@ public class Arrow extends ArrowLogic implements KeyListener
 		if(e.getKeyCode() == KeyEvent.VK_SPACE)
 			spacePressed = true;
 
+		if(devMode == false)
+		{
+			if(side[i] == 0 && leftPressed == true)
+			{
+				if((keysY[i] > 0) && (keysY[i] < 60))
+				{
+					if(spacePressed == true)
+					{
+						setStreak();
+						setScore();
+						keysY[i] = -100;
+						spacePressed = false;
 
-		if(side[i] == 0 && leftPressed == true)
-		{
-			if((keysY[i] > 0) && (keysY[i] < 60))
+						if(dev == true)
+							sc = new SongCreator(side[i],global,filename+"new");
+					}
+				}
+			}
+			if(side[i] == 1 && upPressed == true)
 			{
-				if(spacePressed == true)
+				if((keysY[i] > 0) && (keysY[i] < 60))
 				{
-					setStreak();
-					setScore();
-					keysY[i] = -100;
-					spacePressed = false;
+					if(spacePressed == true)
+					{
+						setStreak();
+						setScore();
+						keysY[i] = -100;
+						spacePressed = false;
+					}
+				}
+			}
+			if(side[i] == 2 && downPressed == true)
+			{
+				if((keysY[i] > 0) && (keysY[i] < 60))
+				{
+					if(spacePressed == true)
+					{
+						setStreak();
+						setScore();
+						keysY[i] = -100;
+						spacePressed = false;
+					}
+				}
+			}
+			if(side[i] == 3 && rightPressed == true)
+			{
+				if((keysY[i] > 0) && (keysY[i] < 60))
+				{
+					if(spacePressed == true)
+					{
+						setStreak();
+						setScore();
+						keysY[i] = -100;
+						spacePressed = false;
+					}
+				}
+			}
+			if(side[i] == 4)
+			{
+				if((keysY[i] > 0) && (keysY[i] < 60))
+				{
+					if(spacePressed == true)
+					{
+						setStreak();
+						setScore();
+						keysY[i] = -100;
+						spacePressed = false;
+					}
+				}
+			}
 
-					if(dev == true)
-						sc = new SongCreator(side[i],global,filename+"new");
-				}
-			}
-		}
-		if(side[i] == 1 && upPressed == true)
-		{
-			if((keysY[i] > 0) && (keysY[i] < 60))
-			{
-				if(spacePressed == true)
-				{
-					setStreak();
-					setScore();
-					keysY[i] = -100;
-					spacePressed = false;
-				}
-			}
-		}
-		if(side[i] == 2 && downPressed == true)
-		{
-			if((keysY[i] > 0) && (keysY[i] < 60))
-			{
-				if(spacePressed == true)
-				{
-					setStreak();
-					setScore();
-					keysY[i] = -100;
-					spacePressed = false;
-				}
-			}
-		}
-		if(side[i] == 3 && rightPressed == true)
-		{
-			if((keysY[i] > 0) && (keysY[i] < 60))
-			{
-				if(spacePressed == true)
-				{
-					setStreak();
-					setScore();
-					keysY[i] = -100;
-					spacePressed = false;
-				}
-			}
-		}
-		if(side[i] == 4)
-		{
-			if((keysY[i] > 0) && (keysY[i] < 60))
-			{
-				if(spacePressed == true)
-				{
-					setStreak();
-					setScore();
-					keysY[i] = -100;
-					spacePressed = false;
-				}
-			}
+			System.out.println(getKeysY(i));
 		}
 
-		System.out.println(getKeysY(i));
+		if(devMode == true)
+		{
+			int j = 0; //note count
+			if(leftPressed == true)
+			{
+				if(spacePressed == true)
+				{
+					side[j] = 0;
+					devModeTime(j);
+					j++;
+				}
+			}
+			else if(upPressed == true)
+			{
+				if(spacePressed == true)
+				{
+					side[j] = 1;
+					devModeTime(j);
+					j++;
+				}
+			}
+			else if(downPressed == true)
+			{
+				if(spacePressed == true)
+				{
+					side[j] = 2;
+					devModeTime(j);
+					j++;
+				}
+			}
+			else if(rightPressed == true)
+			{
+				if(spacePressed == true)
+				{
+					side[j] = 3;
+					devModeTime(j);
+					j++;
+				}
+			}
+			else if(spacePressed == true)
+			{
+				if(spacePressed == true)
+				{
+					side[j] = 4;
+					devModeTime(j);
+					j++;
+				}
+			}
+		}
     }
 
     public void keyReleased(KeyEvent e)

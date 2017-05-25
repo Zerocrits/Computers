@@ -40,12 +40,12 @@ public class ImageChooser extends MakeScore
 	public void render(Graphics g)
 	{
 		g.drawImage(imgHealth, 525, 400, 275, 100, null);
-		if(lives > 1 && lives < 275)
+		if(lives > 1 && lives < 268)
 			g.drawImage(imgBar, 525 + (int)lives, 410, 6, 75, null);
 		else if(lives < 1)
 			g.drawImage(imgBar, 525, 410, 6, 75, null);
-		else if(lives >= 275)
-			g.drawImage(imgBar, 525 + 275, 410, 6, 75, null);
+		else if(lives >= 268)
+			g.drawImage(imgBar, 525 + 268, 410, 6, 75, null);
 
 
 		if(streak == 0 || streak == 9 || streak == 18 || streak == 27)

@@ -20,14 +20,26 @@ public class ArrowLogic extends ImageChooser
 	public String filename;
 	public int[][] keys;
 	public int[] keysY, side, keyTime;
+	public boolean devMode = false;
+	private SongCreator creator;
 
     public ArrowLogic()
     {
-		keys = new int[getLength()][2];
-		keysY = new int[getLength()];
-		side = new int[getLength()];
-		keyTime = new int[getLength()];
-		readKeys();
+		if(devMode == false)
+		{
+			keys = new int[getLength()][2];
+			keysY = new int[getLength()];
+			side = new int[getLength()];
+			keyTime = new int[getLength()];
+			readKeys();
+		}
+		if(devMode == true)
+		{
+			side = new int[10000];
+			keyTime = new int[10000];
+			startDevMode();
+		}
+
     }
 
     public int getLength()
@@ -137,5 +149,19 @@ public class ArrowLogic extends ImageChooser
 		System.out.println("Global: " + global);
 		placeKeys();
 		setSpot();
+	}
+
+	public void devModeTime(int length)
+	{
+		int i = length;
+		keyTime[i] = global;
+	}
+
+	public void startDevMode()
+	{
+		creator = new SongCreator(side, keyTime, "Song-keys/devtest1.txt");
+
+
+
 	}
 }
