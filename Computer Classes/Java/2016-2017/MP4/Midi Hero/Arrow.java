@@ -16,8 +16,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 {
 	private int spot, i, x;
 	private BufferedImage imgLeft, imgRight, imgDown, imgUp, imgBar;
-	private boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
-	private SongCreator sc;
+	private boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, escapePressed;
 
     public Arrow()
     {
@@ -89,6 +88,8 @@ public class Arrow extends ArrowLogic implements KeyListener
 			downPressed = true;
 		if(e.getKeyCode() == KeyEvent.VK_SPACE)
 			spacePressed = true;
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+			escapePressed = true;
 
 		if(devMode == false)
 		{
@@ -164,51 +165,55 @@ public class Arrow extends ArrowLogic implements KeyListener
 
 		if(devMode == true)
 		{
-			int j = 0; //note count
+			//int j = 0; //note count
 			if(leftPressed == true)
 			{
 				if(spacePressed == true)
 				{
-					side[j] = 0;
-					devModeTime(j);
-					j++;
+					side[o] = 0;
+					devModeTime(o);
+					o++;
 				}
 			}
 			else if(upPressed == true)
 			{
 				if(spacePressed == true)
 				{
-					side[j] = 1;
-					devModeTime(j);
-					j++;
+					side[o] = 1;
+					devModeTime(o);
+					o++;
 				}
 			}
 			else if(downPressed == true)
 			{
 				if(spacePressed == true)
 				{
-					side[j] = 2;
-					devModeTime(j);
-					j++;
+					side[o] = 2;
+					devModeTime(o);
+					o++;
 				}
 			}
 			else if(rightPressed == true)
 			{
 				if(spacePressed == true)
 				{
-					side[j] = 3;
-					devModeTime(j);
-					j++;
+					side[o] = 3;
+					devModeTime(o);
+					o++;
 				}
 			}
 			else if(spacePressed == true)
 			{
 				if(spacePressed == true)
 				{
-					side[j] = 4;
-					devModeTime(j);
-					j++;
+					side[o] = 4;
+					devModeTime(o);
+					o++;
 				}
+			}
+			else if(escapePressed == true)
+			{
+				devModeTime(-1);
 			}
 		}
     }
@@ -229,6 +234,9 @@ public class Arrow extends ArrowLogic implements KeyListener
 
         if(e.getKeyCode() == KeyEvent.VK_SPACE)
         	spacePressed = false;
+
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+        	escapePressed = false;
     }
     public void keyTyped(KeyEvent e)
 	{

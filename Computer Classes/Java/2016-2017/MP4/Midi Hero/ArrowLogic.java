@@ -1,3 +1,7 @@
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
@@ -20,8 +24,13 @@ public class ArrowLogic extends ImageChooser
 	public String filename;
 	public int[][] keys;
 	public int[] keysY, side, keyTime;
-	public boolean devMode = true;
-	private SongCreator creator;
+	public boolean devMode = false;
+	private File file;
+	private PrintWriter bw;
+	private FileWriter fw;
+	public int k = 0;
+	public int o = 0;
+	public int temp = 0;
 
     public ArrowLogic()
     {
@@ -37,14 +46,13 @@ public class ArrowLogic extends ImageChooser
 		{
 			side = new int[500];
 			keyTime = new int[500];
-			startDevMode();
 		}
 
     }
 
     public int getLength()
     {
-		filename = "Song-keys/sample.txt";
+		filename = "Song-keys/devtest1.txt";
 		try
 		{
 			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));
@@ -61,7 +69,7 @@ public class ArrowLogic extends ImageChooser
 
     public void readKeys()
     {
-		filename = "Song-keys/sample.txt";
+		filename = "Song-keys/devtest1.txt";
 		try
 		{
 			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));
@@ -72,7 +80,7 @@ public class ArrowLogic extends ImageChooser
 			for(int i = 0; i < length-2; i++)
 			{
 				keys[i][0] = file.nextInt();
-				keys[i][1] = file.nextInt();
+				keys[i][1] = file.nextInt()-185;
 				side[i] = keys[i][0];
 				keyTime[i] = keys[i][1];
 				keysY[i] = 600;
@@ -157,14 +165,40 @@ public class ArrowLogic extends ImageChooser
 	public void devModeTime(int length)
 	{
 		int i = length;
-		keyTime[i] = global;
+		if(i != -1)
+		{
+			keyTime[i] = global;
+			temp = i;
+		}
+		else
+			startDevMode(temp);
+
 	}
 
-	public void startDevMode()
+	public void startDevMode(int i)
 	{
-		creator = new SongCreator(side, keyTime, "Song-keys/devtest1.txt");
+		//creator = new SongCreator(side, keyTime, "Song-keys/devtest1.txt");
+		String filename = "Song-keys/devtest1.txt";
+
+		try {
+
+			bw = new PrintWriter(new FileWriter(filename, true));
+			while(k <= i)
+			{
+				if(keyTime[k] != 0)
+				{
+					bw.println(side[k]);
+					bw.println(keyTime[k]);
+					System.out.println(side[k] + "\nhi" + keyTime[k] + "\n");
+					k++;
+				}
+			}
+			bw.close();
 
 
+		} catch (IOException e) {
 
+			e.printStackTrace();
+		}
 	}
 }
