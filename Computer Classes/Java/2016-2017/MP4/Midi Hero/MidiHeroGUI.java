@@ -8,7 +8,7 @@ public class MidiHeroGUI
 {
 	public MidiHeroGUI()
 	{
-		Game game = new Game(800, 500, "sample");
+		Game game = new Game(800, 500, "eyeofthetiger"); //game starting, when finished you rock! notes hit% , duration
 		game.start();
     }
 

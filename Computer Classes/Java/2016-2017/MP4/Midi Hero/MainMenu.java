@@ -51,8 +51,8 @@ public class MainMenu extends JFrame
 
 	public void startProgram()
 	{
-		dispose();
-		Game game = new Game(800, 500, "Songs/sample.WAV");
+		//dispose();
+		Game game = new Game(800, 500, "imperial");
 		game.start();
 	}
 }

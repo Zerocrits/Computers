@@ -62,7 +62,7 @@ public class Display
 	public void restart()
 	{
 		frame.dispose();
-		Game game = new Game(800, 500, "Songs/sample.WAV");
+		Game game = new Game(800, 500, "sample");
 		game.start();
 	}
 }

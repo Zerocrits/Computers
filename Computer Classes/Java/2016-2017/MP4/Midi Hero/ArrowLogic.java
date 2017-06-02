@@ -18,7 +18,7 @@ import java.io.FileReader;
 public class ArrowLogic extends ImageChooser
 {
 	private int spot = 0;
-	public int global = -1;
+	public int global = -191;
 	private int length;
 	private int min = 0;
 	public String filename;
@@ -40,19 +40,20 @@ public class ArrowLogic extends ImageChooser
 			keysY = new int[getLength()];
 			side = new int[getLength()];
 			keyTime = new int[getLength()];
+			super.getLength(getLength());
 			readKeys();
 		}
 		if(devMode == true)
 		{
-			side = new int[500];
-			keyTime = new int[500];
+			side = new int[5000];
+			keyTime = new int[5000];
 		}
 
     }
 
     public int getLength()
     {
-		filename = "Song-keys/devtest1.txt";
+		filename = "Song-keys/eyeofthetiger.txt";
 		try
 		{
 			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));
@@ -69,7 +70,7 @@ public class ArrowLogic extends ImageChooser
 
     public void readKeys()
     {
-		filename = "Song-keys/devtest1.txt";
+		filename = "Song-keys/eyeofthetiger.txt";
 		try
 		{
 			LineNumberReader size = new LineNumberReader(new FileReader(new File(filename)));
@@ -80,7 +81,7 @@ public class ArrowLogic extends ImageChooser
 			for(int i = 0; i < length-2; i++)
 			{
 				keys[i][0] = file.nextInt();
-				keys[i][1] = file.nextInt()-185;
+				keys[i][1] = file.nextInt();//-190;
 				side[i] = keys[i][0];
 				keyTime[i] = keys[i][1];
 				keysY[i] = 600;
@@ -106,7 +107,7 @@ public class ArrowLogic extends ImageChooser
 		return false;
 	}
 
-	public void setSpot()
+	public int setSpot()
 	{
 		for(int i = min; i < spot; i++)
 		{
@@ -117,8 +118,10 @@ public class ArrowLogic extends ImageChooser
 			}
 			else
 				keysY[i] += -3;
-			//System.out.println("**"+keysY[i]+"**");
+			if(i > 0)
+				getpos(i);
 		}
+		return min;
 	}
 
 	public boolean checkWon()
@@ -178,7 +181,7 @@ public class ArrowLogic extends ImageChooser
 	public void startDevMode(int i)
 	{
 		//creator = new SongCreator(side, keyTime, "Song-keys/devtest1.txt");
-		String filename = "Song-keys/devtest1.txt";
+		String filename = "Song-keys/eyeofthetiger.txt";
 
 		try {
 
@@ -188,8 +191,8 @@ public class ArrowLogic extends ImageChooser
 				if(keyTime[k] != 0)
 				{
 					bw.println(side[k]);
-					bw.println(keyTime[k]);
-					System.out.println(side[k] + "\nhi" + keyTime[k] + "\n");
+					bw.println(keyTime[k]+-190);
+					System.out.println(side[k] + "\nhi" + keyTime[k]+-190 + "\n");
 					k++;
 				}
 			}

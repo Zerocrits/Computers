@@ -93,7 +93,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 
 		if(devMode == false)
 		{
-			if(side[i] == 0 && leftPressed == true)
+			if(side[i] == 0 && leftPressed == true) //if left is correct
 			{
 				if((keysY[i] > 0) && (keysY[i] < 60))
 				{
@@ -103,11 +103,24 @@ public class Arrow extends ArrowLogic implements KeyListener
 						setScore();
 						keysY[i] = -100;
 						spacePressed = false;
+					}
+				}
+			}
+			else if(side[i] != 0 && leftPressed == true) //if left is incorrect
+			{
+				if((keysY[i] > 0) && (keysY[i] < 60))
+				{
+					if(spacePressed == true)
+					{
+						missNote();
+						setMultiplyer();
+						keysY[i] = -100;
+						spacePressed = false;
+					}
+				}
+			}
 
-					}
-				}
-			}
-			if(side[i] == 1 && upPressed == true)
+			if(side[i] == 1 && upPressed == true) //if up is correct
 			{
 				if((keysY[i] > 0) && (keysY[i] < 60))
 				{
@@ -120,7 +133,21 @@ public class Arrow extends ArrowLogic implements KeyListener
 					}
 				}
 			}
-			if(side[i] == 2 && downPressed == true)
+			else if(side[i] != 1 && upPressed == true) //if up is incorrect
+			{
+				if((keysY[i] > 0) && (keysY[i] < 60))
+				{
+					if(spacePressed == true)
+					{
+						missNote();
+						setMultiplyer();
+						keysY[i] = -100;
+						spacePressed = false;
+					}
+				}
+			}
+
+			if(side[i] == 2 && downPressed == true) //if down is correct
 			{
 				if((keysY[i] > 0) && (keysY[i] < 60))
 				{
@@ -133,7 +160,21 @@ public class Arrow extends ArrowLogic implements KeyListener
 					}
 				}
 			}
-			if(side[i] == 3 && rightPressed == true)
+			else if(side[i] != 2 && downPressed == true) //if down is incorrect
+			{
+				if((keysY[i] > 0) && (keysY[i] < 60))
+				{
+					if(spacePressed == true)
+					{
+						missNote();
+						setMultiplyer();
+						keysY[i] = -100;
+						spacePressed = false;
+					}
+				}
+			}
+
+			if(side[i] == 3 && rightPressed == true) //if right is correct
 			{
 				if((keysY[i] > 0) && (keysY[i] < 60))
 				{
@@ -146,7 +187,21 @@ public class Arrow extends ArrowLogic implements KeyListener
 					}
 				}
 			}
-			if(side[i] == 4)
+			else if(side[i] != 3 && rightPressed == true) //if right is incorrect
+			{
+				if((keysY[i] > 0) && (keysY[i] < 60))
+				{
+					if(spacePressed == true)
+					{
+						missNote();
+						setMultiplyer();
+						keysY[i] = -100;
+						spacePressed = false;
+					}
+				}
+			}
+
+			if(side[i] == 4) //if space is correct
 			{
 				if((keysY[i] > 0) && (keysY[i] < 60))
 				{
@@ -157,6 +212,29 @@ public class Arrow extends ArrowLogic implements KeyListener
 						keysY[i] = -100;
 						spacePressed = false;
 					}
+				}
+			}
+			else if(side[i] == 4 && (leftPressed == true || upPressed == true || downPressed == true || rightPressed == true)) //if space is incorrect
+			{
+				if((keysY[i] > 0) && (keysY[i] < 60))
+				{
+					if(spacePressed == true)
+					{
+						missNote();
+						setMultiplyer();
+						keysY[i] = -100;
+						spacePressed = false;
+					}
+				}
+			}
+
+			if(keysY[i] > 60)
+			{
+				if(spacePressed == true)
+				{
+					missNote();
+					setMultiplyer();
+					spacePressed = false;
 				}
 			}
 

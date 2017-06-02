@@ -113,6 +113,10 @@ public class Game implements Runnable
 		isPlaying = true;
 		thread = new Thread(this);
 		thread.start();
+		while(arrow.global < 10)
+		{
+			start();
+		}
 		music.startSong(song);
 	}
 

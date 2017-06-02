@@ -8,10 +8,13 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import javax.swing.*;
 import java.awt.Rectangle;
+import java.text.DecimalFormat;
 
 public class ImageChooser extends MakeScore
 {
 	private int y, x;
+	private int length = 1;
+	private int pos = 1;
 	private BufferedImage imgBoard0, imgBoard1, imgBoard2, imgBoard3, imgBoard4,
 			imgBoard5, imgBoard6, imgBoard7, imgBoard8, imgHealth, imgBar;
 
@@ -36,6 +39,16 @@ public class ImageChooser extends MakeScore
 			System.exit(1);
 		}
     }
+
+	public void getLength(int length)
+	{
+		this.length = length;
+	}
+
+	public void getpos(int pos)
+	{
+		this.pos = pos;
+	}
 
 	public void render(Graphics g)
 	{
@@ -67,10 +80,7 @@ public class ImageChooser extends MakeScore
 		else if(streak == 8 || streak == 17 || streak == 26 || streak >= 35)
 			g.drawImage(imgBoard8, 523, 3, 275, 275, null);
 
-		g.drawString("Score: " + score, 10, 50);
-		g.drawString("Streak: " + streak, 10, 80);
-		g.drawString("Multiplyer: " + multiplyer, 10, 110);
-		g.drawString("Lives: " + lives, 10, 130);
+		g.drawString("Complete: " + (pos*100 / length) + "%", 10, 50);
 
 		g.setFont(new Font("Impact", Font.PLAIN, 100));
 		g.drawString("" + multiplyer, 650,198);
@@ -80,19 +90,24 @@ public class ImageChooser extends MakeScore
 		g.setFont(new Font("Impact", Font.PLAIN, 45));
 		g.setColor(Color.WHITE);
 
+		DecimalFormat df = new DecimalFormat("#,###");
 		if(score < 10)
-			g.drawString(""+score, 770,50);
+			g.drawString(""+score, 765,50);
 		else if(score < 100)
-			g.drawString(""+score, 750,50);
+			g.drawString(""+score, 745,50);
 		else if(score < 1000)
-			g.drawString(""+score, 730,50);
+			g.drawString(""+df.format(score), 725,50);
 		else if(score < 10000)
-			g.drawString(""+score, 710,50);
+			g.drawString(""+df.format(score), 700,50);
 		else if(score < 100000)
-			g.drawString(""+score, 690,50);
+			g.drawString(""+df.format(score), 670,50);
 		else if(score < 1000000)
-			g.drawString(""+score, 670,50);
+			g.drawString(""+df.format(score), 645,50);
 		else if(score < 10000000)
-			g.drawString(""+score, 650,50);
+			g.drawString(""+df.format(score), 610,50);
+		else if(score < 100000000)
+			g.drawString(""+df.format(score), 595,50);
+		else if(score > 100000000)
+			g.drawString(""+df.format(score), 575,50);
 	}
 }

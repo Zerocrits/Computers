@@ -23,7 +23,7 @@ public class MakeScore
 
 	public void setScore()
 	{
-		score += multiplyer;
+		score += multiplyer*125;
 		if(lives >= 272.25)
 			lives = 275;
 		else
