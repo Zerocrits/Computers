@@ -8,9 +8,12 @@ public class Display
 {
 	public JFrame frame;
 	private Canvas canvas;
-	private String title;
+	private String title, song;
 	private int width, height;
 
+	public Display()
+	{
+	}
 	public Display(int width, int height)
 	{
 		title = "Midi Hero";
@@ -18,6 +21,16 @@ public class Display
 		this.height = height;
 
 		createDisplay();
+	}
+
+	public Display(int width, int height, String song)
+	{
+		title = "Midi Hero";
+		this.width = width;
+		this.height = height;
+		this.song = song;
+
+		startGame();
 	}
 
 	private void createDisplay()
@@ -39,6 +52,7 @@ public class Display
 
 		//adds canvas to frame
 		frame.add(canvas);
+		frame.setFocusable(true);
 		frame.pack();
 	}
 
@@ -55,14 +69,17 @@ public class Display
 	public void youLose()
 	{
 		JOptionPane.showMessageDialog(frame, "You Have lost!\nPress OK to restart!", "You Lose!", JOptionPane.ERROR_MESSAGE);
-		frame.setVisible(true);
-		restart();
+		startGame();
 	}
 
-	public void restart()
+	public void startGame()
 	{
-		frame.dispose();
-		Game game = new Game(800, 500, "sample");
+		Game game = new Game(width, height, song);
 		game.start();
+	}
+
+	public static void main(String[] args)
+	{
+		new Display(800,500,"eyeoftiger");
 	}
 }

@@ -114,6 +114,7 @@ public class ArrowLogic extends ImageChooser
 			if(keysY[i] <= -3) //decreases size of forloop
 			{
 				keysY[i] = -100;
+				noteHit(-1);
 				min++;
 			}
 			else
@@ -126,9 +127,13 @@ public class ArrowLogic extends ImageChooser
 
 	public boolean checkWon()
 	{
+		boolean game = true;
+
 		if(lives < 0)
-			return false;
-		return true;
+			game = false;
+
+		getResult(game);
+		return game;
 	}
 
 	public int getKeysY(int i)

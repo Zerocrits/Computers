@@ -102,6 +102,8 @@ public class Arrow extends ArrowLogic implements KeyListener
 						setStreak();
 						setScore();
 						keysY[i] = -100;
+						noteHit(1);
+						noteCount();
 						spacePressed = false;
 					}
 				}
@@ -115,6 +117,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 						missNote();
 						setMultiplyer();
 						keysY[i] = -100;
+						noteCount();
 						spacePressed = false;
 					}
 				}
@@ -129,6 +132,8 @@ public class Arrow extends ArrowLogic implements KeyListener
 						setStreak();
 						setScore();
 						keysY[i] = -100;
+						noteHit(1);
+						noteCount();
 						spacePressed = false;
 					}
 				}
@@ -142,6 +147,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 						missNote();
 						setMultiplyer();
 						keysY[i] = -100;
+						noteCount();
 						spacePressed = false;
 					}
 				}
@@ -156,6 +162,8 @@ public class Arrow extends ArrowLogic implements KeyListener
 						setStreak();
 						setScore();
 						keysY[i] = -100;
+						noteHit(1);
+						noteCount();
 						spacePressed = false;
 					}
 				}
@@ -169,6 +177,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 						missNote();
 						setMultiplyer();
 						keysY[i] = -100;
+						noteCount();
 						spacePressed = false;
 					}
 				}
@@ -183,6 +192,8 @@ public class Arrow extends ArrowLogic implements KeyListener
 						setStreak();
 						setScore();
 						keysY[i] = -100;
+						noteHit(1);
+						noteCount();
 						spacePressed = false;
 					}
 				}
@@ -196,6 +207,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 						missNote();
 						setMultiplyer();
 						keysY[i] = -100;
+						noteCount();
 						spacePressed = false;
 					}
 				}
@@ -210,6 +222,8 @@ public class Arrow extends ArrowLogic implements KeyListener
 						setStreak();
 						setScore();
 						keysY[i] = -100;
+						noteHit(1);
+						noteCount();
 						spacePressed = false;
 					}
 				}
@@ -223,6 +237,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 						missNote();
 						setMultiplyer();
 						keysY[i] = -100;
+						noteCount();
 						spacePressed = false;
 					}
 				}
@@ -234,6 +249,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 				{
 					missNote();
 					setMultiplyer();
+					noteHit(-1);
 					spacePressed = false;
 				}
 			}

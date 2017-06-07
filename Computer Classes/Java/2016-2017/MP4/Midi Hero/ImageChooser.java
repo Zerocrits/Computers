@@ -12,11 +12,14 @@ import java.text.DecimalFormat;
 
 public class ImageChooser extends MakeScore
 {
-	private int y, x;
+	private boolean won = true;
+	private int y, x, hit, noteCount;
 	private int length = 1;
 	private int pos = 1;
 	private BufferedImage imgBoard0, imgBoard1, imgBoard2, imgBoard3, imgBoard4,
 			imgBoard5, imgBoard6, imgBoard7, imgBoard8, imgHealth, imgBar;
+
+	private BufferedImage imgWin, imgLose;
 
     public ImageChooser()
     {
@@ -33,11 +36,15 @@ public class ImageChooser extends MakeScore
 			 imgHealth = ImageIO.read(new File("pictures/scoreboard/health.PNG"));
 			 imgBar = ImageIO.read(new File("pictures/scoreboard/line.PNG"));
 
+			 imgWin = ImageIO.read(new File("pictures/gif/you_win.GIF"));
+			 imgLose = ImageIO.read(new File("pictures/gif/you_lose.GIF"));
 		}catch (IOException e) {
 
 			e.printStackTrace();
 			System.exit(1);
 		}
+		hit = 0;
+		noteCount = 0;
     }
 
 	public void getLength(int length)
@@ -48,6 +55,27 @@ public class ImageChooser extends MakeScore
 	public void getpos(int pos)
 	{
 		this.pos = pos;
+	}
+	public boolean getResult(boolean won)
+	{
+		this.won = won;
+		return won;
+	}
+	public void noteHit(int note)
+	{
+		hit+= note;
+	}
+	public int getHit()
+	{
+		return hit;
+	}
+	public void noteCount()
+	{
+		noteCount++;
+	}
+	public int getCount()
+	{
+		return noteCount;
 	}
 
 	public void render(Graphics g)
@@ -80,7 +108,17 @@ public class ImageChooser extends MakeScore
 		else if(streak == 8 || streak == 17 || streak == 26 || streak >= 35)
 			g.drawImage(imgBoard8, 523, 3, 275, 275, null);
 
-		g.drawString("Complete: " + (pos*100 / length) + "%", 10, 50);
+		if(pos*100 / length < 1)
+			g.drawString("Complete: " + (pos*100 / length) + "%", 10, 50);
+		else
+			g.drawString("Complete: " + (1+pos*100 / length) + "%", 10, 50);
+
+		if(getHit() == getCount())
+			g.drawString("Correct Notes: " + "100%" + getHit() + " " + getCount(), 10, 80);
+		else if(getCount() <= 0)
+			g.drawString("Correct Notes: " + "0%" + getHit() + " " + getCount(), 10, 80);
+		else
+			g.drawString("Correct Notes: " + (getHit() / getCount()) + "%" + getHit() + " " + getCount(), 10, 80);
 
 		g.setFont(new Font("Impact", Font.PLAIN, 100));
 		g.drawString("" + multiplyer, 650,198);
@@ -109,5 +147,10 @@ public class ImageChooser extends MakeScore
 			g.drawString(""+df.format(score), 595,50);
 		else if(score > 100000000)
 			g.drawString(""+df.format(score), 575,50);
+
+		if(won == false)
+			g.drawImage(imgLose, 500, 3, 275, 275, null);
+		else if(pos == length)
+			g.drawImage(imgWin, 500, 3, 275, 275, null);
 	}
 }

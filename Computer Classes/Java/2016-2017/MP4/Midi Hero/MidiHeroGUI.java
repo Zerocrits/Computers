@@ -8,12 +8,16 @@ public class MidiHeroGUI
 {
 	public MidiHeroGUI()
 	{
-		Game game = new Game(800, 500, "eyeofthetiger"); //game starting, when finished you rock! notes hit% , duration
+	}
+
+	public MidiHeroGUI(int width, int height, String song)
+	{
+		Game game = new Game(width, height, song); //game starting, when finished you rock! notes hit% , duration //when it goes past 0 it needs to take away a hit on the counter
 		game.start();
     }
 
     public static void main(String[] args)
     {
-		MidiHeroGUI gui = new MidiHeroGUI();
+		MidiHeroGUI gui = new MidiHeroGUI(800, 500, "eyeofthetiger");
 	}
 }
