@@ -16,6 +16,7 @@ public class ImageChooser extends MakeScore
 	private int y, x, hit, noteCount;
 	private int length = 1;
 	private int pos = 1;
+	private float avg;
 	private BufferedImage imgBoard0, imgBoard1, imgBoard2, imgBoard3, imgBoard4,
 			imgBoard5, imgBoard6, imgBoard7, imgBoard8, imgHealth, imgBar;
 
@@ -61,9 +62,9 @@ public class ImageChooser extends MakeScore
 		this.won = won;
 		return won;
 	}
-	public void noteHit(int note)
+	public void noteHit(int i)
 	{
-		hit+= note;
+		hit+=i;
 	}
 	public int getHit()
 	{
@@ -113,12 +114,19 @@ public class ImageChooser extends MakeScore
 		else
 			g.drawString("Complete: " + (1+pos*100 / length) + "%", 10, 50);
 
+
+		DecimalFormat df2 = new DecimalFormat("###.#%");
+		df2.setMultiplier(1);
+
 		if(getHit() == getCount())
-			g.drawString("Correct Notes: " + "100%" + getHit() + " " + getCount(), 10, 80);
+			g.drawString("Correct Notes: " + "100%" + getHit() + " " + getCount(), 10, 80); //move decimal
 		else if(getCount() <= 0)
 			g.drawString("Correct Notes: " + "0%" + getHit() + " " + getCount(), 10, 80);
 		else
-			g.drawString("Correct Notes: " + (getHit() / getCount()) + "%" + getHit() + " " + getCount(), 10, 80);
+		{
+			avg = Math.abs((float)getHit() / (float)getCount());
+			g.drawString("Correct Notes: " + df2.format(avg*100) + " " + getHit() + " " + getCount(), 10, 80);
+		}
 
 		g.setFont(new Font("Impact", Font.PLAIN, 100));
 		g.drawString("" + multiplyer, 650,198);

@@ -47,6 +47,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 				keysY[i] = -100;
 				missNote();
 				setMultiplyer();
+				noteCount();
 			}
 		}
 	}
@@ -117,6 +118,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 						missNote();
 						setMultiplyer();
 						keysY[i] = -100;
+						noteHit(-1);
 						noteCount();
 						spacePressed = false;
 					}
@@ -147,6 +149,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 						missNote();
 						setMultiplyer();
 						keysY[i] = -100;
+						noteHit(-1);
 						noteCount();
 						spacePressed = false;
 					}
@@ -177,6 +180,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 						missNote();
 						setMultiplyer();
 						keysY[i] = -100;
+						noteHit(-1);
 						noteCount();
 						spacePressed = false;
 					}
@@ -207,6 +211,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 						missNote();
 						setMultiplyer();
 						keysY[i] = -100;
+						noteHit(-1);
 						noteCount();
 						spacePressed = false;
 					}
@@ -237,6 +242,7 @@ public class Arrow extends ArrowLogic implements KeyListener
 						missNote();
 						setMultiplyer();
 						keysY[i] = -100;
+						noteHit(-1);
 						noteCount();
 						spacePressed = false;
 					}

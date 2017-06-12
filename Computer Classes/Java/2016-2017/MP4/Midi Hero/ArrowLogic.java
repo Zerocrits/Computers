@@ -114,7 +114,6 @@ public class ArrowLogic extends ImageChooser
 			if(keysY[i] <= -3) //decreases size of forloop
 			{
 				keysY[i] = -100;
-				noteHit(-1);
 				min++;
 			}
 			else
