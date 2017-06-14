@@ -119,13 +119,13 @@ public class ImageChooser extends MakeScore
 		df2.setMultiplier(1);
 
 		if(getHit() == getCount())
-			g.drawString("Correct Notes: " + "100%" + getHit() + " " + getCount(), 10, 80); //move decimal
+			g.drawString("Correct Notes: " + "100%", 10, 80);
 		else if(getCount() <= 0)
-			g.drawString("Correct Notes: " + "0%" + getHit() + " " + getCount(), 10, 80);
+			g.drawString("Correct Notes: " + "0%", 10, 80);
 		else
 		{
 			avg = Math.abs((float)getHit() / (float)getCount());
-			g.drawString("Correct Notes: " + df2.format(avg*100) + " " + getHit() + " " + getCount(), 10, 80);
+			g.drawString("Correct Notes: " + df2.format(avg*100), 10, 80);
 		}
 
 		g.setFont(new Font("Impact", Font.PLAIN, 100));
